@@ -200,7 +200,7 @@
 		"Separator",
 		["Current group",
 			[0, "Get Item Value ( item , default value)"],
-			[1, "Get Item String ( item . default string)"],
+			[1, "Get Item String ( item , default string)"],
 			"Separator",
 			[2, "Get position X ( item )"],
 			[3, "Get position Y ( item )"],
@@ -265,14 +265,651 @@
 
 	"Actions":
 	[
-		{	"Title": "Action Example with parameter %0",
+		{//0
+			"Title": "Set current group to %0",
 			"Parameters":
 			[
-				["Integer", "Example Parameter"]
+				["String", "Group name"],
+				["Integer", "Ensure new group? ( 0 = No, 1 = Yes. If unsure, choose 0 )"]
 			]
 		},
-		{	"Title": "Second Action Example"
-		}
+		{//1
+			"Title": "Set item %0 to value %2 (Setting = %1)",
+			"Parameters":
+			[
+				["String", "Item name"],
+				["Integer", "Type (0 = Integer [Whole numbers] , 1 = Floating Point [Decimal Points])"],
+				["Float", "Value to set to"] //TODO: Implement special handling
+			]
+		},
+		{//2
+			"Title": "Set item %0 to string %1",
+			"Parameters":
+			[
+				["String", "Item name"],
+				["String", "String to set to"]
+			]
+		},
+		{//3
+			"Title": "Set item %0 to %1 (Hashed)",
+			"Parameters":
+			[
+				["String", "Item name"],
+				["String", "String to set to"]
+			]
+		},
+		{//4
+			"Title": "Save %0 (Save: Position = %1, Alt Values = %2)",
+			"Parameters":
+			[
+				["Object", "Object to save"],
+				["Integer", "Save position? (0 = No, 1 = Yes)"],
+				["Integer", "Save alt values? (0 = No, 1 = Yes)"]
+			]
+		},
+		{//5
+			"Title": "Load %0",
+			"Parameters":
+			[
+				["Object", "Object to load"]
+			]
+		},
+		{//6
+			"Title": "Save position %1 to item %0",
+			"Parameters":
+			[
+				["String", "Item name"],
+				["Position", "Position"]
+			]
+		},
+		{//7
+			"Title": "Save global values"
+		},
+		{//8
+			"Title": "Load global values"
+		},
+		{//9
+			"Title": "Delete current group"
+		},
+		{//10
+			"Title": "Delete %0 in current group",
+			"Parameters":
+			[
+				["String", "Item name"]
+			]
+		},
+		{//11
+			"Title": "Rename current group to %0 (Setting = %1)",
+			"Parameters":
+			[
+				["String", "New name"],
+				["Integer", "Overwrite Mode ( 0 = Overwrite , 1 = Merge , 2 = Never overwrite )"]
+			]
+		},
+		{//12
+			"Title": "Rename item %0 to %1 (Setting = %2)",
+			"Parameters":
+			[
+				["String", "Old name"],
+				["String", "New name"],
+				["Integer", "Allow overwriting? ( 0 = No , 1 = Yes )"]
+			]
+		},
+		{//13
+			"Title": "Move %0 to group %1",
+			"Parameters":
+			[
+				["String", "Item name"],
+				["String", "New group name"],
+				["Integer", "Allow overwrites? (0 = No, 1 = Yes)"]
+			]
+		},
+		{//14
+			"Title": "Set item %1 in group %0 to value %3 (Setting = %2)",
+			"Parameters":
+			[
+				["String", "Group name"],
+				["String", "Item name"],
+				["Integer", "Type (0 = Integer [Whole numbers] , 1 = Floating Point [Decimal Points])"],
+				["Float", "Value"] //TODO
+			]
+		},
+		{//15
+			"Title": "Set item %1 in group %0 to %2",
+			"Parameters":
+			[
+				["String", "Group"],
+				["String", "Item"],
+				["String", "String to set to"]
+			]
+		},
+		{//16
+			"Title": "Set item %1 in group %0 to %2 (Hashed)",
+			"Parameters":
+			[
+				["String", "Group"],
+				["String", "Item"],
+				["String", "Value"]
+			]
+		},
+		{//17
+			"Title": "Save object %0 into group %1 (Pos = %2, Alt Values = %3)",
+			"Parameters":
+			[
+				["Object", "Object"],
+				["String", "Group"],
+				["Integer", "Save position? (0 = No, 1 = Yes)"],
+				["Integer", "Save alt values? (0 = No, 1 = Yes)"]
+			]
+		},
+		{//18
+			"Title": "Load object %0 from group %1",
+			"Parameters":
+			[
+				["Object", "Object"],
+				["String", "Group"]
+			]
+		},
+		{//19
+			"Title": "Save position %2 into group %0, item %1",
+			"Parameters":
+			[
+				["String", "Group name"],
+				["String", "Item name"],
+				["Position", "Position"]
+			]
+		},
+		{//20
+			"Title": "Save global values to group %0",
+			"Parameters":
+			[
+				["String", "Group"]
+			]
+		},
+		{//21
+			"Title": "Load global values from group %0",
+			"Parameters":
+			[
+				["String", "Group"]
+			]
+		},
+		{//22
+			"Title": "Rename group with name %0 to %1",
+			"Parameters":
+			[
+				["String", "Old Group Name"],
+				["String", "New Group Name"],
+				["Integer", "Overwrite Mode ( 0 = Overwrite , 1 = Merge , 2 = Never overwrite )"]
+			]
+		},
+		{//23
+			"Title": "Move %0 -> %1 to %0 -> %2 (Overwrite = %3)",
+			"Parameters":
+			[
+				["String", "Group Name"],
+				["String", "Old item name"],
+				["String", "New item name"],
+				["Integer", "Allow overwrite? (0 = No, 1 = Yes)"]
+			]
+		},
+		{//24
+			"Title": "Move %0 -> %1 to %2 -> %3 (Overwriting=%4)",
+			"Parameters":
+			[
+				["String", "Old Group Name"],
+				["String", "Old item name"],
+				["String", "New group name"],
+				["String", "New item name"],
+				["Integer", "Allow overwrite? (0 = No, 1 = Yes)"]
+			]
+		},
+		{//25
+			"Title": "Move %1 from group %0 to %2",
+			"Parameters":
+			[
+				["String", "Old Group Name"],
+				["String", "Item name"],
+				["String", "New group name"],
+				["Integer", "Allow overwrite? (0 = No, 1 = Yes)"]
+			]
+		},
+		{//26
+			"Title": "Copy group from %0 to %1 (Mode = %2)",
+			"Parameters":
+			[
+				["String", "Source group name"],
+				["String", "Destination group name"],
+				["Integer", "Overwrite Mode ( 0 = Replace old group , 1 = Merge with old group )"]
+			]
+		},
+		{//27
+			"Title": "Copy item %0 -> %1 to %2 -> %3",
+			"Parameters":
+			[
+				["String", "Source group"],
+				["String", "Source item"],
+				["String", "Destination group"],
+				["String", "Destination item"]
+			]
+		},
+		{//28
+			"Title": "Delete group %0",
+			"Parameters":
+			[
+				["String", "Group to delete"]
+			]
+		},
+		{//29
+			"Title": "Delete item %1 in group %0",
+			"Parameters":
+			[
+				["String", "Group"],
+				["String", "Item"]
+			]
+		},
+		{//30
+			"Title": "Delete item %0 from all groups",
+			"Parameters":
+			[
+				["String", "Item name"]
+			]
+		},
+		{//31
+			"Title": "Delete all items with pattern ( %0 ,%1 , %2 )",
+			"Parameters":
+			[
+				["String", "Pattern for groups"],
+				["String", "Pattern for items"],
+				["String", "Pattern for values"],
+				["Integer", "Case Sensitive ( 0 = No , 1 = Yes )"]
+			]
+		},
+		{//32
+			"Title": "Clear all"
+		},
+		{//33
+			"Title": "Find items matching ( %0, %1 , %2 ). %3",
+			"Parameters":
+			[
+				["String", "Group condition (Use '.', '*' or start with a '!' for 'not')"],
+				["String", "Item condition (Use '.', '*' or start with a '!' for 'not')"],
+				["String", "Value condition (Use '.', '*' or start with a '!' for 'not')"],
+				["Custom5", "Search Settings"]
+			]
+		},
+		{//34
+			"Title": "Find repeats of %0->%1",
+			"Parameters":
+			[
+				["String", "Group"],
+				["String", "Item"]
+			]
+		},
+		{//35
+			"Title": "Clear Results"
+		},
+		{//36
+			"Title": "Search for (%1,%2,%3) and put result into file %0",
+			"Parameters":
+			[
+				["File", "#Title#Destination Path#Filter#Ini Files|*.ini|All files|*.*|"],
+				["String", "Group condition"],
+				["String", "Item condition"],
+				["String", "Value condition"],
+				["Integer", "Case sensitive? (0 = No, 1 = Yes)"]
+			]
+		},
+		{//37
+			"Title": "Search for (%1,%2,%3) and put result into object %0",
+			"Parameters":
+			[
+				["Custom1", "Object selector"],
+				["String", "Group condition"],
+				["String", "Item condition"],
+				["String", "Value condition"],
+				["Integer", "Case sensitive? (0 = No, 1 = Yes)"]
+			]
+		},
+		{//38
+			"Title": "Merge from file %0",
+			"Parameters":
+			[
+				["File", "#Title#File to merge from#Filter#Ini Files|*.ini|All files|*.*|"],
+				["Integer", "Allow overwrites ( 0 = No , 1 = Yes )"]
+			]
+		},
+		{//39
+			"Title": "Merge group %1 from file %0",
+			"Parameters":
+			[
+				["File", "#Title#File to merge from#Filter#Ini Files|*.ini|All files|*.*|"],
+				["String", "Source Group name"],
+				["String", "Destination Group name"],
+				["Integer", "Allow overwrites ( 0 = No , 1 = Yes )"]
+			]
+		},
+		{//40
+			"Title": null,
+			"Parameters":
+			[
+				["", null],
+				["", null]
+			]
+		},
+		{//41
+			"Title": null,
+			"Parameters":
+			[
+				["", null],
+				["", null],
+				["", null],
+				["", null]
+			]
+		},
+		{//42
+			"Title": null,
+			"Parameters":
+			[
+				["", null],
+				["", null]
+			]
+		},
+		{//43
+			"Title": null,
+			"Parameters":
+			[
+				["", null],
+				["", null]
+			]
+		},
+		{//44
+			"Title": null
+		},
+		{//45
+			"Title": null,
+			"Parameters":
+			[
+				["", null]
+			]
+		},
+		{//46
+			"Title": null,
+			"Parameters":
+			[
+				["", null],
+				["", null],
+				["", null]
+			]
+		},
+		{//47
+			"Title": null
+		},
+		{//48
+			"Title": null,
+			"Parameters":
+			[
+				["", null],
+				["", null]
+			]
+		},
+		{//49
+			"Title": null,
+			"Parameters":
+			[
+				["", null],
+				["", null]
+			]
+		},
+		{//50
+			"Title": null,
+			"Parameters":
+			[
+				["", null]
+			]
+		},
+		{//51
+			"Title": null,
+			"Parameters":
+			[
+				["", null]
+			]
+		},
+		{//52
+			"Title": null,
+			"Parameters":
+			[
+				["", null]
+			]
+		},
+		{//53
+			"Title": null,
+			"Parameters":
+			[
+				["", null]
+			]
+		},
+		{//54
+			"Title": null,
+			"Parameters":
+			[
+				["", null],
+				["", null],
+				["", null]
+			]
+		},
+		{//55
+			"Title": null,
+			"Parameters":
+			[
+				["", null]
+			]
+		},
+		{//56
+			"Title": null,
+			"Parameters":
+			[
+				["", null],
+				["", null],
+				["", null]
+			]
+		},
+		{//57
+			"Title": null,
+			"Parameters":
+			[
+				["", null]
+			]
+		},
+		{//58
+			"Title": null,
+			"Parameters":
+			[
+				["", null]
+			]
+		},
+		{//59
+			"Title": null,
+			"Parameters":
+			[
+				["", null],
+				["", null]
+			]
+		},
+		{//60
+			"Title": null,
+			"Parameters":
+			[
+				["", null],
+				["", null]
+			]
+		},
+		{//61
+			"Title": null,
+			"Parameters":
+			[
+				["", null],
+				["", null]
+			]
+		},
+		{//62
+			"Title": null,
+			"Parameters":
+			[
+				["", null],
+				["", null],
+				["", null],
+				["", null]
+			]
+		},
+		{//63
+			"Title": null
+		},
+		{//64
+			"Title": null,
+			"Parameters":
+			[
+				["", null]
+			]
+		},
+		{//65
+			"Title": null,
+			"Parameters":
+			[
+				["", null],
+				["", null],
+				["", null],
+				["", null]
+			]
+		},
+		{//66
+			"Title": null,
+			"Parameters":
+			[
+				["", null],
+				["", null],
+				["", null]
+			]
+		},
+		{//67
+			"Title": null,
+			"Parameters":
+			[
+				["", null],
+				["", null]
+			]
+		},
+		{//68
+			"Title": null,
+			"Parameters":
+			[
+				["", null],
+				["", null]
+			]
+		},
+		{//69
+			"Title": null,
+			"Parameters":
+			[
+				["", null],
+				["", null]
+			]
+		},
+		{//70
+			"Title": null,
+			"Parameters":
+			[
+				["", null]
+			]
+		},
+		{//71
+			"Title": null,
+			"Parameters":
+			[
+				["", null],
+				["", null]
+			]
+		},
+		{//72
+			"Title": null,
+			"Parameters":
+			[
+				["", null],
+				["", null],
+				["", null],
+				["", null]
+			]
+		},
+		{//73
+			"Title": null,
+			"Parameters":
+			[
+				["", null],
+				["", null]
+			]
+		},
+		{//74
+			"Title": null,
+			"Parameters":
+			[
+				["", null],
+				["", null]
+			]
+		},
+		{//75
+			"Title": null,
+			"Parameters":
+			[
+				["", null],
+				["", null]
+			]
+		},
+		{//76
+			"Title": null,
+			"Parameters":
+			[
+				["", null],
+				["", null]
+			]
+		},
+		{//77
+			"Title": null,
+			"Parameters":
+			[
+				["", null],
+				["", null]
+			]
+		},
+		{//78
+			"Title": null,
+			"Parameters":
+			[
+				["", null],
+				["", null]
+			]
+		},
+		{//79
+			"Title": null
+		},
+		{//80
+			"Title": null
+		},
+		{//81
+			"Title": null,
+			"Parameters":
+			[
+				["", null]
+			]
+		},
+		{//82
+			"Title": null
+		},
+		{//83
+			"Title": null,
+			"Parameters":
+			[
+				["", null]
+			]
+		},
 	],
 	"Conditions":
 	[
