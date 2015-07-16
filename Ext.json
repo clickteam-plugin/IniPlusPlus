@@ -589,186 +589,186 @@
 			]
 		},
 		{//40
-			"Title": null,
+			"Title": "Merge from object %0",
 			"Parameters":
 			[
-				["", null],
-				["", null]
+				["Custom0", "Other INI++ Object"],
+				["Integer", "Allow overwrites ( 0 = No , 1 = Yes )"]
 			]
 		},
 		{//41
-			"Title": null,
+			"Title": "Merge group %1 from object %0",
 			"Parameters":
 			[
-				["", null],
-				["", null],
-				["", null],
-				["", null]
+				["Custom0", "Other INI++ Object"],
+				["String", "Source Group name"],
+				["String", "Destination Group name"],
+				["Integer", "Allow overwrites ( 0 = No , 1 = Yes )"]
 			]
 		},
 		{//42
-			"Title": null,
+			"Title": "New Ini with file name %0 (Clear all data = %1)",
 			"Parameters":
 			[
-				["", null],
-				["", null]
+				["File", "#Title#File name (if blank it will be kept in memory)#Filter#Ini Files|*.ini|All files|*.*|"],
+				["Integer", "Clear current data? (0 = No, 1 = Yes)"]
 			]
 		},
 		{//43
-			"Title": null,
+			"Title": "Load Ini %0 (Read only = %1)",
 			"Parameters":
 			[
-				["", null],
-				["", null]
+				["File", "#Title#File to load#Filter#Ini Files|*.ini|All files|*.*|"],
+				["Integer", "Read only? ( 0 = No , 1 = Yes )"]
 			]
 		},
 		{//44
-			"Title": null
+			"Title": "Save Ini"
 		},
 		{//45
-			"Title": null,
+			"Title": "Save Ini As %0",
 			"Parameters":
 			[
-				["", null]
+				["File", "Path"]
 			]
 		},
 		{//46
-			"Title": null,
+			"Title": "Backup Ini To %0 (Compressed = %1, Key = %2)",
 			"Parameters":
 			[
-				["", null],
-				["", null],
-				["", null]
+				["File", "#Title#File to backup to#Filter#Ini Files|*.ini|All files|*.*|"],
+				["Integer", "Compressed? ( 0 = No , 1 = Yes )"],
+				["String", "Encrypted? (Type key or use blank string for none)"]
 			]
 		},
 		{//47
-			"Title": null
+			"Title": "Close Ini"
 		},
 		{//48
-			"Title": null,
+			"Title": "Load %0 into Ini",
 			"Parameters":
 			[
-				["", null],
-				["", null]
+				["String", "Text (in Ini format) to load"],
+				["Integer", "Mode ( 0 = Replace , 1 = Merge )"]
 			]
 		},
 		{//49
-			"Title": null,
+			"Title": "Set autosave to %0 and autoload to %1",
 			"Parameters":
 			[
-				["", null],
-				["", null]
+				["Integer", "Auto Save (0 = Off , 1 = On)"],
+				["Integer", "Auto Load ( 0 = Off , 1 = On )"]
 			]
 		},
 		{//50
-			"Title": null,
+			"Title": "Set compression to %0",
 			"Parameters":
 			[
-				["", null]
+				["Integer", "0 = Off , 1 = On"]
 			]
 		},
 		{//51
-			"Title": null,
+			"Title": "Set Encryption to %0",
 			"Parameters":
 			[
-				["", null]
+				["String", "Type the key, or an empty string to not use encryption"]
 			]
 		},
 		{//52
-			"Title": null,
+			"Title": "Set Read Only to %0",
 			"Parameters":
 			[
-				["", null]
+				["Integer", "0 = No , 1 = Yes"]
 			]
 		},
 		{//53
-			"Title": null,
+			"Title": "Set Case Sensitive to %0",
 			"Parameters":
 			[
-				["", null]
+				["Integer", "0 = Not case sensitive , 1 = Case sensitive"]
 			]
 		},
 		{//54
-			"Title": null,
+			"Title": "Use escape characters ( %0 , %1 , %2 )",
 			"Parameters":
 			[
-				["", null],
-				["", null],
-				["", null]
+				["Integer", "Use in groups ( 0 = No , 1 = Yes )"],
+				["Integer", "Use in item names ( 0 = No , 1 = Yes )"],
+				["Integer", "Use in item values ( 0 = No , 1 = Yes )"]
 			]
 		},
 		{//55
-			"Title": null,
+			"Title": "Quote strings = %0",
 			"Parameters":
 			[
-				["", null]
+				["Integer", "0 = No , 1 = Yes"]
 			]
 		},
 		{//56
-			"Title": null,
+			"Title": "Set repeat modes to ( %0 , %1 , %2 )",
 			"Parameters":
 			[
-				["", null],
-				["", null],
-				["", null]
+				["Integer", "For groups ( 0 = First , 1 = Last , 2 = Rename , 3 = Merge )"],
+				["Integer", "For items ( 0 = First , 1 = Last , 2 = Rename  )"],
+				["Integer", "Save repeated items as original? (0 = No, 1 = Yes)"]
 			]
 		},
 		{//57
-			"Title": null,
+			"Title": "Set new line string to %0",
 			"Parameters":
 			[
-				["", null]
+				["String", "Type the new line string or type an empty string to use the Standard mode"]
 			]
 		},
 		{//58
-			"Title": null,
+			"Title": "Set default directory to %0",
 			"Parameters":
 			[
-				["", null]
+				["String", "Default directory"]
 			]
 		},
 		{//59
-			"Title": null,
+			"Title": "Compress %0 to %1",
 			"Parameters":
 			[
-				["", null],
-				["", null]
+				["File", "#Title#Source#Filter#All files|*.*|"],
+				["File", "#Title#Destination#Filter#All files|*.*|"]
 			]
 		},
 		{//60
-			"Title": null,
+			"Title": "Decompress %0 to %1",
 			"Parameters":
 			[
-				["", null],
-				["", null]
+				["File", "#Title#Source#Filter#All files|*.*|"],
+				["File", "#Title#Destination#Filter#All files|*.*|"]
 			]
 		},
 		{//61
-			"Title": null,
+			"Title": "Open dialog with title %0 (Settings: %1)",
 			"Parameters":
 			[
-				["", null],
-				["", null]
+				["String", "Title for dialog box"],
+				["Custom2", "Dialog Settings"]
 			]
 		},
 		{//62
-			"Title": null,
+			"Title": "Add repeated (%0,%1,%2) with mode %3",
 			"Parameters":
 			[
-				["", null],
-				["", null],
-				["", null],
-				["", null]
+				["String", "Group Name"],
+				["String", "Item Name"],
+				["String", "String to set to (Use Str$(...) if you wish to set to a value)"],
+				["Integer", "Mode ( 0 = New item ; 1 = New group )"]
 			]
 		},
 		{//63
-			"Title": null
+			"Title": "Close dialog"
 		},
 		{//64
-			"Title": null,
+			"Title": "Refresh dialog (Mode = %0)",
 			"Parameters":
 			[
-				["", null]
+				["Integer", "Mode (0 for full refresh, 1 for 'quick' item name refresh)"]
 			]
 		},
 		{//65
