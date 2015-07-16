@@ -772,153 +772,257 @@
 			]
 		},
 		{//65
-			"Title": null,
+			"Title": "CSV Import/Export (%0) to file %1, seperator %2",
 			"Parameters":
 			[
-				["", null],
-				["", null],
-				["", null],
-				["", null]
+				["Integer", "Import = 0, Export = 1"],
+				["File", "#Title#Path to save to#Filter#CSV Files|*.csv|All files|*.*|"],
+				["String", "Group to save. Leave blank to save/load all."],
+				["String", "Seperator symbol"]
 			]
 		},
 		{//66
-			"Title": null,
+			"Title": "CSV Array Import/Export (%1) to file %1, seperator %2",
 			"Parameters":
 			[
-				["", null],
-				["", null],
-				["", null]
+				["Integer", "0 = Import, 1 = Export"],
+				["File", "#Title#Path to load from#Filter#CSV Files|*.csv|All files|*.*|"],
+				["String", "Seperator symbol"]
 			]
 		},
 		{//67
-			"Title": null,
+			"Title": "Put data into chart object %0 from group %1",
 			"Parameters":
 			[
-				["", null],
-				["", null]
+				["Custom3", "Chart object name"],
+				["String", "Group Name"]
 			]
 		},
 		{//68
-			"Title": null,
+			"Title": "Find subgroups of '%0' (Levels = %1)",
 			"Parameters":
 			[
-				["", null],
-				["", null]
+				["String", "Group to find subgroups of"],
+				["Integer", "Number of levels (0 for unlimited. n for at most n levels, -n means exactly n levels)"]
 			]
 		},
 		{//69
-			"Title": null,
+			"Title": "Subgroups enabled = %0, Empty Groups allowed = %1.",
 			"Parameters":
 			[
-				["", null],
-				["", null]
+				["Integer", "Enable subgroup loading and saving? (0 = No, 1 = Yes)"],
+				["Integer", "Allow empty groups? (0 = No, 1 = Yes)"]
 			]
 		},
 		{//70
-			"Title": null,
+			"Title": "Name of data slot",
 			"Parameters":
 			[
-				["", null]
+				["String", "Changed global data slot to %0"]
 			]
 		},
 		{//71
-			"Title": null,
+			"Title": "%0 group %1",
 			"Parameters":
 			[
-				["", null],
-				["", null]
+				["Custom4", "Shift/Sort/Shuffle settings"],
+				["String", "Group to apply to"]
 			]
 		},
 		{//72
-			"Title": null,
+			"Title": "Set part %2 of the item %1 from group %0 to %3",
 			"Parameters":
 			[
-				["", null],
-				["", null],
-				["", null],
-				["", null]
+				["String", "Group to apply to"],
+				["String", "Item"],
+				["Integer", "Part to set"],
+				["String", "String to set to"]
 			]
 		},
 		{//73
-			"Title": null,
+			"Title": "Load data from array '%0' into group '%1'",
 			"Parameters":
 			[
-				["", null],
-				["", null]
+				["Custom6", "Array name"],
+				["String", "Group"]
 			]
 		},
 		{//74
-			"Title": null,
+			"Title": "Put data into array '%0' from group '%1' ",
 			"Parameters":
 			[
-				["", null],
-				["", null]
+				["Custom7", "Array name"],
+				["String", "Group"]
 			]
 		},
 		{//75
-			"Title": null,
+			"Title": "Get data from chart object %0 into group %1",
 			"Parameters":
 			[
-				["", null],
-				["", null]
+				["Custom3", "Chart object name"],
+				["String", "Group Name"]
 			]
 		},
 		{//76
-			"Title": null,
+			"Title": "Get properties from chart object %0 into %1",
 			"Parameters":
 			[
-				["", null],
-				["", null]
+				["Custom3", "Chart object name"],
+				["String", "Group Name"]
 			]
 		},
 		{//77
-			"Title": null,
+			"Title": "Put properties to chart object %0 from group %1",
 			"Parameters":
 			[
-				["", null],
-				["", null]
+				["Custom3", "Chart object name"],
+				["String", "Group Name"]
 			]
 		},
 		{//78
-			"Title": null,
+			"Title": "%0 : %1",
 			"Parameters":
 			[
-				["", null],
-				["", null]
+				["File", "#Title#File to load#Filter#Ini Files|*.ini|All files|*.*|"],
+				["Custom8", "File settings"]
 			]
 		},
 		{//79
-			"Title": null
+			"Title": "Perform undo"
 		},
 		{//80
-			"Title": null
+			"Title": "Perform redo"
 		},
 		{//81
-			"Title": null,
+			"Title": "Clear undo/redo stack. Mode = %0",
 			"Parameters":
 			[
-				["", null]
+				["Integer", "Which? (1 = Undo Stack, 2 = Redo Stack, 3 = Both)"]
 			]
 		},
 		{//82
-			"Title": null
+			"Title": "Add a new undo stack block"
 		},
 		{//83
-			"Title": null,
+			"Title": "Set automatic mode to %0",
 			"Parameters":
 			[
-				["", null]
+				["Integer", "1 = Automatic, 2 = Manual"]
 			]
-		},
+		}
 	],
 	"Conditions":
 	[
-		{	"Title": "%o: Are %0 and %1 equal?",
+		{//0
+			"Title": "%o: Current group exists",
+			"Triggered": false
+		},
+		{//1
+			"Title": "%o: Current group has item %0",
 			"Parameters":
 			[
-				["Integer", "First number"],
-				["Integer", "Second number"]
+				["String", "Item name"]
 			],
+			"Triggered": false
+		},
+		{//2
+			"Title": "%o: %0 in current group is equal to %2 with default value %1 (hashed) ",
+			"Parameters":
+			[
+				["String", "Item name"],
+				["String", "Default string (if item does not exist)"],
+				["String", "String to compare to"]
+			],
+			"Triggered": false
+		},
+		{//3
+			"Title": "%o: Group %0 exists",
+			"Parameters":
+			[
+				["String", "Group name"]
+			],
+			"Triggered": false
+		},
+		{//4
+			"Title": "%o: Group %0 has item %1",
+			"Parameters":
+			[
+				["String", "Group name"],
+				["String", "Item name"]
+			],
+			"Triggered": false
+		},
+		{//5
+			"Title": "%o: %1 in %0 is equal to %3 with default value %2 (hashed) ",
+			"Parameters":
+			[
+				["String", "Group name"],
+				["String", "Item name"],
+				["String", "Default value (if item does not exist)"],
+				["String", "String to compare to"]
+			],
+			"Triggered": false
+		},
+		{//6
+			"Title": "%o: Wildcat match %1 to pattern %0",
+			"Parameters":
+			[
+				["String", "Pattern (. or * allowed)"],
+				["String", "String"],
+				["Integer", "Case Sensitive? ( 0 = No , 1 = Yes )"]
+			],
+			"Triggered": false
+		},
+		{//7
+			"Title": "%o: On Dialog Box Opened",
+			"Triggered": true
+		},
+		{//8
+			"Title": "%o: On Dialog Box Closed",
+			"Triggered": true
+		},
+		{//9
+			"Title": "%o: On Dialog Box Modified",
+			"Triggered": true
+		},
+		{//10
+			"Title": "%o: On Data Modified",
+			"Triggered": true
+		},
+		{//11
+			"Title": "%o: On Save",
+			"Triggered": true
+		},
+		{//12
+			"Title": "%o: On New Item",
+			"Triggered": true
+		},
+		{//13
+			"Title": "%o: On Search Results Found",
+			"Triggered": true
+		},
+		{//14
+			"Title": "%o: On No Search Results Found",
+			"Triggered": true
+		},
+		{//15
+			"Title": "%o: On Merge",
+			"Triggered": true
+		},
+		{//16
+			"Title": "%o: File was uncompressed",
+			"Triggered": true
+		},
+		{//17
+			"Title": "%o: File failed to be uncompressed",
+			"Triggered": true
+		},
+		{//18
+			"Title": "Is undo available?",
+			"Triggered": false
+		},
+		{//19
+			"Title": "Is redo available?",
 			"Triggered": false
 		}
 	],
