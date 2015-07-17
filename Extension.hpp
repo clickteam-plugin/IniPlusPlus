@@ -204,47 +204,47 @@ public:
 	bool conditionHasRedo();
 
 	//Expressions - Defined in Expressions.cpp
-	void expressionGetItemValueG(/**/);
-	void expressionGetItemStringG(/**/);
-	void expressionGetXG(/**/);
-	void expressionGetYG(/**/);
-	void expressionNthItemG(/**/);
-	void expressionNthItemValueG(/**/);
-	void expressionNthItemStringG(/**/);
-	void expressionItemCountG(/**/);
-	void expressionGetItemValue(/**/);
-	void expressionGetItemString(/**/);
-	void expressionGetX(/**/);
-	void expressionGetY(/**/);
-	void expressionNthGroup(/**/);
-	void expressionNthItem(/**/);
-	void expressionNthItemString(/**/);
-	void expressionNthItemValue(/**/);
-	void expressionGroupCount(/**/);
-	void expressionItemCount(/**/);
-	void expressionTotalItems(/**/);
-	void expressionSearchResultCounts(/**/);
-	void expressionGetNthSearchResultGroup(/**/);
-	void expressionGetNthSearchResultItem(/**/);
-	void expressionGetNthSearchResultItemValue(/**/);
-	void expressionGetNthSearchResultItemString(/**/);
-	void expressionGetNthSearchResultPath(/**/);
-	void expressionWriteStream(/**/);
-	void expressionHashString(/**/);
-	void expressionEncryptString(/**/);
-	void expressionEscapeString(/**/);
-	void expressionUnEscapeString(/**/);
-	void expressionInnerProduct(/**/);
-	void expressionInnerProductStr(/**/);
-	void expressionNthSortedName(/**/);
-	void expressionNthSortedValue(/**/);
-	void expressionGetCSV(/**/);
-	void expressionNthOverallItem(/**/);
-	void expressionUniqueItemCount(/**/);
-	void expressionGetItemArray(/**/);
-	void expressionCurGroup(/**/);
-	void expressionCurGroupString(/**/);
-	void expressionFname(/**/);
+	float expressionGetItemValueG(TCHAR const *item, float def); //TODO
+	TCHAR const *expressionGetItemStringG(TCHAR const *item, TCHAR const *def);
+	int expressionGetXG(TCHAR const *item);
+	int expressionGetYG(TCHAR const *item);
+	TCHAR const *expressionNthItemG(int n);
+	float expressionNthItemValueG(int n); //TODO
+	TCHAR const *expressionNthItemStringG(int n);
+	int expressionItemCountG();
+	float expressionGetItemValue(TCHAR const *group, TCHAR const *item, float def); //TODO
+	TCHAR const *expressionGetItemString(TCHAR const *group, TCHAR const *item, TCHAR const *def);
+	int expressionGetX(TCHAR const *group, TCHAR const *item);
+	int expressionGetY(TCHAR const *group, TCHAR const *item);
+	TCHAR const *expressionNthGroup(int n);
+	TCHAR const *expressionNthItem(TCHAR const *group, int n);
+	TCHAR const *expressionNthItemString(TCHAR const *group, int n);
+	float expressionNthItemValue(TCHAR const *group, int n); //TODO
+	int expressionGroupCount();
+	int expressionItemCount(TCHAR const *group);
+	int expressionTotalItems();
+	int expressionSearchResultCounts();
+	TCHAR const *expressionGetNthSearchResultGroup(int n);
+	TCHAR const *expressionGetNthSearchResultItem(int n);
+	float expressionGetNthSearchResultItemValue(int n); //TODO
+	TCHAR const *expressionGetNthSearchResultItemString(int n);
+	TCHAR const *expressionGetNthSearchResultPath(int n, TCHAR const *separator);
+	TCHAR const *expressionWriteStream();
+	TCHAR const *expressionHashString(TCHAR const *str);
+	TCHAR const *expressionEncryptString(TCHAR const *, TCHAR const *); //TODO
+	TCHAR const *expressionEscapeString(TCHAR const *str);
+	TCHAR const *expressionUnEscapeString(TCHAR const *str);
+	int expressionInnerProduct(TCHAR const *, TCHAR const *); //TODO
+	TCHAR const *expressionInnerProductStr(TCHAR const *, TCHAR const *); //TODO
+	TCHAR const *expressionNthSortedName(TCHAR const *group, int n);
+	float expressionNthSortedValue(TCHAR const *group, int n); //TODO
+	TCHAR const *expressionGetCSV(TCHAR const *, TCHAR const *); //TODO
+	TCHAR const *expressionNthOverallItem(int n);
+	int expressionUniqueItemCount();
+	TCHAR const *expressionGetItemArray(TCHAR const *group, TCHAR const *item, int index, TCHAR const *def);
+	TCHAR const *expressionCurGroup();
+	TCHAR const *expressionCurGroupString();
+	TCHAR const *expressionFname();
 
 
 	short Handle();         //defined & documented in Extension.cpp

@@ -1072,7 +1072,7 @@
 		},
 		{//5
 			"Title": "NthItemValueG(",
-			"Returns": "Integer",
+			"Returns": "Float", //TODO
 			"Parameters":
 			[
 				["Integer", "n"]
