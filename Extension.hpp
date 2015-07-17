@@ -47,7 +47,7 @@ public:
 	 * version of MMF2 to get access to some
 	 * new SDK feature.
 	 */
-	static const int MinimumBuild = 257;
+	static const int MinimumBuild = 258;
 
 	/* Version
 	 * This is the version of your extension
@@ -56,7 +56,7 @@ public:
 	 * changes, not just when you have a new version
 	 * of your extension with new features.
 	 */
-	static const int Version = 1;
+	static const int Version = 2;
 
 	/* OEFLAGS, OEPREFS
 	 * These are settings for your extension
@@ -66,7 +66,7 @@ public:
 	 * more detailed information on the flags you
 	 * can set and what they implicate.
 	 */
-	static const int OEFLAGS = OEFLAG_VALUES|OEFLAG_RUNBEFOREFADEIN|OEFLAG_NEVERKILL;
+	static const int OEFLAGS = OEFLAG_VALUES|OEFLAG_RUNBEFOREFADEIN|OEFLAG_NEVERKILL|OEFLAG_MOVEMENTS;
 	static const int OEPREFS = 0;
 
 	/* WindowProcPriority
@@ -106,15 +106,145 @@ public:
 	 */
 
 	//Actions - Defined in Actions.cpp
-	void ActionExample(int ExampleParameter);
-	void SecondActionExample();
+	void actionSetCurrentGroup(TCHAR const *group, int flag);
+	void actionSetValueG(/**/);
+	void actionSetStringG(/**/);
+	void actionSetStringMD5G(/**/);
+	void actionSaveObjectG(/**/);
+	void actionLoadObjectG(/**/);
+	void actionSavePositionG(/**/);
+	void actionSaveGlobalValuesG(/**/);
+	void actionLoadGlobalValuesG(/**/);
+	void actionDeleteGroupG(/**/);
+	void actionDeleteItemG(/**/);
+	void actionRenameGroupG(/**/);
+	void actionRenameItemG(/**/);
+	void actionMoveItemToGroupG(/**/);
+	void actionSetValue(/**/);
+	void actionSetString(/**/);
+	void actionSetStringMD5(/**/);
+	void actionSaveObject(/**/);
+	void actionLoadObject(/**/);
+	void actionSavePosition(/**/);
+	void actionSaveAltValues(/**/);
+	void actionLoadAltValues(/**/);
+	void actionRenameGroup(/**/);
+	void actionRenameItem(/**/);
+	void actionMoveItem(/**/);
+	void actionMoveItemToGroup(/**/);
+	void actionCopyGroup(/**/);
+	void actionCopyItem(/**/);
+	void actionDeleteGroup(/**/);
+	void actionDeleteItem(/**/);
+	void actionDeleteItemInAllGroups(/**/);
+	void actionDeleteFromPattern(/**/);
+	void actionClearAll(/**/);
+	void actionPerformSearch(/**/);
+	void actionPerformMultiplesSearch(/**/);
+	void actionClearResults(/**/);
+	void actionCreateSubINI(/**/);
+	void actionCreateSubINIObject(/**/);
+	void actionMergeFile(/**/);
+	void actionMergeGroupFile(/**/);
+	void actionMerge(/**/);
+	void actionMergeGroupObject(/**/);
+	void actionNew(/**/);
+	void actionLoad(/**/);
+	void actionSave(/**/);
+	void actionSaveAs(/**/);
+	void actionBackupTo(/**/);
+	void actionClose(/**/);
+	void actionLoadFromString(/**/);
+	void actionSetAutoSave(/**/);
+	void actionSetCompresson(/**/);
+	void actionSetEncryption(/**/);
+	void actionSetReadOnly(/**/);
+	void actionSetCaseSensitive(/**/);
+	void actionSetEscapeChars(/**/);
+	void actionNeverQuoteStrings(/**/);
+	void actionSetRepeatModes(/**/);
+	void actionSetNewLineChar(/**/);
+	void actionSetDefaultDirectory(/**/);
+	void actionCompressFile(/**/);
+	void actionDeCompressFile(/**/);
+	void actionOpenDialog(/**/);
+	void actionAddRepeatedItem(/**/);
+	void actionCloseDialog(/**/);
+	void actionRefreshDialog(/**/);
+	void actionExportCVS(/**/);
+	void actionImportCVS(/**/);
+	void actionToChart(/**/);
+	void actionFindSubGroups(/**/);
+	void actionEnableSubGroups(/**/);
+	void actionSwitchGlobalObject(/**/);
+	void actionSSS(/**/);
+	void actionSetItemArray(/**/);
+	void actionLoadFromArray(/**/);
+	void actionSaveToArray(/**/);
+	void actionFromChart(/**/);
+	void actionSaveChartSettings(/**/);
+	void actionLoadChartSettings(/**/);
+	void actionLoadChangeFile(/**/);
+	void actionUndo(/**/);
+	void actionRedo(/**/);
+	void actionClearUndoStack(/**/);
+	void actionAddNewUndoBlock(/**/);
+	void actionSetManualMode(/**/);
 
 	//Conditions - Defined in Conditions.cpp
-	bool AreTwoNumbersEqual(int FirstNumber, int SecondNumber);
+	bool conditionHasGroupG(/**/);
+	bool conditionHasItemG(/**/);
+	bool conditionCompareMD5G(/**/);
+	bool conditionHasGroup(/**/);
+	bool conditionHasItem(/**/);
+	bool conditionCompareMD5(/**/);
+	bool conditionWildcatMatch(/**/);
+	bool conditionEvent(){ return true; }
+	bool conditionHasUndo(/**/);
+	bool conditionHasRedo(/**/);
 
 	//Expressions - Defined in Expressions.cpp
-	int Add(int FirstNumber, int SecondNumber);
-	const TCHAR * HelloWorld();
+	void expressionGetItemValueG(/**/);
+	void expressionGetItemStringG(/**/);
+	void expressionGetXG(/**/);
+	void expressionGetYG(/**/);
+	void expressionNthItemG(/**/);
+	void expressionNthItemValueG(/**/);
+	void expressionNthItemStringG(/**/);
+	void expressionItemCountG(/**/);
+	void expressionGetItemValue(/**/);
+	void expressionGetItemString(/**/);
+	void expressionGetX(/**/);
+	void expressionGetY(/**/);
+	void expressionNthGroup(/**/);
+	void expressionNthItem(/**/);
+	void expressionNthItemString(/**/);
+	void expressionNthItemValue(/**/);
+	void expressionGroupCount(/**/);
+	void expressionItemCount(/**/);
+	void expressionTotalItems(/**/);
+	void expressionSearchResultCounts(/**/);
+	void expressionGetNthSearchResultGroup(/**/);
+	void expressionGetNthSearchResultItem(/**/);
+	void expressionGetNthSearchResultItemValue(/**/);
+	void expressionGetNthSearchResultItemString(/**/);
+	void expressionGetNthSearchResultPath(/**/);
+	void expressionWriteStream(/**/);
+	void expressionHashString(/**/);
+	void expressionEncryptString(/**/);
+	void expressionEscapeString(/**/);
+	void expressionUnEscapeString(/**/);
+	void expressionInnerProduct(/**/);
+	void expressionInnerProductStr(/**/);
+	void expressionNthSortedName(/**/);
+	void expressionNthSortedValue(/**/);
+	void expressionGetCSV(/**/);
+	void expressionNthOverallItem(/**/);
+	void expressionUniqueItemCount(/**/);
+	void expressionGetItemArray(/**/);
+	void expressionCurGroup(/**/);
+	void expressionCurGroupString(/**/);
+	void expressionFname(/**/);
 
 
 	short Handle();         //defined & documented in Extension.cpp

@@ -232,8 +232,8 @@
 			[17, "Get Item Count (Group)"],
 			[18, "Get Total Item Count"],
 			[36, "Get number of unique item names"],
-			[30, "Perform Calculations (Click for info)"], //TODO
-			[31, "Find Max or Min Group (Click for info)"] //TODO
+			[30, "Perform Calculations (Click for info)"],
+			[31, "Find Max or Min Group (Click for info)"]
 		],
 		["List Groups and Items",
 			[12, "Get N-th Group name ( n )"],

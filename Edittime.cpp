@@ -295,3 +295,71 @@ BOOL MMF2Func GetFilters(mv *mV, SerializedED *SED, DWORD Flags, void *)
 #endif
 	return FALSE;
 }
+
+#ifndef RUN_ONLY
+
+/* InterceptActionSelection
+ * This function is called after the user has selected a
+ * menu item from the actions popup menu. You can show
+ * a dialog or allow the user to make a choice, and
+ * return a different ID to Fusion. Be aware, there
+ * is no way to cancel this operation.
+ */
+short InterceptActionSelection(mv *mV, short selectedId)
+{
+	return selectedId;
+}
+
+/* InterceptActionSelection
+ * This function is called after the user has selected a
+ * menu item from the conditions popup menu. You can show
+ * a dialog or allow the user to make a choice, and
+ * return a different ID to Fusion. Be aware, there
+ * is no way to cancel this operation.
+ */
+short InterceptConditionSelection(mv *mV, short selectedId)
+{
+	return selectedId;
+}
+
+/* InterceptActionSelection
+ * This function is called after the user has selected a
+ * menu item from the expressions popup menu. You can show
+ * a dialog or allow the user to make a choice, and
+ * return a different ID to Fusion. Be aware, there
+ * is no way to cancel this operation.
+ */
+short InterceptExpressionSelection(mv *mV, short selectedId)
+{
+	if(selectedId == 30) //Perform Calculations
+	{
+		MessageBox
+		(
+			GetActiveWindow(),
+			(
+				_T("This expression goes through each group and calculates the specified operation (sum, average, maximum, etc) of all items in the group. Which operation it performs is specified by the first parameter.\n\nIt then takes all these values and calculations either the sum, average, maximum, etc., of those. Which operation it performs here is specified by the second parameter.")
+				_T("\n\nThe possible parameters are:\n+\tSum\n*\tProduct\navg\tAverage\nmin\tMinimum\nmax\tMaximum\nn\tNumber of items (for second parameter only)\n\nYou may also write the name of an item or group and it will only look at those.\n\nFor instance, setting the first parameter to 'max' and the second to 'avg' will give you the average highest value in a group.")
+				_T("\n\nRefer to the help file for more information.")
+			),
+			_T("Quick Help for Ini++ Object"),
+			MB_ICONINFORMATION
+		);
+	}
+	else if(selectedId == 31) //Find Max or Min Group
+	{
+		MessageBox
+		(
+			GetActiveWindow(),
+			(
+				_T("This expression goes through each group and calculates the specified operation (sum, average, maximum, etc) of all items in the group. Which operation it performs is specified by the first parameter.\n\nIt then takes all these values and calculations either the sum, average, maximum, etc., of those. Which operation it performs here is specified by the second parameter.")
+				_T("\n\nThe possible values for the first parameter are:\n+\tSum\n*\tProduct\nAvg\tAverage\nMin\tMinimum\nMax\tMaximum\nn\tNumber of items\n\nYou may also write the name of an item and will only look at items with that name. The second parameter must be either 'min' or 'max'.\n\nFor instance, setting the first parameter to 'n' and the second to 'max' will give you the name of the group with the most items.")
+				_T("\n\nRefer to the help file for more information.")
+			),
+			_T("Quick Help for Ini++ Object"),
+			MB_ICONINFORMATION
+		);
+	}
+	return selectedId;
+}
+
+#endif

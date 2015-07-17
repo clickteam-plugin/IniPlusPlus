@@ -8,13 +8,4 @@
 
 #include "Common.h"
 
-int Extension::Add(int First, int Second)
-{
-	return First + Second;
-}
-
-TCHAR const * Extension::HelloWorld()
-{
-	return _T("Hello world!");
-	//return Runtime.CopyString(MyString.c_str()); //for stdtstrings
-}
+//
