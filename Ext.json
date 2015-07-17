@@ -232,8 +232,8 @@
 			[17, "Get Item Count (Group)"],
 			[18, "Get Total Item Count"],
 			[36, "Get number of unique item names"],
-			[30, "Perform Calculations (Click for info)"],
-			[31, "Find Max or Min Group (Click for info)"]
+			[30, "Perform Calculations (Click for info)"], //TODO
+			[31, "Find Max or Min Group (Click for info)"] //TODO
 		],
 		["List Groups and Items",
 			[12, "Get N-th Group name ( n )"],
@@ -919,59 +919,59 @@
 		},
 		{//1
 			"Title": "%o: Current group has item %0",
+			"Triggered": false,
 			"Parameters":
 			[
 				["String", "Item name"]
-			],
-			"Triggered": false
+			]
 		},
 		{//2
 			"Title": "%o: %0 in current group is equal to %2 with default value %1 (hashed) ",
+			"Triggered": false,
 			"Parameters":
 			[
 				["String", "Item name"],
 				["String", "Default string (if item does not exist)"],
 				["String", "String to compare to"]
-			],
-			"Triggered": false
+			]
 		},
 		{//3
 			"Title": "%o: Group %0 exists",
+			"Triggered": false,
 			"Parameters":
 			[
 				["String", "Group name"]
-			],
-			"Triggered": false
+			]
 		},
 		{//4
 			"Title": "%o: Group %0 has item %1",
+			"Triggered": false,
 			"Parameters":
 			[
 				["String", "Group name"],
 				["String", "Item name"]
-			],
-			"Triggered": false
+			]
 		},
 		{//5
 			"Title": "%o: %1 in %0 is equal to %3 with default value %2 (hashed) ",
+			"Triggered": false,
 			"Parameters":
 			[
 				["String", "Group name"],
 				["String", "Item name"],
 				["String", "Default value (if item does not exist)"],
 				["String", "String to compare to"]
-			],
-			"Triggered": false
+			]
 		},
 		{//6
 			"Title": "%o: Wildcat match %1 to pattern %0",
+			"Triggered": false,
 			"Parameters":
 			[
 				["String", "Pattern (. or * allowed)"],
 				["String", "String"],
 				["Integer", "Case Sensitive? ( 0 = No , 1 = Yes )"]
-			],
-			"Triggered": false
+			]
 		},
 		{//7
 			"Title": "%o: On Dialog Box Opened",
@@ -1028,16 +1028,318 @@
 	],
 	"Expressions":
 	[
-		{	"Title": "Add(",
+		{//0
+			"Title": "GetItemValueG(",
+			"Returns": "Float", //TODO
+			"Parameters":
+			[
+				["String", "Item $"],
+				["Float", "Default Value"] //TODO
+			]
+		},
+		{//1
+			"Title": "GetItemStringG$(",
+			"Returns": "String",
+			"Parameters":
+			[
+				["String", "Item $"],
+				["String", "Default Value $"]
+			]
+		},
+		{//2
+			"Title": "PosXG(",
 			"Returns": "Integer",
 			"Parameters":
 			[
-				["Integer", "First number"],
-				["Integer", "Second number"]
+				["String", "Item $"]
 			]
 		},
-		{	"Title": "HelloWorld$(",
-			"Returns": "Text"
+		{//3
+			"Title": "PosYG(",
+			"Returns": "Integer",
+			"Parameters":
+			[
+				["String", "Item $"]
+			]
+		},
+		{//4
+			"Title": "NthItemG$(",
+			"Returns": "String",
+			"Parameters":
+			[
+				["Integer", "n"]
+			]
+		},
+		{//5
+			"Title": "NthItemValueG(",
+			"Returns": "Integer",
+			"Parameters":
+			[
+				["Integer", "n"]
+			]
+		},
+		{//6
+			"Title": "NthItemStringG$(",
+			"Returns": "String",
+			"Parameters":
+			[
+				["Integer", "n"]
+			]
+		},
+		{//7
+			"Title": "ItemCountG(",
+			"Returns": "Integer"
+		},
+		{//8
+			"Title": "GetItemValue(",
+			"Returns": "Float", //TODO
+			"Parameters":
+			[
+				["String", "Group $"],
+				["String", "Item $"],
+				["Float", "Default Value"] //TODO
+			]
+		},
+		{//9
+			"Title": "GetItemString$(",
+			"Returns": "String",
+			"Parameters":
+			[
+				["String", "Group $"],
+				["String", "Item $"],
+				["String", "Default Value $"]
+			]
+		},
+		{//10
+			"Title": "PosX(",
+			"Returns": "Integer",
+			"Parameters":
+			[
+				["String", "Group $"],
+				["String", "Item $"]
+			]
+		},
+		{//11
+			"Title": "PosY(",
+			"Returns": "Integer",
+			"Parameters":
+			[
+				["String", "Group $"],
+				["String", "Item $"]
+			]
+		},
+		{//12
+			"Title": "NthGroup$(",
+			"Returns": "String",
+			"Parameters":
+			[
+				["Integer", "n"]
+			]
+		},
+		{//13
+			"Title": "NthItemName$(",
+			"Returns": "String",
+			"Parameters":
+			[
+				["String", "Group $"],
+				["Integer", "n"]
+			]
+		},
+		{//14
+			"Title": "NthItemString$(",
+			"Returns": "String",
+			"Parameters":
+			[
+				["String", "Group $"],
+				["Integer", "n"]
+			]
+		},
+		{//15
+			"Title": "NthItemValue(",
+			"Returns": "Float", //TODO
+			"Parameters":
+			[
+				["String", "Group $"],
+				["Integer", "n"]
+			]
+		},
+		{//16
+			"Title": "GroupCount(",
+			"Returns": "Integer"
+		},
+		{//17
+			"Title": "ItemCount(",
+			"Returns": "Integer",
+			"Parameters":
+			[
+				["String", "Group $"]
+			]
+		},
+		{//18
+			"Title": "TotalItems(",
+			"Returns": "Integer"
+		},
+		{//19
+			"Title": "SearchResultsCount(",
+			"Returns": "Integer"
+		},
+		{//20
+			"Title": "SearchGroup$(",
+			"Returns": "String",
+			"Parameters":
+			[
+				["Integer", "n"]
+			]
+		},
+		{//21
+			"Title": "SearchItemName$(",
+			"Returns": "String",
+			"Parameters":
+			[
+				["Integer", "n"],
+			]
+		},
+		{//22
+			"Title": "SearchItemValue(",
+			"Returns": "Float", //TODO
+			"Parameters":
+			[
+				["Integer", "n"]
+			]
+		},
+		{//23
+			"Title": "SearchItemString$(",
+			"Returns": "String",
+			"Parameters":
+			[
+				["Integer", "n"]
+			]
+		},
+		{//24
+			"Title": "SearchItemPath$(",
+			"Returns": "String",
+			"Parameters":
+			[
+				["Integer", "n"],
+				["String", "Separator $"]
+			]
+		},
+		{//25
+			"Title": "WriteStream$(",
+			"Returns": "String"
+		},
+		{//26
+			"Title": "Hash$(",
+			"Returns": "String",
+			"Parameters":
+			[
+				["String", "String $"]
+			]
+		},
+		{//27
+			"Title": "Crypt$(",
+			"Returns": "String",
+			"Parameters":
+			[
+				["String", "??? $"], //TODO (string to encrypt?)
+				["String", "??? $"] //TODO (encryption key?)
+			]
+		},
+		{//28
+			"Title": "Escape$(",
+			"Returns": "String",
+			"Parameters":
+			[
+				["String", "String $"]
+			]
+		},
+		{//29
+			"Title": "Unescape$(",
+			"Returns": "String",
+			"Parameters":
+			[
+				["String", "String $"]
+			]
+		},
+		{//30
+			"Title": "Calc(",
+			"Returns": "Integer",
+			"Parameters":
+			[
+				["String", "??? $"], //TODO
+				["String", "??? $"] //TODO
+			]
+		},
+		{//31
+			"Title": "CalcStr$(",
+			"Returns": "String",
+			"Parameters":
+			[
+				["String", "??? $"], //TODO
+				["String", "??? $"] //TODO
+			]
+		},
+		{//32
+			"Title": "NthSortedName$(",
+			"Returns": "String",
+			"Parameters":
+			[
+				["String", "Group $"],
+				["Integer", "n"]
+			]
+		},
+		{//33
+			"Title": "NthSortedItem(",
+			"Returns": "Float", //TODO
+			"Parameters":
+			[
+				["String", "Group $"],
+				["Integer", "n"]
+			]
+		},
+		{//34
+			"Title": "GetCSV$(",
+			"Returns": "String",
+			"Parameters":
+			[
+				["String", "??? $"], //TODO
+				["String", "??? $"] //TODO
+			]
+		},
+		{//35
+			"Title": "NthOverallItem$(",
+			"Returns": "String",
+			"Parameters":
+			[
+				["Integer", "n"]
+			]
+		},
+		{//36
+			"Title": "UniqueItemCount(",
+			"Returns": "Integer"
+		},
+		{//37
+			"Title": "GetItemPart$(",
+			"Returns": "String",
+			"Parameters":
+			[
+				["String", "Group $"],
+				["String", "Item $"],
+				["Integer", "Index"],
+				["String", "Default $"]
+			]
+		},
+		{//38
+			"Title": "CurrentGroupName$(",
+			"Returns": "String"
+		},
+		{//39
+			"Title": "CurrentGroupString$(",
+			"Returns": "String"
+		},
+		{//40
+			"Title": "Filename$(",
+			"Returns": "String"
 		}
 	]
 }
