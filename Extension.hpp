@@ -192,16 +192,16 @@ public:
 	void actionSetManualMode(/**/);
 
 	//Conditions - Defined in Conditions.cpp
-	bool conditionHasGroupG(/**/);
-	bool conditionHasItemG(/**/);
-	bool conditionCompareMD5G(/**/);
-	bool conditionHasGroup(/**/);
-	bool conditionHasItem(/**/);
-	bool conditionCompareMD5(/**/);
-	bool conditionWildcatMatch(/**/);
+	bool conditionHasGroupG();
+	bool conditionHasItemG(TCHAR const *item);
+	bool conditionCompareMD5G(TCHAR const *item, TCHAR const *def, TCHAR const *comp);
+	bool conditionHasGroup(TCHAR const *group);
+	bool conditionHasItem(TCHAR const *group, TCHAR const *item);
+	bool conditionCompareMD5(TCHAR const *group, TCHAR const *item, TCHAR const *def, TCHAR const *comp);
+	bool conditionWildcatMatch(TCHAR const *pattern, TCHAR const *str, int flag);
 	bool conditionEvent(){ return true; }
-	bool conditionHasUndo(/**/);
-	bool conditionHasRedo(/**/);
+	bool conditionHasUndo();
+	bool conditionHasRedo();
 
 	//Expressions - Defined in Expressions.cpp
 	void expressionGetItemValueG(/**/);
