@@ -33,16 +33,96 @@ namespace Prop
 	{
 		zNOT_USED = PROPID_EXTITEM_CUSTOM_FIRST,
 		Version,
-		//MyString,
-		//MyInt,
+		PathTitle,
+		DefPath,
+		ReadOnly,
+		DefFolder,
+		DefaultText,
+		Index,
+		CreateFolders,
+		AutoLoad,
+		AutoSave,			
+		IniTitle,
+		GlobalData,
+		GlobalDataName,
+		StandardQM,
+		TreeTitle,			
+			Compress,		
+			Encrypt,			
+			NewLine,
+			QuoteStrings,
+			GroupRepeat,
+			RepeatSave,
+			ItemRepeat,
+			EscapeChar_Group,
+			EscapeChar_Item,
+			EscapeChar_Value,
+			CaseSensitive,
+			SubGroups,
+			AllowEmptyGroups,
+		UndoTitle,
+		Undo,
+		Redo,
+		CompEncYTitle,
 	};
 }
 
-PropData Properties[] = //See the MMF2SDK help file for information on PropData_ macros.
+LPCTSTR DefaultFolderList[] =
+{0,
+	_T("Windows Folder"),
+	_T("(Initial) Current Folder"),
+	_T("Program Folder"),
+	_T("Application Data (User)"),
+	_T("Application Data (Common)"),
+	NULL
+};
+
+LPCTSTR GroupRepeatList[] =
+{0,
+	_T("First Only"),
+	_T("Last Only"),
+	_T("Rename"),
+	_T("Merge"),
+	NULL
+};
+LPCTSTR ItemRepeatList[] =
+{0,
+	_T("First Only"),
+	_T("Last Only"),
+	_T("Rename"),
+	NULL
+};
+
+int UndoRange[] = {-1, 127};
+
+FilenameCreateParam fcp =
 {
-	PropData_StaticString(Prop::Version, (UINT_PTR)_T("Version #"), (UINT_PTR)_T("This is the current version of the EDIF Template object.")),
-	//PropData_EditMultiLine(Prop::MyString, (UINT_PTR)_T("My String"), (UINT_PTR)_T("The contents of my string.")),
-	//PropData_EditNumber(Prop::MyInt, (UINT_PTR)_T("My Integer"), (UINT_PTR)_T("The value of my integer.")),
+	_T("INI Files|*.ini|All Files|*.*|"),
+	OFN_PATHMUSTEXIST
+};
+
+#define _P(s) ((UINT_PTR)_T(s))
+
+PropData Properties[] =
+{
+	PropData_StaticString    (Prop::Version       , _P("Version #")                                     , _P("This is the current version of the Ini++ object.")),
+	PropData_CheckBox        (Prop::GlobalData    , _P("Global Data?")                                  , _P("If this is checked, then the data is shared with all Ini++ objects with this property, even across frames. Important: Only one object may have this property per frame.")),
+	PropData_EditString      (Prop::GlobalDataName, _P("Global data key")                               , _P("A key can be selected. All global Ini++ objects with the same key share the same data.")),
+	PropData_Group           (Prop::PathTitle     , _P("File and Path Settings")                        , _P("File and Path Settings")),
+	PropData_Filename_Check  (Prop::DefPath       , _P("Default File")                                  , _P("The file to be initially loaded. Relative paths may be used. If the field is left blank or the check-box unchecked no file will be loaded."), &fcp),
+	PropData_CheckBox        (Prop::ReadOnly      , _P("Read Only?")                                    , _P("If selected, the file specified above will be opened in Read Only mode. This does not apply if another file is opened or created.")),
+	PropData_ComboBox        (Prop::DefFolder     , _P("Base Folder")                                   , _P("The folder that all relative paths are relative to."), DefaultFolderList),
+	PropData_EditMultiLine   (Prop::DefaultText   , _P("Initial Data")                                  , _P("Data loaded into the object after the default file is loaded. Object settings are used except encryption and compression.")),
+	PropData_CheckBox        (Prop::AutoLoad      , _P("Enable 'Auto Load'")                            , _P("Before any condition, expression or action, reload the file. Avoid this opition if possible.")),
+	PropData_CheckBox        (Prop::AutoSave      , _P("Enable 'Auto Save'")                            , _P("When the object is written to when a file is open, automatically resave the file?")),
+	PropData_CheckBox        (Prop::CreateFolders , _P("Create folders for files if they do not exist?"), _P("Allow the Save functions to create folders if they do not exist. If not selected, folders (but not files) must exist.")),
+	PropData_CheckBox        (Prop::Index         , _P("1-based index")                                 , _P("If selected, any specified index will start at 1. Otherwise it will start at 0.")),
+	PropData_Group           (Prop::CompEncYTitle , _P("Compression & Encyption")                       , _P("Compression & Encyption")),
+	PropData_CheckBox        (Prop::Compress      , _P("Use Compression?")                              , _P("If selected, the Ini file will be decompressed when loaded and compressed when saved.")),
+	PropData_EditString_Check(Prop::Encrypt       , _P("Encryption")                                    , _P("If the box is checked then the Ini file will be decrypted when loaded and encrypted when saved, with the key specified.")),
+	PropData_Group           (Prop::UndoTitle     , _P("Undo/Redo Buffer Size")                         , _P("Undo/Redo Buffer Size")),
+	PropData_SpinEdit        (Prop::Undo          , _P("Undo:")                                         , _P("Number of actions that can be undone. -1 for infinite."), &UndoRange),
+	PropData_SpinEdit        (Prop::Redo          , _P("Redo:")                                         , _P("Number of 'undo's that can be redone. -1 for infinite."), &UndoRange),
 	PropData_End()
 };
 
@@ -137,7 +217,7 @@ void *MMF2Func GetPropValue(mv *mV, SerializedED *SED, UINT PropID)
 	{
 	case Prop::Version:
 		{
-			return new CPropStringValue(_T("Default.EDIF.Template.0"));
+			return new CPropStringValue(_T("v1.6 July 2015"));
 		}
 	//case Prop::MyString:
 	//	{
