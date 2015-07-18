@@ -107,89 +107,89 @@ public:
 
 	//Actions - Defined in Actions.cpp
 	void actionSetCurrentGroup(TCHAR const *group, int flag);
-	void actionSetValueG(/**/);
-	void actionSetStringG(/**/);
-	void actionSetStringMD5G(/**/);
-	void actionSaveObjectG(/**/);
-	void actionLoadObjectG(/**/);
-	void actionSavePositionG(/**/);
-	void actionSaveGlobalValuesG(/**/);
-	void actionLoadGlobalValuesG(/**/);
-	void actionDeleteGroupG(/**/);
-	void actionDeleteItemG(/**/);
-	void actionRenameGroupG(/**/);
-	void actionRenameItemG(/**/);
-	void actionMoveItemToGroupG(/**/);
-	void actionSetValue(/**/);
-	void actionSetString(/**/);
-	void actionSetStringMD5(/**/);
-	void actionSaveObject(/**/);
-	void actionLoadObject(/**/);
-	void actionSavePosition(/**/);
-	void actionSaveAltValues(/**/);
-	void actionLoadAltValues(/**/);
-	void actionRenameGroup(/**/);
-	void actionRenameItem(/**/);
-	void actionMoveItem(/**/);
-	void actionMoveItemToGroup(/**/);
-	void actionCopyGroup(/**/);
-	void actionCopyItem(/**/);
-	void actionDeleteGroup(/**/);
-	void actionDeleteItem(/**/);
-	void actionDeleteItemInAllGroups(/**/);
-	void actionDeleteFromPattern(/**/);
-	void actionClearAll(/**/);
-	void actionPerformSearch(/**/);
-	void actionPerformMultiplesSearch(/**/);
-	void actionClearResults(/**/);
-	void actionCreateSubINI(/**/);
-	void actionCreateSubINIObject(/**/);
-	void actionMergeFile(/**/);
-	void actionMergeGroupFile(/**/);
-	void actionMerge(/**/);
-	void actionMergeGroupObject(/**/);
-	void actionNew(/**/);
-	void actionLoad(/**/);
-	void actionSave(/**/);
-	void actionSaveAs(/**/);
-	void actionBackupTo(/**/);
-	void actionClose(/**/);
-	void actionLoadFromString(/**/);
-	void actionSetAutoSave(/**/);
-	void actionSetCompresson(/**/);
-	void actionSetEncryption(/**/);
-	void actionSetReadOnly(/**/);
-	void actionSetCaseSensitive(/**/);
-	void actionSetEscapeChars(/**/);
-	void actionNeverQuoteStrings(/**/);
-	void actionSetRepeatModes(/**/);
-	void actionSetNewLineChar(/**/);
-	void actionSetDefaultDirectory(/**/);
-	void actionCompressFile(/**/);
-	void actionDeCompressFile(/**/);
-	void actionOpenDialog(/**/);
-	void actionAddRepeatedItem(/**/);
-	void actionCloseDialog(/**/);
-	void actionRefreshDialog(/**/);
-	void actionExportCVS(/**/);
-	void actionImportCVS(/**/);
-	void actionToChart(/**/);
-	void actionFindSubGroups(/**/);
-	void actionEnableSubGroups(/**/);
-	void actionSwitchGlobalObject(/**/);
-	void actionSSS(/**/);
-	void actionSetItemArray(/**/);
-	void actionLoadFromArray(/**/);
-	void actionSaveToArray(/**/);
-	void actionFromChart(/**/);
-	void actionSaveChartSettings(/**/);
-	void actionLoadChartSettings(/**/);
-	void actionLoadChangeFile(/**/);
-	void actionUndo(/**/);
-	void actionRedo(/**/);
-	void actionClearUndoStack(/**/);
-	void actionAddNewUndoBlock(/**/);
-	void actionSetManualMode(/**/);
+	void actionSetValueG(TCHAR const *item, int flag, float v); //TODO
+	void actionSetStringG(TCHAR const *item, TCHAR const *v);
+	void actionSetStringMD5G(TCHAR const *item, TCHAR const *v);
+	void actionSaveObjectG(RunObject *o, int flag_pos, int flag_alt);
+	void actionLoadObjectG(RunObject *o);
+	void actionSavePositionG(TCHAR const *item, unsigned position);
+	void actionSaveGlobalValuesG();
+	void actionLoadGlobalValuesG();
+	void actionDeleteGroupG();
+	void actionDeleteItemG(TCHAR const *item);
+	void actionRenameGroupG(TCHAR const *newname, int mode);
+	void actionRenameItemG(TCHAR const *item, TCHAR const *newname, int flag);
+	void actionMoveItemToGroupG(TCHAR const *item, TCHAR const *group, int flag);
+	void actionSetValue(TCHAR const *group, TCHAR const *item, int flag, float v); //TODO
+	void actionSetString(TCHAR const *group, TCHAR const *item, TCHAR const *v);
+	void actionSetStringMD5(TCHAR const *group, TCHAR const *item, TCHAR const *v);
+	void actionSaveObject(RunObject *o, TCHAR const *group, int flag_pos, int flag_alt);
+	void actionLoadObject(RunObject *o, TCHAR const *group);
+	void actionSavePosition(TCHAR const *group, TCHAR const *item, unsigned position);
+	void actionSaveAltValues(TCHAR const *group);
+	void actionLoadAltValues(TCHAR const *group);
+	void actionRenameGroup(TCHAR const *group, TCHAR const *newname, int mode);
+	void actionRenameItem(TCHAR const *group, TCHAR const *item, TCHAR const *newname, int flag);
+	void actionMoveItem(TCHAR const *group, TCHAR const *item, TCHAR const *newgroup, TCHAR const *newitem, int flag);
+	void actionMoveItemToGroup(TCHAR const *group, TCHAR const *item, TCHAR const *newgroup, int flag);
+	void actionCopyGroup(TCHAR const *group, TCHAR const *newname, int mode);
+	void actionCopyItem(TCHAR const *group, TCHAR const *item, TCHAR const *newgroup, TCHAR const *newitem);
+	void actionDeleteGroup(TCHAR const *group);
+	void actionDeleteItem(TCHAR const *group, TCHAR const *item);
+	void actionDeleteItemInAllGroups(TCHAR const *item);
+	void actionDeleteFromPattern(TCHAR const *gpatern, TCHAR const *ipattern, TCHAR const *vpattern, int flag);
+	void actionClearAll();
+	void actionPerformSearch(TCHAR const *gcond, TCHAR const *icond, TCHAR const *vcond, void *settings); //TODO
+	void actionPerformMultiplesSearch(TCHAR const *group, TCHAR const *item);
+	void actionClearResults();
+	void actionCreateSubINI(TCHAR const *file, TCHAR const *gcond, TCHAR const *icond, TCHAR const *vcond, int flag);
+	void actionCreateSubINIObject(void *object_name, TCHAR const *gcond, TCHAR const *icond, TCHAR const *vcond, int flag); //TODO
+	void actionMergeFile(TCHAR const *file, int flag);
+	void actionMergeGroupFile(TCHAR const *file, TCHAR const *filegroup, TCHAR const *group, int flag);
+	void actionMerge(void *objectname, int flag); //TODO
+	void actionMergeGroupObject(void *objectname, TCHAR const *objectgroup, TCHAR const *group, int flag); //TODO
+	void actionNew(TCHAR const *file, int flag);
+	void actionLoad(TCHAR const *file, int flag);
+	void actionSave();
+	void actionSaveAs(TCHAR const *file);
+	void actionBackupTo(TCHAR const *file, int flag, TCHAR const *key);
+	void actionClose();
+	void actionLoadFromString(TCHAR const *inistr, int mode);
+	void actionSetAutoSave(int flag_save, int flag_load);
+	void actionSetCompresson(int flag);
+	void actionSetEncryption(TCHAR const *key);
+	void actionSetReadOnly(int flag);
+	void actionSetCaseSensitive(int flag);
+	void actionSetEscapeChars(int flag_groups, int flag_items, int flag_values);
+	void actionNeverQuoteStrings(int flag);
+	void actionSetRepeatModes(int flag_groups, int flag_items, int flag_repeats);
+	void actionSetNewLineChar(TCHAR const *str);
+	void actionSetDefaultDirectory(TCHAR const *directory);
+	void actionCompressFile(TCHAR const *file_source, TCHAR const *file_dest);
+	void actionDeCompressFile(TCHAR const *file_source, TCHAR const *file_dest);
+	void actionOpenDialog(TCHAR const *title, void *settings); //TODO
+	void actionAddRepeatedItem(TCHAR const *group, TCHAR const *item, TCHAR const *str, int mode);
+	void actionCloseDialog();
+	void actionRefreshDialog(int mode);
+	void actionExportCVS(int io, TCHAR const *file, TCHAR const *group, TCHAR const *separator);
+	void actionImportCVS(int io, TCHAR const *file, TCHAR const *separator);
+	void actionToChart(void *objectname, TCHAR const *group); //TODO
+	void actionFindSubGroups(TCHAR const *group, int depth);
+	void actionEnableSubGroups(int flag_subgroups, int flag_empties);
+	void actionSwitchGlobalObject(TCHAR const *dataslot);
+	void actionSSS(void *settings, TCHAR const *group);
+	void actionSetItemArray(TCHAR const *group, TCHAR const *item, int part, TCHAR const *v);
+	void actionLoadFromArray(void *objectname, TCHAR const *group); //TODO
+	void actionSaveToArray(void *objectname, TCHAR const *group); //TODO
+	void actionFromChart(void *objectname, TCHAR const *group); //TODO
+	void actionSaveChartSettings(void *objectname, TCHAR const *group); //TODO
+	void actionLoadChartSettings(void *objectname, TCHAR const *group); //TODO
+	void actionLoadChangeFile(TCHAR const *file, void *settings);
+	void actionUndo();
+	void actionRedo();
+	void actionClearUndoStack(int mode);
+	void actionAddNewUndoBlock();
+	void actionSetManualMode(int mode);
 
 	//Conditions - Defined in Conditions.cpp
 	bool conditionHasGroupG();

@@ -192,7 +192,7 @@
 			[6, "Is Wildcat Match?"],
 			[16, "On uncompression OK"],
 			[17, "On uncompression fail"]
-		]
+		],
 		"Separator"
 	],
 	"ExpressionMenu":
@@ -815,10 +815,10 @@
 			]
 		},
 		{//70
-			"Title": "Name of data slot",
+			"Title": "Changed global data slot to %0",
 			"Parameters":
 			[
-				["String", "Changed global data slot to %0"]
+				["String", "Name of data slot"]
 			]
 		},
 		{//71

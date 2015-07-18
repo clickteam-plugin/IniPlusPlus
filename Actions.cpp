@@ -8,4 +8,422 @@
 
 #include "Common.h"
 
-//
+void Extension::actionSetCurrentGroup(TCHAR const *group, int flag)
+{
+	//
+}
+
+void Extension::actionSetValueG(TCHAR const *item, int flag, float v) //TODO
+{
+	//
+}
+
+void Extension::actionSetStringG(TCHAR const *item, TCHAR const *v)
+{
+	//
+}
+
+void Extension::actionSetStringMD5G(TCHAR const *item, TCHAR const *v)
+{
+	//
+}
+
+void Extension::actionSaveObjectG(RunObject *o, int flag_pos, int flag_alt)
+{
+	//
+}
+
+void Extension::actionLoadObjectG(RunObject *o)
+{
+	//
+}
+
+void Extension::actionSavePositionG(TCHAR const *item, unsigned position)
+{
+	//
+}
+
+void Extension::actionSaveGlobalValuesG()
+{
+	//
+}
+
+void Extension::actionLoadGlobalValuesG()
+{
+	//
+}
+
+void Extension::actionDeleteGroupG()
+{
+	//
+}
+
+void Extension::actionDeleteItemG(TCHAR const *item)
+{
+	//
+}
+
+void Extension::actionRenameGroupG(TCHAR const *newname, int mode)
+{
+	//
+}
+
+void Extension::actionRenameItemG(TCHAR const *item, TCHAR const *newname, int flag)
+{
+	//
+}
+
+void Extension::actionMoveItemToGroupG(TCHAR const *item, TCHAR const *group, int flag)
+{
+	//
+}
+
+void Extension::actionSetValue(TCHAR const *group, TCHAR const *item, int flag, float v) //TODO
+{
+	//
+}
+
+void Extension::actionSetString(TCHAR const *group, TCHAR const *item, TCHAR const *v)
+{
+	//
+}
+
+void Extension::actionSetStringMD5(TCHAR const *group, TCHAR const *item, TCHAR const *v)
+{
+	//
+}
+
+void Extension::actionSaveObject(RunObject *o, TCHAR const *group, int flag_pos, int flag_alt)
+{
+	//
+}
+
+void Extension::actionLoadObject(RunObject *o, TCHAR const *group)
+{
+	//
+}
+
+void Extension::actionSavePosition(TCHAR const *group, TCHAR const *item, unsigned position)
+{
+	//
+}
+
+void Extension::actionSaveAltValues(TCHAR const *group)
+{
+	//
+}
+
+void Extension::actionLoadAltValues(TCHAR const *group)
+{
+	//
+}
+
+void Extension::actionRenameGroup(TCHAR const *group, TCHAR const *newname, int mode)
+{
+	//
+}
+
+void Extension::actionRenameItem(TCHAR const *group, TCHAR const *item, TCHAR const *newname, int flag)
+{
+	//
+}
+
+void Extension::actionMoveItem(TCHAR const *group, TCHAR const *item, TCHAR const *newgroup, TCHAR const *newitem, int flag)
+{
+	//
+}
+
+void Extension::actionMoveItemToGroup(TCHAR const *group, TCHAR const *item, TCHAR const *newgroup, int flag)
+{
+	//
+}
+
+void Extension::actionCopyGroup(TCHAR const *group, TCHAR const *newname, int mode)
+{
+	//
+}
+
+void Extension::actionCopyItem(TCHAR const *group, TCHAR const *item, TCHAR const *newgroup, TCHAR const *newitem)
+{
+	//
+}
+
+void Extension::actionDeleteGroup(TCHAR const *group)
+{
+	//
+}
+
+void Extension::actionDeleteItem(TCHAR const *group, TCHAR const *item)
+{
+	//
+}
+
+void Extension::actionDeleteItemInAllGroups(TCHAR const *item)
+{
+	//
+}
+
+void Extension::actionDeleteFromPattern(TCHAR const *gpatern, TCHAR const *ipattern, TCHAR const *vpattern, int flag)
+{
+	//
+}
+
+void Extension::actionClearAll()
+{
+	//
+}
+
+void Extension::actionPerformSearch(TCHAR const *gcond, TCHAR const *icond, TCHAR const *vcond, void *settings) //TODO
+{
+	//
+}
+
+void Extension::actionPerformMultiplesSearch(TCHAR const *group, TCHAR const *item)
+{
+	//
+}
+
+void Extension::actionClearResults()
+{
+	//
+}
+
+void Extension::actionCreateSubINI(TCHAR const *file, TCHAR const *gcond, TCHAR const *icond, TCHAR const *vcond, int flag)
+{
+	//
+}
+
+void Extension::actionCreateSubINIObject(void *object_name, TCHAR const *gcond, TCHAR const *icond, TCHAR const *vcond, int flag) //TODO
+{
+	//
+}
+
+void Extension::actionMergeFile(TCHAR const *file, int flag)
+{
+	//
+}
+
+void Extension::actionMergeGroupFile(TCHAR const *file, TCHAR const *filegroup, TCHAR const *group, int flag)
+{
+	//
+}
+
+void Extension::actionMerge(void *objectname, int flag) //TODO
+{
+	//
+}
+
+void Extension::actionMergeGroupObject(void *objectname, TCHAR const *objectgroup, TCHAR const *group, int flag) //TODO
+{
+	//
+}
+
+void Extension::actionNew(TCHAR const *file, int flag)
+{
+	//
+}
+
+void Extension::actionLoad(TCHAR const *file, int flag)
+{
+	//
+}
+
+void Extension::actionSave()
+{
+	//
+}
+
+void Extension::actionSaveAs(TCHAR const *file)
+{
+	//
+}
+
+void Extension::actionBackupTo(TCHAR const *file, int flag, TCHAR const *key)
+{
+	//
+}
+
+void Extension::actionClose()
+{
+	//
+}
+
+void Extension::actionLoadFromString(TCHAR const *inistr, int mode)
+{
+	//
+}
+
+void Extension::actionSetAutoSave(int flag_save, int flag_load)
+{
+	//
+}
+
+void Extension::actionSetCompresson(int flag)
+{
+	//
+}
+
+void Extension::actionSetEncryption(TCHAR const *key)
+{
+	//
+}
+
+void Extension::actionSetReadOnly(int flag)
+{
+	//
+}
+
+void Extension::actionSetCaseSensitive(int flag)
+{
+	//
+}
+
+void Extension::actionSetEscapeChars(int flag_groups, int flag_items, int flag_values)
+{
+	//
+}
+
+void Extension::actionNeverQuoteStrings(int flag)
+{
+	//
+}
+
+void Extension::actionSetRepeatModes(int flag_groups, int flag_items, int flag_repeats)
+{
+	//
+}
+
+void Extension::actionSetNewLineChar(TCHAR const *str)
+{
+	//
+}
+
+void Extension::actionSetDefaultDirectory(TCHAR const *directory)
+{
+	//
+}
+
+void Extension::actionCompressFile(TCHAR const *file_source, TCHAR const *file_dest)
+{
+	//
+}
+
+void Extension::actionDeCompressFile(TCHAR const *file_source, TCHAR const *file_dest)
+{
+	//
+}
+
+void Extension::actionOpenDialog(TCHAR const *title, void *settings) //TODO
+{
+	//
+}
+
+void Extension::actionAddRepeatedItem(TCHAR const *group, TCHAR const *item, TCHAR const *str, int mode)
+{
+	//
+}
+
+void Extension::actionCloseDialog()
+{
+	//
+}
+
+void Extension::actionRefreshDialog(int mode)
+{
+	//
+}
+
+void Extension::actionExportCVS(int io, TCHAR const *file, TCHAR const *group, TCHAR const *separator)
+{
+	//
+}
+
+void Extension::actionImportCVS(int io, TCHAR const *file, TCHAR const *separator)
+{
+	//
+}
+
+void Extension::actionToChart(void *objectname, TCHAR const *group) //TODO
+{
+	//
+}
+
+void Extension::actionFindSubGroups(TCHAR const *group, int depth)
+{
+	//
+}
+
+void Extension::actionEnableSubGroups(int flag_subgroups, int flag_empties)
+{
+	//
+}
+
+void Extension::actionSwitchGlobalObject(TCHAR const *dataslot)
+{
+	//
+}
+
+void Extension::actionSSS(void *settings, TCHAR const *group)
+{
+	//
+}
+
+void Extension::actionSetItemArray(TCHAR const *group, TCHAR const *item, int part, TCHAR const *v)
+{
+	//
+}
+
+void Extension::actionLoadFromArray(void *objectname, TCHAR const *group) //TODO
+{
+	//
+}
+
+void Extension::actionSaveToArray(void *objectname, TCHAR const *group) //TODO
+{
+	//
+}
+
+void Extension::actionFromChart(void *objectname, TCHAR const *group) //TODO
+{
+	//
+}
+
+void Extension::actionSaveChartSettings(void *objectname, TCHAR const *group) //TODO
+{
+	//
+}
+
+void Extension::actionLoadChartSettings(void *objectname, TCHAR const *group) //TODO
+{
+	//
+}
+
+void Extension::actionLoadChangeFile(TCHAR const *file, void *settings)
+{
+	//
+}
+
+void Extension::actionUndo()
+{
+	//
+}
+
+void Extension::actionRedo()
+{
+	//
+}
+
+void Extension::actionClearUndoStack(int mode)
+{
+	//
+}
+
+void Extension::actionAddNewUndoBlock()
+{
+	//
+}
+
+void Extension::actionSetManualMode(int mode)
+{
+	//
+}
