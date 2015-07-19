@@ -15,7 +15,7 @@
  */
 
 #include "Common.h"
-
+#include <sstream>
 /* InitParameter
  * Like with the editdata, this data will
  * be written as-is to disk and later read
@@ -23,11 +23,50 @@
  * by PARAM_EXTMAXSIZE, which currently is
  * 512 bytes. Use them wisely!
  */
-void MMF2Func InitParameter(mv *mV, short ID, paramExt *ParamData)
-{
+void MMF2Func InitParameter(mv *mV, short ID, paramExt *ParamData) //TODO: cleanup
+{std::ostringstream oss;oss<<"type="<<ParamData->pextType<<std::endl<<"code="<<ParamData->pextCode;MessageBoxA(NULL,oss.str().c_str(),"InitParameter",MB_OK);
 #ifndef RUN_ONLY
 	//store data in ParamData->pextData
 	//store the size of the data in ParamData->pextSize
+	switch(ID - PARAM_EXTBASE)
+	{
+	case 0: //object selector 1
+	case 1: //object selector 2
+		{
+			strcpy(&(ParamData->pextData[0]), "Ini++ v1.6");
+			ParamData->pextSize = sizeof(paramExt) - sizeof(ParamData->pextData) + strlen(ParamData->pextData)+1;
+		} break;
+	case 3: //object selector 3
+		{
+			strcpy(&(ParamData->pextData[0]), "Chart");
+			ParamData->pextSize = sizeof(paramExt) - sizeof(ParamData->pextData) + strlen(ParamData->pextData)+1;
+		} break;
+	case 2: //dialog selector
+		{
+			ParamData->pextSize = sizeof(paramExt) - sizeof(ParamData->pextData) + sizeof(int);
+			(*((int *)&(ParamData->pextData[0]))) = 0;
+		} break;
+	case 4: //shift/sort/shuffle setup
+		{
+			ParamData->pextSize = sizeof(paramExt) - sizeof(ParamData->pextData) + sizeof(char)*2;
+			((char *)&(ParamData->pextData[0]))[0] = 0;
+			((char *)&(ParamData->pextData[0]))[1] = 0;
+		} break;
+	case 5: //ssearch setup
+		{
+			ParamData->pextSize = sizeof(paramExt) - sizeof(ParamData->pextData) + sizeof(char)*2;
+			((char *)&(ParamData->pextData[0]))[0] = 0;
+			((char *)&(ParamData->pextData[0]))[1] = 0;
+		} break;
+	case 8: //load file setup
+		{
+			ParamData->pextSize = sizeof(paramExt) - sizeof(ParamData->pextData) + sizeof(char)*4;
+			((char *)&(ParamData->pextData[0]))[0] = 0;
+			((char *)&(ParamData->pextData[0]))[1] = 0;
+			((char *)&(ParamData->pextData[0]))[2] = 0;
+			((char *)&(ParamData->pextData[0]))[3] = 0;
+		} break;
+	}
 #endif
 }
 
