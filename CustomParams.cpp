@@ -24,7 +24,7 @@
  * 512 bytes. Use them wisely!
  */
 void MMF2Func InitParameter(mv *mV, short ID, paramExt *ParamData) //TODO: cleanup
-{std::ostringstream oss;oss<<"type="<<ParamData->pextType<<std::endl<<"code="<<ParamData->pextCode;MessageBoxA(NULL,oss.str().c_str(),"InitParameter",MB_OK);
+{
 #ifndef RUN_ONLY
 	//store data in ParamData->pextData
 	//store the size of the data in ParamData->pextSize
