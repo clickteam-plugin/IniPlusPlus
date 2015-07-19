@@ -153,6 +153,8 @@ struct EditData
 		subGroups             = from.subGroups;
 		allowEmptyGroups      = from.allowEmptyGroups;
 		globalKey             = from.globalKey;
+
+		return *this;
 	}
 
 #ifndef RUN_ONLY

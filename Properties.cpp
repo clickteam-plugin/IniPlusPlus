@@ -103,7 +103,7 @@ FilenameCreateParam fcp =
 
 #define _P(s) ((UINT_PTR)_T(s))
 
-PropData Properties[] =
+PropData GeneralProps[] =
 {
 	PropData_StaticString    (Prop::Version       , _P("Version #")                                     , _P("This is the current version of the Ini++ object.")),
 	PropData_CheckBox        (Prop::GlobalData    , _P("Global Data?")                                  , _P("If this is checked, then the data is shared with all Ini++ objects with this property, even across frames. Important: Only one object may have this property per frame.")),
@@ -125,6 +125,25 @@ PropData Properties[] =
 	PropData_SpinEdit        (Prop::Redo          , _P("Redo:")                                         , _P("Number of 'undo's that can be redone. -1 for infinite."), &UndoRange),
 	PropData_End()
 };
+PropData AdvancedProps[] =
+{
+	PropData_Group               (Prop::IniTitle        , _P("Format Settings")                  , _P("Format Settings")),
+	PropData_CheckBox            (Prop::StandardQM      , _P("Use Standard Settings?")           , _P("Use standard Ini file settings with no encryption or compression. Disables 'special' features.")),
+	PropData_Group               (Prop::TreeTitle       , _P("Advanced Settings")                , _P("Custom settings can only be used if \"Standard Ini\" mode is disabled.")),
+		PropData_EditString_Check(Prop::NewLine         , _P("New line")                         , _P("The string which represents new lines. If the box is unchecked then the standard Windows new line is used.")),
+		PropData_CheckBox        (Prop::QuoteStrings    , _P("Always quote strings?")            , _P("If this is selected then string values are always quoted. Otherwise, they will be only if they have leading or trailing white space.")),
+		PropData_CheckBox        (Prop::CaseSensitive   , _P("Case sensitive?")                  , _P("If selected, group and item names are case sensitive.")),
+		PropData_CheckBox        (Prop::AllowEmptyGroups, _P("Allow empty groups")               , _P("With this selected, empty groups will still be said to exist.")),
+		PropData_CheckBox        (Prop::SubGroups       , _P("Load and Save Subgroups")          , _P("When selected, indented groups will be considered 'subgroups', and they will be renamed to the 'path' of the group.")),
+		PropData_ComboBox        (Prop::GroupRepeat     , _P("Repeated Groups")                  , _P("See documentation."), GroupRepeatList),
+		PropData_ComboBox        (Prop::ItemRepeat      , _P("Repeated Items")                   , _P("See documentation."), ItemRepeatList),
+		PropData_CheckBox        (Prop::RepeatSave      , _P("Save repeated items as original?") , _P("If selected, repeated items will be saved without all the text before the last dot. This may result in multiple items having the same name.")),
+		PropData_CheckBox        (Prop::EscapeChar_Group, _P("Escape characters in group names?"), _P("Escape characters in group names?")),
+		PropData_CheckBox        (Prop::EscapeChar_Item , _P("Escape characters in item names?") , _P("Escape characters in item names?")),
+		PropData_CheckBox        (Prop::EscapeChar_Value, _P("Escape characters in item values?"), _P("Escape characters in item values?")),
+//	PropData_Folder_End          (),
+	PropData_End()
+};
 
 #endif
 
@@ -140,7 +159,8 @@ BOOL MMF2Func GetProperties(mv *mV, SerializedED *SED, BOOL MasterItem)
 #ifndef RUN_ONLY
 	//EditData ed (SED);
 	//ed.stuff;
-	mvInsertProps(mV, SED, Properties, PROPID_TAB_GENERAL, TRUE);
+	mvInsertProps(mV, SED, GeneralProps , PROPID_TAB_GENERAL, TRUE);
+	mvInsertProps(mV, SED, AdvancedProps, PROPID_TAB_CUSTOM1, TRUE);
 	//if you changed ed:
 	//ed.Serialize(mV, SED);
 	return TRUE;
@@ -212,21 +232,53 @@ void MMF2Func ReleasePropCreateParam(mv *mV, SerializedED *SED, UINT PropID, LPA
 void *MMF2Func GetPropValue(mv *mV, SerializedED *SED, UINT PropID)
 {
 #ifndef RUN_ONLY
-	//EditData ed (SED);
+	EditData ed (SED);
 	switch(PropID)
 	{
 	case Prop::Version:
 		{
 			return new CPropStringValue(_T("v1.6 July 2015"));
 		}
-	//case Prop::MyString:
-	//	{
-	//		return new CPropStringValue(ed.MyString.c_str());
-	//	}
-	//case Prop::MyInt:
-	//	{
-	//		return new CPropDWordValue(ed.MyInt);
-	//	}
+	case Prop::DefPath:
+		{
+			return new CPropStringValue(ed.defaultFile.c_str());
+		}
+	case Prop::DefFolder:
+		{
+			return new CPropDWordValue(ed.defaultFolder);
+		}
+	case Prop::DefaultText:
+		{
+			return new CPropStringValue(ed.defaultText.c_str());
+		}
+	case Prop::Encrypt:
+		{
+			return new CPropStringValue(ed.encrypt_key.c_str());
+		}
+	case Prop::NewLine:
+		{
+			return new CPropStringValue(ed.newline.c_str());
+		}
+	case Prop::GroupRepeat:
+		{
+			return new CPropDWordValue(ed.repeatGroups);
+		}
+	case Prop::ItemRepeat:
+		{
+			return new CPropDWordValue(ed.repeatItems);
+		}
+	case Prop::GlobalDataName:
+		{
+			return new CPropStringValue(ed.globalKey.c_str());
+		}
+	case Prop::Undo:
+		{
+			return new CPropDWordValue(ed.undoCount);
+		}
+	case Prop::Redo:
+		{
+			return new CPropDWordValue(ed.redoCount);
+		}
 	}
 	//if you changed ed:
 	//ed.Serialize(mV, SED);
@@ -243,22 +295,52 @@ void *MMF2Func GetPropValue(mv *mV, SerializedED *SED, UINT PropID)
 void MMF2Func SetPropValue(mv *mV, SerializedED *SED, UINT PropID, CPropValue *PropVal)
 {
 #ifndef RUN_ONLY
-	//EditData ed (SED);
-	//switch(PropID)
-	//{
-	//case Prop::MyString:
-	//	{
-	//		ed.MyString = ((CPropStringValue*)PropVal)->GetString();
-	//		break;
-	//	}
-	//case Prop::MyInt:
-	//	{
-	//		ed.MyInt = (CPropDWordValue*)PropVal)->m_dwValue;
-	//		break;
-	//	}
-	//}
-	//since you changed ed:
-	//ed.Serialize(mV, SED);
+	EditData ed (SED);
+	switch(PropID)
+	{
+	case Prop::DefPath:
+		{
+			ed.defaultFile = ((CPropStringValue *)PropVal)->GetString();
+		} break;
+	case Prop::DefaultText:
+		{
+			ed.defaultText = ((CPropStringValue *)PropVal)->GetString();
+		} break;
+	case Prop::DefFolder:
+		{
+			ed.defaultFolder = ((CPropDWordValue *)PropVal)->m_dwValue;
+		} break;
+	case Prop::Encrypt:
+		{
+			ed.encrypt_key = ((CPropStringValue *)PropVal)->GetString();
+		} break;
+	case Prop::NewLine:
+		{
+			ed.newline = ((CPropStringValue *)PropVal)->GetString();
+		} break;
+	case Prop::GroupRepeat:
+		{
+			ed.repeatGroups = ((CPropDWordValue *)PropVal)->m_dwValue;
+		} break;
+	case Prop::ItemRepeat:
+		{
+			ed.repeatItems = (char)(((CPropDWordValue *)PropVal)->m_dwValue);
+		} break;
+	case Prop::GlobalDataName:
+		{
+			ed.globalKey = ((CPropStringValue *)PropVal)->GetString();
+		} break;
+	case Prop::Undo:
+		{
+			ed.undoCount = (signed char)(((CPropDWordValue *)PropVal)->m_dwValue);
+		} break;
+	case Prop::Redo:
+		{
+			ed.redoCount = (signed char)(((CPropDWordValue *)PropVal)->m_dwValue);
+		} break;
+	default: return;
+	}
+	ed.Serialize(mV, SED);
 
 	//You may want to have your object redrawn in the
 	//frame editor after the modifications; in this
@@ -277,14 +359,86 @@ void MMF2Func SetPropValue(mv *mV, SerializedED *SED, UINT PropID, CPropValue *P
 BOOL MMF2Func GetPropCheck(mv *mV, SerializedED *SED, UINT PropID)
 {
 #ifndef RUN_ONLY
-	//EditData ed (SED);
-	//switch(PropID)
-	//{
-	//case Prop::MyCheckBoxPropertyOrPropertyThatHasTheCheckboxOptionSet:
-	//	{
-	//		return ed.WhetherOrNotThatPropertyOfMineIsTicked ? TRUE : FALSE;
-	//	}
-	//}
+	EditData ed (SED);
+	switch(PropID)
+	{
+	case Prop::DefPath:
+		{
+			return ed.b_defaultFile ? TRUE : FALSE;
+		}
+	case Prop::CreateFolders:
+		{
+			return ed.bool_CanCreateFolders ? TRUE : FALSE;
+		}
+	case Prop::AutoSave:
+		{
+			return ed.bool_AutoSave ? TRUE : FALSE;
+		}
+	case Prop::StandardQM:
+		{
+			return ed.bool_stdINI ? TRUE : FALSE;
+		}
+	case Prop::Compress:
+		{
+			return ed.bool_compress ? TRUE : FALSE;
+		}
+	case Prop::Encrypt:
+		{
+			return ed.bool_encrypt ? TRUE : FALSE;
+		}
+	case Prop::NewLine:
+		{
+			return ed.bool_newline ? TRUE : FALSE;
+		}
+	case Prop::QuoteStrings:
+		{
+			return ed.bool_QuoteStrings ? TRUE : FALSE;
+		}
+	case Prop::EscapeChar_Group:
+		{
+			return ed.bool_EscapeGroup ? TRUE : FALSE;
+		}
+	case Prop::EscapeChar_Item:
+		{
+			return ed.bool_EscapeItem ? TRUE : FALSE;
+		}
+	case Prop::EscapeChar_Value:
+		{
+			return ed.bool_EscapeValue ? TRUE : FALSE;
+		}
+	case Prop::CaseSensitive:
+		{
+			return ed.bool_CaseSensitive ? TRUE : FALSE;
+		}
+	case Prop::ReadOnly:
+		{
+			return ed.b_ReadOnly ? TRUE : FALSE;
+		}
+	case Prop::GlobalData:
+		{
+			return ed.globalObject ? TRUE : FALSE;
+		}
+	case Prop::RepeatSave:
+		{
+			return ed.saveRepeated ? TRUE : FALSE;
+		}
+	case Prop::Index:
+		{
+			return ed.index ? TRUE : FALSE;
+		}
+	case Prop::AutoLoad:
+		{
+			return ed.autoLoad ? TRUE : FALSE;
+		}
+	case Prop::SubGroups:
+		{
+			return ed.subGroups ? TRUE : FALSE;
+		}
+	case Prop::AllowEmptyGroups:
+		{
+			return ed.allowEmptyGroups ? TRUE : FALSE;
+		}
+	}
 	//if you changed ed:
 	//ed.Serialize(mV, SED);
 #endif
@@ -302,16 +456,110 @@ BOOL MMF2Func GetPropCheck(mv *mV, SerializedED *SED, UINT PropID)
 void MMF2Func SetPropCheck(mv *mV, SerializedED *SED, UINT PropID, BOOL Ticked)
 {
 #ifndef RUN_ONLY
-	//EditData ed (SED);
-	//switch(PropID)
-	//{
-	//case Prop::MyCheckBoxPropertyOrPropertyThatHasTheCheckboxOptionSet:
-	//	{
-	//		ed.WhetherOrNotThatPropertyOfMineIsTicked = Ticked != FALSE ? true : false;
-	//	}
-	//}
-	//since you changed ed:
-	//ed.Serialize(mV, SED);
+	bool ticked = ((Ticked != FALSE)? true : false);
+	EditData ed (SED);
+	switch(PropID)
+	{
+	case Prop::DefPath:
+		{
+			ed.b_defaultFile = ticked;
+			ed.Serialize(mV, SED);
+			mvRefreshProp(mV, SED, Prop::ReadOnly, FALSE);
+			return;
+		} break;
+	case Prop::CreateFolders:
+		{
+			ed.bool_CanCreateFolders = ticked;
+		} break;
+	case Prop::AutoSave:
+		{
+			ed.bool_AutoSave = ticked;
+		} break;
+	case Prop::StandardQM:
+		{
+			ed.bool_stdINI = ticked;
+			ed.Serialize(mV, SED);
+//			mvRefreshProp(mV, SED, Prop::Compress, FALSE);
+//			mvRefreshProp(mV, SED, Prop::Encrypt, FALSE);
+			mvRefreshProp(mV, SED, Prop::NewLine, FALSE);
+			mvRefreshProp(mV, SED, Prop::QuoteStrings, FALSE);
+			mvRefreshProp(mV, SED, Prop::GroupRepeat, FALSE);
+			mvRefreshProp(mV, SED, Prop::ItemRepeat, FALSE);
+			mvRefreshProp(mV, SED, Prop::EscapeChar_Group, FALSE);
+			mvRefreshProp(mV, SED, Prop::EscapeChar_Item, FALSE);
+			mvRefreshProp(mV, SED, Prop::EscapeChar_Value, FALSE);
+			mvRefreshProp(mV, SED, Prop::CaseSensitive, FALSE);
+			mvRefreshProp(mV, SED, Prop::RepeatSave, FALSE);
+			mvRefreshProp(mV, SED, Prop::SubGroups, FALSE);
+			mvRefreshProp(mV, SED, Prop::AllowEmptyGroups, FALSE);
+			return;
+		} break;
+	case Prop::Compress:
+		{
+			ed.bool_compress = ticked;
+		} break;
+	case Prop::Encrypt:
+		{
+			ed.bool_encrypt = ticked;
+		} break;
+	case Prop::NewLine:
+		{
+			ed.bool_newline = ticked;
+		} break;
+	case Prop::QuoteStrings:
+		{
+			ed.bool_QuoteStrings = ticked;
+		} break;
+	case Prop::EscapeChar_Group:
+		{
+			ed.bool_EscapeGroup = ticked;
+		} break;
+	case Prop::EscapeChar_Item:
+		{
+			ed.bool_EscapeItem = ticked;
+		} break;
+	case Prop::EscapeChar_Value:
+		{
+			ed.bool_EscapeValue = ticked;
+		} break;
+	case Prop::CaseSensitive:
+		{
+			ed.bool_CaseSensitive = ticked;
+		} break;
+	case Prop::ReadOnly:
+		{
+			ed.b_ReadOnly = ticked;
+		} break;
+	case Prop::GlobalData:
+		{
+			ed.globalObject = ticked;
+			ed.Serialize(mV, SED);
+			mvRefreshProp(mV, SED, Prop::GlobalDataName, FALSE);
+			return;
+		} break;
+	case Prop::RepeatSave:
+		{
+			ed.saveRepeated = ticked;
+		} break;
+	case Prop::Index:
+		{
+			ed.index = ticked;
+		} break;
+	case Prop::AutoLoad:
+		{
+			ed.autoLoad = ticked;
+		} break;
+	case Prop::SubGroups:
+		{
+			ed.subGroups = ticked;
+		} break;
+	case Prop::AllowEmptyGroups:
+		{
+			ed.allowEmptyGroups = ticked;
+		} break;
+	default: return;
+	}
+	ed.Serialize(mV, SED);
 #endif
 }
 
@@ -352,18 +600,38 @@ BOOL MMF2Func EditProp(mv *mV, SerializedED *SED, UINT PropID)
 BOOL MMF2Func IsPropEnabled(mv *mV, SerializedED *SED, UINT PropID)
 {
 #ifndef RUN_ONLY
-	//EditData ed (SED);
+	EditData ed (SED);
 	switch(PropID)
 	{
 	case Prop::Version:
 		{
-			return FALSE; //Makes the version proeprty greyed out
+			return FALSE;
 		}
-	//case Prop::MyString:	//intentional\\
-	//case Prop::MyInt:		//fallthrough\\
-	//	{
-	//		return TRUE; //allows the user to interact with these proeprties
-	//	}
+//	case Prop::Compress:
+//	case Prop::Encrypt:
+	case Prop::NewLine:
+	case Prop::QuoteStrings:
+	case Prop::GroupRepeat:
+	case Prop::ItemRepeat:
+	case Prop::EscapeChar_Group:
+	case Prop::EscapeChar_Item:
+	case Prop::EscapeChar_Value:
+	case Prop::CaseSensitive:
+	case Prop::RepeatSave:
+	case Prop::SubGroups:
+	case Prop::AllowEmptyGroups:
+		{
+			return ed.bool_stdINI? FALSE : TRUE;
+		}
+	case Prop::ReadOnly:
+		{
+			return ed.b_defaultFile? TRUE : FALSE;
+		}
+	case Prop::GlobalDataName:
+		{
+			return ed.globalObject? TRUE : FALSE;
+		}
+	default: return TRUE;
 	}
 	//if you changed ed:
 	//ed.Serialize(mV, SED);

@@ -81,12 +81,12 @@ BOOL MMF2Func UsesFile(mv *mV, LPTSTR FileName)
 #ifndef RUN_ONLY
 	if(IS_COMPATIBLE(mV)) //check for compatibility, since you can't return an error from CreateFromFile
 	{
-//		char ext[_MAX_EXT];
-//		_tsplitpath(FileName, 0, 0, 0, ext);
-//		if(stdtstring(".iherebydeclarethatthisfilecontainsmyintmystringandmyarray") == ext)
-//		{
-//			return TRUE;
-//		}
+		TCHAR ext[_MAX_EXT];
+		_tsplitpath(FileName, 0, 0, 0, ext);
+		if(stdtstring(_T(".ini")) == ext)
+		{
+			return TRUE;
+		}
 	}
 #endif
 	return FALSE;
@@ -106,16 +106,9 @@ void MMF2Func CreateFromFile(mv *mV, LPTSTR FileName, SerializedED *SED)
 #ifndef RUN_ONLY
 	Edif::Init(mV, SED);
 
-	EditData ed; //default EditData
-//	std::ifstream in (FileName);
-//	EditData::MyArray_t::size_type MyArray_size;
-//	in >> ed.MyString >> ed.MyInt >> MyArray_size;
-//	ed.MyArray.clear();
-//	for(EditData::MyArray_t::size_type i = 0; i < MyArray_size; ++i)
-//	{
-//		ed.MyArray.push_back(0);
-//		in >> ed.MyArray.back();
-//	}
+	EditData ed;
+	ed.defaultFile = FileName;
+
 	ed.Serialize(mV, SED);
 #endif
 }
