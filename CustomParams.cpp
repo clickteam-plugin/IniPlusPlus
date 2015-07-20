@@ -34,12 +34,12 @@ void MMF2Func InitParameter(mv *mV, short ID, paramExt *p) //TODO: cleanup
 	case 1: //object selector 2
 		{
 			_tcscpy((TCHAR *)&(p->pextData[0]), _T("Ini++ v1.6"));
-			p->pextSize = sizeof(paramExt) - sizeof(p->pextData) + (strlen(p->pextData)+1)*sizeof(TCHAR);
+			p->pextSize = sizeof(paramExt) - sizeof(p->pextData) + (_tcslen((TCHAR *)(p->pextData))+1)*sizeof(TCHAR);
 		} break;
 	case 3: //object selector 3
 		{
 			_tcscpy((TCHAR *)&(p->pextData[0]), _T("Chart"));
-			p->pextSize = sizeof(paramExt) - sizeof(p->pextData) + (strlen(p->pextData)+1)*sizeof(TCHAR);
+			p->pextSize = sizeof(paramExt) - sizeof(p->pextData) + (_tcslen((TCHAR *)(p->pextData))+1)*sizeof(TCHAR);
 		} break;
 	case 2: //dialog selector
 		{
@@ -78,11 +78,11 @@ struct ParamInfo
 	mv &mV;
 };
 
-BOOL CALLBACK DLLExport ObjectSelector(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lParam);
-BOOL CALLBACK DLLExport DialogSelector(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lParam);
-BOOL CALLBACK DLLExport SSSSettings(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lParam);
-BOOL CALLBACK DLLExport SearchSettings(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lParam);
-BOOL CALLBACK DLLExport LoadFileSettings(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lParam);
+BOOL CALLBACK ObjectSelector(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lParam);
+BOOL CALLBACK DialogSelector(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lParam);
+BOOL CALLBACK SSSSettings(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lParam);
+BOOL CALLBACK SearchSettings(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lParam);
+BOOL CALLBACK LoadFileSettings(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lParam);
 
 #endif
 
@@ -192,7 +192,7 @@ stdtstring LoadFileStrings[] =
  * displays depending on the A/C's display
  * string.
  */
-void MMF2Func GetParameterString(mv *mV, short ID, paramExt *p, LPTSTR dest, short size) //TODO: cleanup
+void MMF2Func GetParameterString(mv *mV, short ID, paramExt const *p, LPTSTR dest, short size) //TODO: cleanup
 {
 #ifndef RUN_ONLY
 	switch(ID - PARAM_EXTBASE)
@@ -202,17 +202,17 @@ void MMF2Func GetParameterString(mv *mV, short ID, paramExt *p, LPTSTR dest, sho
 			std::size_t num = p->pextData[0];
 			if(num < sizeof(SSSTag)/sizeof(stdtstring))
 			{
-				_tcsncpy(dest, SSSTag[num].c_str(), size);
+				_tcsncpy(dest, SSSTag[num].c_str(), size/sizeof(TCHAR));
 			}
 			else
 			{
-				_tcsncpy(dest, _T("<corrupt parameter>"), size);
+				_tcsncpy(dest, _T("<corrupt parameter>"), size/sizeof(TCHAR));
 			}
 		} break;
 	case 5: //search setup
 		{
 			std::size_t num = p->pextData[0];
-			char &flags = p->pextData[1];
+			char const &flags = p->pextData[1];
 			if(num < sizeof(SearchModeNames)/sizeof(stdtstring))
 			{
 				stdtstring str = _T("Mode: ");
@@ -238,11 +238,11 @@ void MMF2Func GetParameterString(mv *mV, short ID, paramExt *p, LPTSTR dest, sho
 					}
 					str += _T(")");
 				}
-				_tcsncpy(dest, str.c_str(), size);
+				_tcsncpy(dest, str.c_str(), size/sizeof(TCHAR));
 			}
 			else
 			{
-				_tcsncpy(dest, _T("<corrupt parameter>"), size);
+				_tcsncpy(dest, _T("<corrupt parameter>"), size/sizeof(TCHAR));
 			}
 		} break;
 	case 0: //object selector 1
@@ -251,7 +251,7 @@ void MMF2Func GetParameterString(mv *mV, short ID, paramExt *p, LPTSTR dest, sho
 	case 6: //object selector 4
 	case 7: //object selector 5
 		{
-			_tcsncpy(dest, (TCHAR *)(p->pextData), size);
+			_tcsncpy(dest, (TCHAR *)(p->pextData), size/sizeof(TCHAR));
 		} break;
 	case 2: //dialog selector
 		{
@@ -277,7 +277,7 @@ void MMF2Func GetParameterString(mv *mV, short ID, paramExt *p, LPTSTR dest, sho
 			{
 				str = _T("None");
 			}
-			_tcsncpy(dest, str.c_str(), size);
+			_tcsncpy(dest, str.c_str(), size/sizeof(TCHAR));
 		} break;
 	case 8:
 		{
@@ -302,11 +302,11 @@ void MMF2Func GetParameterString(mv *mV, short ID, paramExt *p, LPTSTR dest, sho
 				{
 					str += LoadFileStrings[9];
 				}
-				_tcsncpy(dest, str.c_str(), size);
+				_tcsncpy(dest, str.c_str(), size/sizeof(TCHAR));
 			}
 			else
 			{
-				_tcsncpy(dest, _T("<corrupt parameter>"), size);
+				_tcsncpy(dest, _T("<corrupt parameter>"), size/sizeof(TCHAR));
 			}
 		} break;
 	}
@@ -315,7 +315,46 @@ void MMF2Func GetParameterString(mv *mV, short ID, paramExt *p, LPTSTR dest, sho
 
 #ifndef RUN_ONLY
 
-BOOL CALLBACK DLLExport ObjectSelector(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lParam)
+BOOL CALLBACK ObjectSelector(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lParam)
+{
+	switch(msgType)
+	{
+	case WM_INITDIALOG:
+		{
+			SetWindowLong(hDlg, DWL_USER, lParam);
+			ParamInfo &pi = *(ParamInfo *)lParam;
+
+			SetDlgItemText(hDlg, IDC_EDIT, (TCHAR *)pi.p.pextData);
+
+			switch(pi.p.pextCode - PARAM_EXTBASE)
+			{
+			case 0: SetWindowText(GetDlgItem(hDlg, IDC_INFO), _T("Please type the name of an Ini++ object (other than this one) that you wish to use as the source for the merge operation. Please note this is case sensitive.")); break;
+			case 1: SetWindowText(GetDlgItem(hDlg, IDC_INFO), _T("Please type the name of an Ini++ object (other than this one) that you wish to save search results to. Please note this is case sensitive.")); break;
+			case 3: SetWindowText(GetDlgItem(hDlg, IDC_INFO), _T("Please type the name of a Chart Object that you wish to use. Please note this is case sensitive.")); break;
+			case 6: SetWindowText(GetDlgItem(hDlg, IDC_INFO), _T("Please type the name of an Array Object that you wish to recieve data from. Please note this is case sensitive.")); break;
+			case 7: SetWindowText(GetDlgItem(hDlg, IDC_INFO), _T("Please type the name of an Array Object that you wish to put data into. Please note this is case sensitive.")); break;
+			}
+
+			return TRUE;
+		} break;
+	case WM_COMMAND:
+		{
+			ParamInfo &pi = *(ParamInfo *)GetWindowLong(hDlg, DWL_USER);
+
+			switch(wmCommandID)
+			{
+			case IDOK:
+				{
+					GetDlgItemText(hDlg, IDC_EDIT, (TCHAR *)pi.p.pextData, PARAM_EXTMAXSIZE);
+					pi.p.pextSize = sizeof(paramExt) - sizeof(pi.p.pextData) + (_tcslen((TCHAR *)pi.p.pextData)+1)*sizeof(TCHAR);
+					EndDialog(hDlg, TRUE);
+				} break;
+			}
+		} break;
+	}
+	return FALSE;
+}
+BOOL CALLBACK DialogSelector(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lParam)
 {
 	switch(msgType)
 	{
@@ -331,7 +370,7 @@ BOOL CALLBACK DLLExport ObjectSelector(HWND hDlg, UINT msgType, WPARAM wParam, L
 	}
 	return FALSE;
 }
-BOOL CALLBACK DLLExport DialogSelector(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lParam)
+BOOL CALLBACK SSSSettings(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lParam)
 {
 	switch(msgType)
 	{
@@ -347,7 +386,7 @@ BOOL CALLBACK DLLExport DialogSelector(HWND hDlg, UINT msgType, WPARAM wParam, L
 	}
 	return FALSE;
 }
-BOOL CALLBACK DLLExport SSSSettings(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lParam)
+BOOL CALLBACK SearchSettings(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lParam)
 {
 	switch(msgType)
 	{
@@ -363,23 +402,7 @@ BOOL CALLBACK DLLExport SSSSettings(HWND hDlg, UINT msgType, WPARAM wParam, LPAR
 	}
 	return FALSE;
 }
-BOOL CALLBACK DLLExport SearchSettings(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lParam)
-{
-	switch(msgType)
-	{
-	case WM_INITDIALOG:
-		{
-			SetWindowLong(hDlg, DWL_USER, lParam);
-			ParamInfo &pi = *(ParamInfo *)lParam;
-
-			//
-
-			return TRUE;
-		} break;
-	}
-	return FALSE;
-}
-BOOL CALLBACK DLLExport LoadFileSettings(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lParam)
+BOOL CALLBACK LoadFileSettings(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lParam)
 {
 	switch(msgType)
 	{
