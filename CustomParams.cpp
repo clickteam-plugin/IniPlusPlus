@@ -15,7 +15,7 @@
  */
 
 #include "Common.h"
-#include <sstream>
+
 /* InitParameter
  * Like with the editdata, this data will
  * be written as-is to disk and later read
@@ -33,13 +33,13 @@ void MMF2Func InitParameter(mv *mV, short ID, paramExt *p) //TODO: cleanup
 	case 0: //object selector 1
 	case 1: //object selector 2
 		{
-			strcpy(&(p->pextData[0]), "Ini++ v1.6");
-			p->pextSize = sizeof(paramExt) - sizeof(p->pextData) + strlen(p->pextData)+1;
+			_tcscpy((TCHAR *)&(p->pextData[0]), _T("Ini++ v1.6"));
+			p->pextSize = sizeof(paramExt) - sizeof(p->pextData) + (strlen(p->pextData)+1)*sizeof(TCHAR);
 		} break;
 	case 3: //object selector 3
 		{
-			strcpy(&(p->pextData[0]), "Chart");
-			p->pextSize = sizeof(paramExt) - sizeof(p->pextData) + strlen(p->pextData)+1;
+			_tcscpy((TCHAR *)&(p->pextData[0]), _T("Chart"));
+			p->pextSize = sizeof(paramExt) - sizeof(p->pextData) + (strlen(p->pextData)+1)*sizeof(TCHAR);
 		} break;
 	case 2: //dialog selector
 		{
@@ -192,11 +192,208 @@ stdtstring LoadFileStrings[] =
  * displays depending on the A/C's display
  * string.
  */
-void MMF2Func GetParameterString(mv *mV, short ID, paramExt *p, LPSTR dest, short size)
+void MMF2Func GetParameterString(mv *mV, short ID, paramExt *p, LPTSTR dest, short size) //TODO: cleanup
 {
 #ifndef RUN_ONLY
-	// Example
-	// -------
-	// wsprintf(pDest, "Super parameter %s", p->pextData);
+	switch(ID - PARAM_EXTBASE)
+	{
+	case 4: //shift/sort/shuffle setup
+		{
+			std::size_t num = p->pextData[0];
+			if(num < sizeof(SSSTag)/sizeof(stdtstring))
+			{
+				_tcsncpy(dest, SSSTag[num].c_str(), size);
+			}
+			else
+			{
+				_tcsncpy(dest, _T("<corrupt parameter>"), size);
+			}
+		} break;
+	case 5: //search setup
+		{
+			std::size_t num = p->pextData[0];
+			char &flags = p->pextData[1];
+			if(num < sizeof(SearchModeNames)/sizeof(stdtstring))
+			{
+				stdtstring str = _T("Mode: ");
+				str += SearchModeNames[num];
+				if(flags)
+				{
+					str += _T(" (Options: ");
+					bool first = true;
+					for(std::size_t n = 0; n < sizeof(SearchSettingsNames)/sizeof(stdtstring); ++n)
+					{
+						if(flags & (1 << n))
+						{
+							if(!first)
+							{
+								str += _T(", ");
+							}
+							else
+							{
+								first = false;
+							}
+							str += SearchSettingsNames[n];
+						}
+					}
+					str += _T(")");
+				}
+				_tcsncpy(dest, str.c_str(), size);
+			}
+			else
+			{
+				_tcsncpy(dest, _T("<corrupt parameter>"), size);
+			}
+		} break;
+	case 0: //object selector 1
+	case 1: //object selector 2
+	case 3: //object selector 3
+	case 6: //object selector 4
+	case 7: //object selector 5
+		{
+			_tcsncpy(dest, (TCHAR *)(p->pextData), size);
+		} break;
+	case 2: //dialog selector
+		{
+			int &flags = *(int *)(p->pextData);
+			stdtstring str;
+			bool first = true;
+			for(std::size_t n = 0; n < sizeof(SettingsNames)/sizeof(stdtstring); ++n)
+			{
+				if(flags & (1 << n))
+				{
+					if(!first)
+					{
+						str += _T(", ");
+					}
+					else
+					{
+						first = false;
+					}
+					str += SettingsNames[n];
+				}
+			}
+			if(str.empty())
+			{
+				str = _T("None");
+			}
+			_tcsncpy(dest, str.c_str(), size);
+		} break;
+	case 8:
+		{
+			std::size_t num0 = 0 + p->pextData[0];
+			std::size_t num1 = 2 + p->pextData[1];
+			std::size_t num2 = 5 + p->pextData[2];
+			std::size_t flags = p->pextData[3];
+			std::size_t const max = sizeof(LoadFileStrings)/sizeof(stdtstring);
+			if(num0 < max && num1 < max && num2 < max)
+			{
+				stdtstring str = LoadFileStrings[num0];
+				if(!num0)
+				{
+					str += LoadFileStrings[num1];
+				}
+				str += LoadFileStrings[num2];
+				if(flags & (1 << 0))
+				{
+					str += LoadFileStrings[8];
+				}
+				if(flags & (1 << 1))
+				{
+					str += LoadFileStrings[9];
+				}
+				_tcsncpy(dest, str.c_str(), size);
+			}
+			else
+			{
+				_tcsncpy(dest, _T("<corrupt parameter>"), size);
+			}
+		} break;
+	}
 #endif
 }
+
+#ifndef RUN_ONLY
+
+BOOL CALLBACK DLLExport ObjectSelector(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lParam)
+{
+	switch(msgType)
+	{
+	case WM_INITDIALOG:
+		{
+			SetWindowLong(hDlg, DWL_USER, lParam);
+			ParamInfo &pi = *(ParamInfo *)lParam;
+
+			//
+
+			return TRUE;
+		} break;
+	}
+	return FALSE;
+}
+BOOL CALLBACK DLLExport DialogSelector(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lParam)
+{
+	switch(msgType)
+	{
+	case WM_INITDIALOG:
+		{
+			SetWindowLong(hDlg, DWL_USER, lParam);
+			ParamInfo &pi = *(ParamInfo *)lParam;
+
+			//
+
+			return TRUE;
+		} break;
+	}
+	return FALSE;
+}
+BOOL CALLBACK DLLExport SSSSettings(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lParam)
+{
+	switch(msgType)
+	{
+	case WM_INITDIALOG:
+		{
+			SetWindowLong(hDlg, DWL_USER, lParam);
+			ParamInfo &pi = *(ParamInfo *)lParam;
+
+			//
+
+			return TRUE;
+		} break;
+	}
+	return FALSE;
+}
+BOOL CALLBACK DLLExport SearchSettings(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lParam)
+{
+	switch(msgType)
+	{
+	case WM_INITDIALOG:
+		{
+			SetWindowLong(hDlg, DWL_USER, lParam);
+			ParamInfo &pi = *(ParamInfo *)lParam;
+
+			//
+
+			return TRUE;
+		} break;
+	}
+	return FALSE;
+}
+BOOL CALLBACK DLLExport LoadFileSettings(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lParam)
+{
+	switch(msgType)
+	{
+	case WM_INITDIALOG:
+		{
+			SetWindowLong(hDlg, DWL_USER, lParam);
+			ParamInfo &pi = *(ParamInfo *)lParam;
+
+			//
+
+			return TRUE;
+		} break;
+	}
+	return FALSE;
+}
+
+#endif
