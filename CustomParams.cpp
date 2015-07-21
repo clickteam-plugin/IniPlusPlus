@@ -345,7 +345,7 @@ BOOL CALLBACK ObjectSelector(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lPar
 			{
 			case IDOK:
 				{
-					GetDlgItemText(hDlg, IDC_EDIT, (TCHAR *)pi.p.pextData, PARAM_EXTMAXSIZE);
+					GetDlgItemText(hDlg, IDC_EDIT, (TCHAR *)pi.p.pextData, (PARAM_EXTMAXSIZE-sizeof(paramExt))/sizeof(TCHAR));
 					pi.p.pextSize = sizeof(paramExt) - sizeof(pi.p.pextData) + (_tcslen((TCHAR *)pi.p.pextData)+1)*sizeof(TCHAR);
 					EndDialog(hDlg, TRUE);
 				} break;
