@@ -362,10 +362,61 @@ BOOL CALLBACK DialogSelector(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lPar
 		{
 			SetWindowLong(hDlg, DWL_USER, lParam);
 			ParamInfo &pi = *(ParamInfo *)lParam;
+			int &flags = *(int *)pi.p.pextData;
 
-			//
+			for(int n = IDC_CHECK1; n <= IDC_CHECK10; ++n)
+			{
+				SendDlgItemMessage(hDlg, n, BM_SETCHECK, (flags & (1 << (n - IDC_CHECK1)))? BST_CHECKED : BST_UNCHECKED, 0);
+			}
+
+			SendDlgItemMessage(hDlg, IDC_COMBO, CB_ADDSTRING, 0, (LPARAM)_T("item = 'value'"));
+			SendDlgItemMessage(hDlg, IDC_COMBO, CB_ADDSTRING, 0, (LPARAM)_T("item"));
+			SendDlgItemMessage(hDlg, IDC_COMBO, CB_ADDSTRING, 0, (LPARAM)_T("item ('value')"));
+			SendDlgItemMessage(hDlg, IDC_COMBO, CB_ADDSTRING, 0, (LPARAM)_T("'value'"));
+			SendDlgItemMessage(hDlg, IDC_COMBO, CB_ADDSTRING, 0, (LPARAM)_T("Item 'item' has value 'value'"));
+			SendDlgItemMessage(hDlg, IDC_COMBO, CB_ADDSTRING, 0, (LPARAM)_T("Item: 'item' Value: 'value'"));
+			SendDlgItemMessage(hDlg, IDC_COMBO, CB_ADDSTRING, 0, (LPARAM)_T("item: value"));
+			SendDlgItemMessage(hDlg, IDC_COMBO, CB_ADDSTRING, 0, (LPARAM)_T("Item 'item' Valeur 'value'"));
+
+			SendDlgItemMessage(hDlg, IDC_COMBO, CB_SETCURSEL, HIWORD(flags), 0);
+			SendMessage(hDlg, WM_COMMAND, IDC_CHECK10, 0);
 
 			return TRUE;
+		} break;
+	case WM_COMMAND:
+		{
+			ParamInfo &pi = *(ParamInfo *)GetWindowLong(hDlg, DWL_USER);
+			int &flags = *(int *)pi.p.pextData;
+			switch(wmCommandID)
+			{
+			case IDOK:
+				{ 
+					flags = 0;
+					for(int n = IDC_CHECK1; n <= IDC_CHECK10; ++n)
+					{
+						flags |= (1 << (n - IDC_CHECK1))*((SendDlgItemMessage(hDlg, n, BM_GETCHECK, 0, 0) == BST_CHECKED)? 1 : 0);
+					}
+					flags = MAKELONG(LOWORD(flags), SendDlgItemMessage(hDlg, IDC_COMBO, CB_GETCURSEL, 0, 0));
+
+					EndDialog(hDlg, TRUE);
+					return TRUE;
+				} break;
+			case IDC_CHECK10:
+				{
+					if(BST_CHECKED == SendDlgItemMessage(hDlg, IDC_CHECK10, BM_GETCHECK, 0, 0))
+					{
+						SendDlgItemMessage(hDlg, IDC_CHECK6, BM_SETCHECK, BST_CHECKED, 0);
+						SendDlgItemMessage(hDlg, IDC_CHECK9, BM_SETCHECK, BST_CHECKED, 0);
+						EnableWindow(GetDlgItem(hDlg, IDC_CHECK6), FALSE);
+						EnableWindow(GetDlgItem(hDlg, IDC_CHECK9), FALSE);
+					}
+					else
+					{
+						EnableWindow(GetDlgItem(hDlg, IDC_CHECK6), TRUE);
+						EnableWindow(GetDlgItem(hDlg, IDC_CHECK9), TRUE);
+					}
+				} break;
+			}
 		} break;
 	}
 	return FALSE;
