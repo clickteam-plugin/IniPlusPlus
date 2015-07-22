@@ -356,6 +356,11 @@ BOOL CALLBACK ObjectSelector(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lPar
 					pi.p.pextSize = sizeof(paramExt) - sizeof(pi.p.pextData) + (_tcslen((TCHAR *)pi.p.pextData)+1)*sizeof(TCHAR);
 					EndDialog(hDlg, TRUE);
 				} break;
+			case IDCANCEL:
+				{
+					EndDialog(hDlg, TRUE);
+					return TRUE;
+				} break;
 			}
 		} break;
 	}
@@ -405,6 +410,11 @@ BOOL CALLBACK DialogSelector(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lPar
 					}
 					flags = MAKELONG(LOWORD(flags), SendDlgItemMessage(hDlg, IDC_COMBO, CB_GETCURSEL, 0, 0));
 
+					EndDialog(hDlg, TRUE);
+					return TRUE;
+				} break;
+			case IDCANCEL:
+				{
 					EndDialog(hDlg, TRUE);
 					return TRUE;
 				} break;
@@ -515,6 +525,11 @@ BOOL CALLBACK SSSSettings(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lParam)
 					EndDialog(hDlg, TRUE);
 					return TRUE;
 				} break;
+			case IDCANCEL:
+				{
+					EndDialog(hDlg, TRUE);
+					return TRUE;
+				} break;
 			default:
 				{
 					for(int n = 0; n < descsize; ++n)
@@ -555,11 +570,55 @@ BOOL CALLBACK SearchSettings(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lPar
 		{
 			SetWindowLong(hDlg, DWL_USER, lParam);
 			ParamInfo &pi = *(ParamInfo *)lParam;
+			char &n0 = pi.p.pextData[0];
+			char &n1 = pi.p.pextData[1];
 
-			//
+			SendDlgItemMessage(hDlg, IDC_RADIO+n0, BM_SETCHECK, BST_CHECKED, 0);
+			for(int n = 0; n < 3 /*TODO*/; ++n)
+			{
+				if(n1 & (1 << (n+1)))
+				{
+					SendDlgItemMessage(hDlg, IDC_CHECK2+n, BM_SETCHECK, BST_CHECKED, 0);
+				}
+			}
 
 			return TRUE;
 		} break;
+	case WM_COMMAND:
+		{
+			ParamInfo &pi = *(ParamInfo *)GetWindowLong(hDlg, DWL_USER);
+			char &n0 = pi.p.pextData[0];
+			char &n1 = pi.p.pextData[1];
+			switch(wmCommandID)
+			{
+			case IDOK:
+				{
+					for(n0 = 0; n0 < 4 /*TODO*/; ++n0)
+					{
+						if(BST_CHECKED == SendDlgItemMessage(hDlg, IDC_RADIO+n0, BM_GETCHECK, 0, 0))
+						{
+							break;
+						}
+					}
+					n1 = 0;
+					for(int n = 0; n < 3 /*TODO*/; ++n)
+					{
+						if(BST_CHECKED == SendDlgItemMessage(hDlg, IDC_CHECK2+n, BM_GETCHECK, 0, 0))
+						{
+							n1 |= (1 << (n+1));
+						}
+					}
+
+					EndDialog(hDlg, TRUE);
+					return TRUE;
+				} break;
+			case IDCANCEL:
+				{
+					EndDialog(hDlg, TRUE);
+					return TRUE;
+				} break;
+			}
+		}
 	}
 	return FALSE;
 }
