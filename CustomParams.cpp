@@ -618,7 +618,7 @@ BOOL CALLBACK SearchSettings(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lPar
 					return TRUE;
 				} break;
 			}
-		}
+		} break;
 	}
 	return FALSE;
 }
@@ -630,10 +630,112 @@ BOOL CALLBACK LoadFileSettings(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lP
 		{
 			SetWindowLong(hDlg, DWL_USER, lParam);
 			ParamInfo &pi = *(ParamInfo *)lParam;
+			char &n0 = pi.p.pextData[0];
+			char &n1 = pi.p.pextData[1];
+			char &n2 = pi.p.pextData[2];
+			char &n3 = pi.p.pextData[3];
 
-			//
+			SendDlgItemMessage(hDlg, IDC_RADIO1+n0, BM_SETCHECK, BST_CHECKED, 0);
+			SendDlgItemMessage(hDlg, IDC_RADIO5+n1, BM_SETCHECK, BST_CHECKED, 0);
+			SendDlgItemMessage(hDlg, IDC_RADIO8+n2, BM_SETCHECK, BST_CHECKED, 0);
+			if(n3 & (1 << 0))
+			{
+				SendDlgItemMessage(hDlg, IDC_CHECK1, BM_SETCHECK, BST_CHECKED, 0);
+			}
+			if(n3 & (1 << 1))
+			{
+				SendDlgItemMessage(hDlg, IDC_CHECK2, BM_SETCHECK, BST_CHECKED, 0);
+			}
+
+			LoadFileSettings(hDlg, WM_COMMAND, 0, 0);
 
 			return TRUE;
+		} break;
+	case WM_COMMAND:
+		{
+			ParamInfo &pi = *(ParamInfo *)GetWindowLong(hDlg, DWL_USER);
+			char &n0 = pi.p.pextData[0];
+			char &n1 = pi.p.pextData[1];
+			char &n2 = pi.p.pextData[2];
+			char &n3 = pi.p.pextData[3];
+			switch(wmCommandID)
+			{
+			case IDOK:
+				{
+					for(n0 = 0; n0 < 3 /*TODO*/; ++n0)
+					{
+						if(BST_CHECKED == SendDlgItemMessage(hDlg, IDC_RADIO1+n0, BM_GETCHECK, 0, 0))
+						{
+							break;
+						}
+					}
+					for(n1 = 0; n1 < 3 /*TODO*/; ++n1)
+					{
+						if(BST_CHECKED == SendDlgItemMessage(hDlg, IDC_RADIO5+n1, BM_GETCHECK, 0, 0))
+						{
+							break;
+						}
+					}
+					for(n2 = 0; n2 < 3 /*TODO*/; ++n2)
+					{
+						if(BST_CHECKED == SendDlgItemMessage(hDlg, IDC_RADIO8+n2, BM_GETCHECK, 0, 0))
+						{
+							break;
+						}
+					}
+					n3 = 0;
+					if(BST_CHECKED == SendDlgItemMessage(hDlg, IDC_CHECK1, BM_GETCHECK, 0, 0))
+					{
+						n3 |= (1 << 0);
+					}
+					if(BST_CHECKED == SendDlgItemMessage(hDlg, IDC_CHECK2, BM_GETCHECK, 0, 0))
+					{
+						n3 |= (1 << 1);
+					}
+
+					EndDialog(hDlg, TRUE);
+					return TRUE;
+				} break;
+			case IDCANCEL:
+				{
+					EndDialog(hDlg, TRUE);
+					return TRUE;
+				} break;
+			default:
+				{
+					for(int n = 0; n < 4 /*TODO*/; ++n)
+					{
+						if(BST_CHECKED == SendDlgItemMessage(hDlg, IDC_RADIO1+n, BM_GETCHECK, 0, 0))
+						{
+							if(n == 0 /*TODO*/)
+							{
+								EnableWindow(GetDlgItem(hDlg, IDC_RADIO6), TRUE);
+								EnableWindow(GetDlgItem(hDlg, IDC_RADIO7), TRUE);
+								EnableWindow(GetDlgItem(hDlg, IDC_RADIO10), TRUE);
+							}
+							else
+							{
+								EnableWindow(GetDlgItem(hDlg, IDC_RADIO6), FALSE);
+								EnableWindow(GetDlgItem(hDlg, IDC_RADIO7), FALSE);
+								EnableWindow(GetDlgItem(hDlg, IDC_RADIO10), FALSE);
+
+								if(BST_UNCHECKED == SendDlgItemMessage(hDlg, IDC_RADIO5, BM_GETCHECK, 0, 0))
+								{
+									SendDlgItemMessage(hDlg, IDC_RADIO5, BM_SETCHECK, BST_CHECKED, 0);
+									SendDlgItemMessage(hDlg, IDC_RADIO6, BM_SETCHECK, BST_UNCHECKED, 0);
+									SendDlgItemMessage(hDlg, IDC_RADIO7, BM_SETCHECK, BST_UNCHECKED, 0);
+								}
+								if(BST_CHECKED == SendDlgItemMessage(hDlg, IDC_RADIO10, BM_GETCHECK, 0, 0))
+								{
+									SendDlgItemMessage(hDlg, IDC_RADIO8, BM_SETCHECK, BST_CHECKED, 0);
+									SendDlgItemMessage(hDlg, IDC_RADIO10, BM_SETCHECK, BST_UNCHECKED, 0);
+								}
+							}
+							break;
+						}
+					}
+				} break;
+			}
 		} break;
 	}
 	return FALSE;
