@@ -20,8 +20,7 @@
 #include "Edif.h"
 #include "Resource.h"
 
-//#include <someheader>
-//#include "YourHeader.hpp"
+#include <sstream>
 
 /* stdtstring
  * A std::string that knows if you're using

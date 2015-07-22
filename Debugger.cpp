@@ -27,8 +27,10 @@ namespace DB
 	 */
 	enum
 	{
-//		MyString,
-//		MyInt,
+		Filename,
+		Tree,
+		CurrentData,
+		GlobalSlots,
 	};
 }
 
@@ -38,9 +40,10 @@ namespace DB
  */
 WORD DebugTree[] =
 {
-//	DB::MyString|DB_EDITABLE,
-//	DB::MyInt|DB_EDITABLE,
-//	DB::SomethingThatIDontWantTheUserToBeAbleToEditAtRuntime,
+	DB::Filename,
+	DB::Tree|DB_EDITABLE,
+	DB::CurrentData|DB_EDITABLE,
+	DB::GlobalSlots|DB_EDITABLE,
 	DB_END
 };
 
@@ -70,27 +73,38 @@ LPWORD MMF2Func GetDebugTree(RD *rd)
  * name and the value in the string,
  * or any format you want.
  */
-void MMF2Func GetDebugItem(LPSTR Buffer, RD *rd, int ID)
+void MMF2Func GetDebugItem(LPTSTR Buffer, RD *rd, int ID)
 {
 #ifndef RUN_ONLY
-//	char temp[DB_BUFFERSIZE];
-//	switch (ID)
-//	{
-//	case DB::MyString:
-//		{
-//			LoadString(hInstLib, IDS_CURRENTSTRING, temp, DB_BUFFERSIZE);
-//			wsprintf(pBuffer, temp, rdPtr->text);
-//			break;
-//		}
-//	case DB::MyInt:
-//		{
-//			LoadString(hInstLib, IDS_CURRENTVALUE, temp, DB_BUFFERSIZE);
-//			wsprintf(pBuffer, temp, rdPtr->value);
-//			break;
-//		}
-//	}
+	std::basic_ostringstream<TCHAR> oss;
+	switch (ID)
+	{
+	case DB::Filename:
+		{
+			//TODO
+		} break;
+	case DB::CurrentData:
+		{
+			oss << _T("(Double click to view/edit data as text)");
+		} break;
+	case DB::Tree:
+		{
+			oss << _T("(Double click to view data as tree)");
+		} break;
+	case DB::GlobalSlots:
+		{
+			//TODO
+		} break;
+	}
+	_tcsncpy(Buffer, oss.str().c_str(), DB_BUFFERSIZE/sizeof(TCHAR));
 #endif
 }
+
+#ifndef RUN_ONLY
+BOOL CALLBACK CurrentDataDebug(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lParam);
+BOOL CALLBACK TreeDebug(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lParam);
+BOOL CALLBACK GlobalSlotsDebug(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lParam);
+#endif
 
 /* EditDebugItem
  * When the user chooses to edit an
@@ -105,37 +119,33 @@ void MMF2Func GetDebugItem(LPSTR Buffer, RD *rd, int ID)
 void MMF2Func EditDebugItem(RD *rd, int ID)
 {
 #ifndef RUN_ONLY
-/*
 	switch(ID)
 	{
-	case DB::MyString:
+	case DB::CurrentData:
 		{
-			EditDebugInfo dbi;
-			char buffer[256];
-
-			dbi.pText=buffer;
-			dbi.lText=TEXT_MAX;
-			dbi.pTitle=NULL;
-
-			strcpy(buffer, rdPtr->text);
-			long ret=callRunTimeFunction(rdPtr, RFUNCTION_EDITTEXT, 0, (LPARAM)&dbi);
-			if (ret)
-				strcpy(rdPtr->text, dbi.pText);
-		}
-		break;
-	case DB::MyInt:
+			DialogBoxParam(hInstLib, MAKEINTRESOURCE(IDD_DEBUG), NULL, CurrentDataDebug, LPARAM(rd->pExtension));
+		} break;
+	case DB::Tree:
 		{
-			EditDebugInfo dbi;
-
-			dbi.value=rdPtr->value;
-			dbi.pTitle=NULL;
-
-			long ret=callRunTimeFunction(rdPtr, RFUNCTION_EDITINT, 0, (LPARAM)&dbi);
-			if (ret)
-				rdPtr->value=dbi.value;
-		}
-		break;
+			//TODO
+			//DialogBoxParam(hInstLib, MAKEINTRESOURCE(IDD_DEBUG), NULL, TreeDebug, LPARAM(rd->pExtension));
+		} break;
+	case DB::GlobalSlots:
+		{
+			DialogBoxParam(hInstLib, MAKEINTRESOURCE(IDD_DEBUG), NULL, GlobalSlotsDebug, LPARAM(rd->pExtension));
+		} break;
 	}
-*/
 #endif
+}
+
+BOOL CALLBACK CurrentDataDebug(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lParam)
+{
+	//TODO
+	return FALSE;
+}
+
+BOOL CALLBACK GlobalSlotsDebug(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lParam)
+{
+	//TODO
+	return FALSE;
 }
