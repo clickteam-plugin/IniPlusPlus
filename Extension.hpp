@@ -105,8 +105,13 @@ public:
 		GroupMerge,
 	};
 
-	struct Settings
+	struct Data //global data
 	{
+		Ini ini;
+		SearchResults results;
+		stdtstring defaultDirectory;
+		stdtstring currentGroup;
+
 		bool bAutoSave;
 		bool CaseSensitive;
 		bool EscapeCharsInValue;
@@ -125,6 +130,15 @@ public:
 		bool saveRepeats;
 		bool subGroups;
 		bool allowEmptyGroup;
+
+		bool bool_CanCreateFolders;
+		bool index;
+		bool autoLoad;
+
+		Data(EditData const &ed)
+		{
+			//TODO
+		}
 	};
 
 	enum struct CallbackPhase
@@ -136,23 +150,18 @@ public:
 		YesSilent, //the warning dialog was already shown
 	};
 
-	Ini ini;
-	SearchResults results;
-	stdtstring defaultDirectory;
-	stdtstring currentGroup;
-
+	//data that doesn't need to be global
 	short dialogSettings;
 	char dialogDisplay; //TODO
 	stdtstring dialogTitle;
 	HWND dialogCurrent;
 	HWND dialogChild;
-	HIMAGELIST icons;
-
-	bool bool_CanCreateFolders;
-	std::shared_ptr<Settings> settings;
-	bool index;
-	bool autoLoad;
+	HIMAGELIST icons; //TODO
 	CallbackPhase duringCallback;
+
+	//global data stuff
+	static std::map<stdtstring /*global key*/, std::weak_ptr<Data>> gdata;
+	std::shared_ptr<Data> data;
 
 
 	/* Add your actions, conditions, and expressions

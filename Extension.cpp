@@ -19,6 +19,8 @@
 
 #include "Common.h"
 
+std::map<stdtstring, std::weak_ptr<Extension::Data>> Extension::gdata;
+
 /* <constructor>
  * This is your extension's constructor, which
  * is the replacement for the old CreateRunObject
@@ -184,15 +186,18 @@ Extension::Extension(RD *rd, SerializedED *SED, createObjectInfo *COB)
 	LinkExpression(40, expressionFname);
 
 
-	//This is where you'd do anything you'd do in CreateRunObject in the original SDK.
-	//It's the only place you'll get access to the editdata at runtime, so you should
-	//transfer anything from the editdata to the extension class here. For example:
-//	EditData ed (SED);
-//	MyString = ed.MyString;
-//	MyInt = ed.MyInt;
-//	MyArray = ed.MyArray;
-
-	//
+	//Load settings from editdata and link to global data
+	EditData ed (SED);
+	auto s = std::make_shared<Data>(ed);
+	if(ed.globalObject)
+	{
+		if(gdata.find(ed.globalKey) == gdata.end() || gdata.at(ed.globalKey).expired())
+		{
+			gdata.emplace(ed.globalKey, s);
+		}
+		s = gdata.at(ed.globalKey).lock();
+	}
+	data = std::move(s);
 }
 
 /* <destructor>
@@ -204,7 +209,6 @@ Extension::Extension(RD *rd, SerializedED *SED, createObjectInfo *COB)
  */
 Extension::~Extension()
 {
-	//
 }
 
 /* Handle
