@@ -89,9 +89,40 @@ public:
 	 * store a pointer.
 	 */
 
-	//stdtstring MyString;
-	//int MyInt;
-	//std::vector<float> MyArray;
+	stdtstring const subgroup_separator = _T("/");
+
+	using Value = stdtstring;
+	using Group = std::multimap<stdtstring /*item name*/, Value>;
+	using Ini = std::multimap<stdtstring /*group name*/, Group>;
+
+	using SearchResults = std::multiset<std::tuple<stdtstring /*group name*/, stdtstring /*item name*/, Value>>;
+
+	enum struct CallbackPhase
+	{
+		No,
+	#ifndef RUN_ONLY
+		YesNoisy, //show a warning dialog for bad code
+	#endif
+		YesSilent, //the warning dialog was already shown
+	};
+
+	Ini ini;
+	SearchResults results;
+	stdtstring defaultDirectory;
+	stdtstring currentGroup;
+
+	short dialogSettings;
+	char dialogDisplay; //TODO
+	stdtstring dialogTitle;
+	HWND dialogCurrent;
+	HWND dialogChild;
+	HIMAGELIST icons;
+
+	bool bool_CanCreateFolders;
+	//TODO global;
+	bool index;
+	bool autoLoad;
+	CallbackPhase duringCallback;
 
 
 	/* Add your actions, conditions, and expressions

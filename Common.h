@@ -21,6 +21,13 @@
 #include "Resource.h"
 
 #include <sstream>
+#include <map>
+#include <set>
+#include <vector>
+#include <tuple>
+
+#include <Shlwapi.h>
+#include <CommCtrl.h>
 
 /* stdtstring
  * A std::string that knows if you're using
@@ -30,6 +37,15 @@
  * returned from expressions and conditions).
  */
 typedef std::basic_string<TCHAR> stdtstring;
+
+template<typename T>
+T cast(stdtstring const &value)
+{
+	std::basic_istringstream<TCHAR> iss (value);
+	T t = T();
+	iss >> t;
+	return t;
+}
 
 #include "EditData.hpp"
 #include "Extension.hpp"
