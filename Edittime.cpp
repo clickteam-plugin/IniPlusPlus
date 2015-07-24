@@ -23,6 +23,12 @@
 
 #include "Common.h"
 
+EditData &EdittimeGlobal(mv *mV, stdtstring const &key)
+{
+	static std::map<CEditApp *, std::map<stdtstring, EditData>> datas;
+	return datas[mV->mvEditApp][key];
+}
+
 /* CreateObject
  * This is the first time you have
  * access to the editdata, so it

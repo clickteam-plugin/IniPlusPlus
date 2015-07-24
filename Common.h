@@ -25,6 +25,8 @@
 #include <set>
 #include <vector>
 #include <tuple>
+//#include <experimental/filesystem>
+#include <memory>
 
 #include <Shlwapi.h>
 #include <CommCtrl.h>

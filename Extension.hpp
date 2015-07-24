@@ -97,6 +97,36 @@ public:
 
 	using SearchResults = std::multiset<std::tuple<stdtstring /*group name*/, stdtstring /*item name*/, Value>>;
 
+	enum struct RepeatMode
+	{
+		TakeFirst,
+		TakeLast,
+		Rename,
+		GroupMerge,
+	};
+
+	struct Settings
+	{
+		bool bAutoSave;
+		bool CaseSensitive;
+		bool EscapeCharsInValue;
+		bool EscapeCharsInItem;
+		bool EscapeCharsInGroups;
+		bool NeverQuoteStrings;
+		bool ReadOnly;
+		bool StandardNewLines;
+		stdtstring NewLineChar;
+		stdtstring autoSavePath;
+		bool AutoSaveEncrypted;
+		stdtstring AutoSaveKey;
+		bool AutoSaveCompressed;
+		RepeatMode groupRepeatSetting;
+		RepeatMode itemRepeatSetting;
+		bool saveRepeats;
+		bool subGroups;
+		bool allowEmptyGroup;
+	};
+
 	enum struct CallbackPhase
 	{
 		No,
@@ -119,7 +149,7 @@ public:
 	HIMAGELIST icons;
 
 	bool bool_CanCreateFolders;
-	//TODO global;
+	std::shared_ptr<Settings> settings;
 	bool index;
 	bool autoLoad;
 	CallbackPhase duringCallback;

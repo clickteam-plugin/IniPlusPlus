@@ -64,6 +64,7 @@ namespace Prop
 		Undo,
 		Redo,
 		CompEncYTitle,
+		zLast
 	};
 }
 
@@ -232,7 +233,7 @@ void MMF2Func ReleasePropCreateParam(mv *mV, SerializedED *SED, UINT PropID, LPA
 void *MMF2Func GetPropValue(mv *mV, SerializedED *SED, UINT PropID)
 {
 #ifndef RUN_ONLY
-	EditData ed (SED);
+	EditData ed (mV, SED);
 	switch(PropID)
 	{
 	case Prop::Version:
@@ -295,7 +296,7 @@ void *MMF2Func GetPropValue(mv *mV, SerializedED *SED, UINT PropID)
 void MMF2Func SetPropValue(mv *mV, SerializedED *SED, UINT PropID, CPropValue *PropVal)
 {
 #ifndef RUN_ONLY
-	EditData ed (SED);
+	EditData ed (mV, SED);
 	switch(PropID)
 	{
 	case Prop::DefPath:
@@ -329,6 +330,12 @@ void MMF2Func SetPropValue(mv *mV, SerializedED *SED, UINT PropID, CPropValue *P
 	case Prop::GlobalDataName:
 		{
 			ed.globalKey = ((CPropStringValue *)PropVal)->GetString();
+			ed.loadGlobal(mV);
+			ed.Serialize(mV, SED);
+			for(UINT id = PROPID_EXTITEM_CUSTOM_FIRST + 1; id != Prop::zLast; ++id)
+			{
+				mvRefreshProp(mV, SED, id, FALSE);
+			}
 		} break;
 	case Prop::Undo:
 		{
@@ -359,7 +366,7 @@ void MMF2Func SetPropValue(mv *mV, SerializedED *SED, UINT PropID, CPropValue *P
 BOOL MMF2Func GetPropCheck(mv *mV, SerializedED *SED, UINT PropID)
 {
 #ifndef RUN_ONLY
-	EditData ed (SED);
+	EditData ed (mV, SED);
 	switch(PropID)
 	{
 	case Prop::DefPath:
@@ -457,7 +464,7 @@ void MMF2Func SetPropCheck(mv *mV, SerializedED *SED, UINT PropID, BOOL Ticked)
 {
 #ifndef RUN_ONLY
 	bool ticked = ((Ticked != FALSE)? true : false);
-	EditData ed (SED);
+	EditData ed (mV, SED);
 	switch(PropID)
 	{
 	case Prop::DefPath:
@@ -533,8 +540,12 @@ void MMF2Func SetPropCheck(mv *mV, SerializedED *SED, UINT PropID, BOOL Ticked)
 	case Prop::GlobalData:
 		{
 			ed.globalObject = ticked;
+			ed.loadGlobal(mV);
 			ed.Serialize(mV, SED);
-			mvRefreshProp(mV, SED, Prop::GlobalDataName, FALSE);
+			for(UINT id = PROPID_EXTITEM_CUSTOM_FIRST + 1; id != Prop::zLast; ++id)
+			{
+				mvRefreshProp(mV, SED, id, FALSE);
+			}
 			return;
 		} break;
 	case Prop::RepeatSave:
@@ -600,7 +611,7 @@ BOOL MMF2Func EditProp(mv *mV, SerializedED *SED, UINT PropID)
 BOOL MMF2Func IsPropEnabled(mv *mV, SerializedED *SED, UINT PropID)
 {
 #ifndef RUN_ONLY
-	EditData ed (SED);
+	EditData ed (mV, SED);
 	switch(PropID)
 	{
 	case Prop::Version:

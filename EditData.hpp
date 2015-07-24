@@ -10,6 +10,10 @@
  * start of the runtime.
  */
 
+struct EditData;
+
+EditData &EdittimeGlobal(mv *mV, stdtstring const &key);
+
 struct EditData
 {
 	bool b_defaultFile;
@@ -72,89 +76,36 @@ struct EditData
 	, index()
 	, autoLoad()
 	, subGroups()
-	, allowEmptyGroups(1)
+	, allowEmptyGroups(true)
 	{
 	}
 
-	/* <copy constructor>
-	 * As a convenience in other parts of your code,
-	 * you should copy data from another instance
-	 * of the EditData class. Make sure you deep-copy
-	 * dynamically allocated memory e.g. with pointers.
-	 */
-	EditData(const EditData &from) // = default; //C++11
-	: b_defaultFile        (from.b_defaultFile)
-	, b_ReadOnly           (from.b_ReadOnly)
-	, defaultFile          (from.defaultFile)
-	, defaultFolder        (from.defaultFolder)
-	, defaultText          (from.defaultText)
-	, bool_CanCreateFolders(from.bool_CanCreateFolders)
-	, bool_AutoSave        (from.bool_AutoSave)
-	, bool_stdINI          (from.bool_stdINI)
-	, bool_compress        (from.bool_compress)
-	, bool_encrypt         (from.bool_encrypt)
-	, encrypt_key          (from.encrypt_key)
-	, bool_newline         (from.bool_newline)
-	, newline              (from.newline)
-	, bool_QuoteStrings    (from.bool_QuoteStrings)
-	, repeatGroups         (from.repeatGroups)
-	, repeatItems          (from.repeatItems)
-	, undoCount            (from.undoCount)
-	, redoCount            (from.redoCount)
-	, saveRepeated         (from.saveRepeated)
-	, bool_EscapeGroup     (from.bool_EscapeGroup)
-	, bool_EscapeItem      (from.bool_EscapeItem)
-	, bool_EscapeValue     (from.bool_EscapeValue)
-	, bool_CaseSensitive   (from.bool_CaseSensitive)
-	, globalObject         (from.globalObject)
-	, index                (from.index)
-	, autoLoad             (from.autoLoad)
-	, subGroups            (from.subGroups)
-	, allowEmptyGroups     (from.allowEmptyGroups)
-	, globalKey            (from.globalKey)
+	EditData(EditData const &) = default;
+	EditData(EditData &&) = default;
+	EditData &operator=(EditData const &) = default;
+	EditData &operator=(EditData &&) = default;
+
+	void loadGlobal(mv *mV)
 	{
-		//
+		if(globalObject)
+		{
+			EditData &ed = EdittimeGlobal(mV, globalKey);
+			if(ed.globalObject)
+			{
+				*this = ed;
+			}
+			else
+			{
+				ed = *this;
+			}
+		}
 	}
-
-	/* operator=
-	 * This is essentially the same as the copy
-	 * constructor above, except you are working
-	 * with an instance that is already
-	 * constructed.
-	 */
-	EditData &operator=(const EditData &from) // = default; //C++11
+	void saveGlobal(mv *mV) const
 	{
-		b_defaultFile         = from.b_defaultFile;
-		b_ReadOnly            = from.b_ReadOnly;
-		defaultFile           = from.defaultFile;
-		defaultFolder         = from.defaultFolder;
-		defaultText           = from.defaultText;
-		bool_CanCreateFolders = from.bool_CanCreateFolders;
-		bool_AutoSave         = from.bool_AutoSave;
-		bool_stdINI           = from.bool_stdINI;
-		bool_compress         = from.bool_compress;
-		bool_encrypt          = from.bool_encrypt;
-		encrypt_key           = from.encrypt_key;
-		bool_newline          = from.bool_newline;
-		newline               = from.newline;
-		bool_QuoteStrings     = from.bool_QuoteStrings;
-		repeatGroups          = from.repeatGroups;
-		repeatItems           = from.repeatItems;
-		undoCount             = from.undoCount;
-		redoCount             = from.redoCount;
-		saveRepeated          = from.saveRepeated;
-		bool_EscapeGroup      = from.bool_EscapeGroup;
-		bool_EscapeItem       = from.bool_EscapeItem;
-		bool_EscapeValue      = from.bool_EscapeValue;
-		bool_CaseSensitive    = from.bool_CaseSensitive;
-		globalObject          = from.globalObject;
-		index                 = from.index;
-		autoLoad              = from.autoLoad;
-		subGroups             = from.subGroups;
-		allowEmptyGroups      = from.allowEmptyGroups;
-		globalKey             = from.globalKey;
-
-		return *this;
+		if(globalObject)
+		{
+			EdittimeGlobal(mV, globalKey) = *this;
+		}
 	}
 
 #ifndef RUN_ONLY
@@ -166,6 +117,8 @@ struct EditData
 	 */
 	bool Serialize(mv *mV, SerializedED *&SED) const
 	{
+		saveGlobal(mV);
+
 		EDOStream os (mV, SED);
 
 		os.write_value(b_defaultFile);
@@ -202,6 +155,7 @@ struct EditData
 	}
 #endif
 
+private:
 	stdtstring upgrade(char const *old)
 	{
 		TCHAR *s = Edif::ConvertString(old);
@@ -209,6 +163,7 @@ struct EditData
 		Edif::FreeString(s);
 		return str;
 	}
+public:
 
 	/* <constructor>
 	 * This is the primary constructor for the
@@ -347,6 +302,11 @@ struct EditData
 				MB_ICONWARNING
 			);
 		}
+	}
+	EditData(mv *mV, SerializedED *SED)
+	: EditData(SED)
+	{
+		loadGlobal(mV);
 	}
 
 	/* <destructor>
