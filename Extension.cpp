@@ -191,7 +191,7 @@ Extension::Extension(RD *rd, SerializedED *SED, createObjectInfo *COB)
 	auto s = std::make_shared<Data>(ed);
 	if(ed.globalObject)
 	{
-		if(gdata.find(ed.globalKey) == gdata.end() || gdata.at(ed.globalKey).expired())
+		if(gdata.find(ed.globalKey) == std::end(gdata) || gdata.at(ed.globalKey).expired())
 		{
 			gdata.emplace(ed.globalKey, s);
 		}

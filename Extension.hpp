@@ -106,7 +106,7 @@ public:
 	};
 
 	struct Data //global data
-	{
+	{ //TODO: add missing fields from editdata
 		Ini ini;
 		SearchResults results;
 		stdtstring defaultDirectory;
@@ -135,6 +135,8 @@ public:
 		bool index;
 		bool autoLoad;
 
+		unsigned undoCount, redoCount;
+
 		Data(EditData const &ed)
 		{
 			//TODO
@@ -150,6 +152,14 @@ public:
 		YesSilent, //the warning dialog was already shown
 	};
 
+	struct Doer
+	{
+		virtual ~Doer() = default;
+
+		virtual void undo() const = 0;
+		virtual void redo() const = 0;
+	};
+
 	//data that doesn't need to be global
 	short dialogSettings;
 	char dialogDisplay; //TODO
@@ -158,11 +168,66 @@ public:
 	HWND dialogChild;
 	HIMAGELIST icons; //TODO
 	CallbackPhase duringCallback;
+	std::deque<std::unique_ptr<Doer>> undos, redos;
 
 	//global data stuff
 	static std::map<stdtstring /*global key*/, std::weak_ptr<Data>> gdata;
 	std::shared_ptr<Data> data;
 
+	//helpers
+	Group &groupByName(stdtstring const &group)
+	{
+		return data->ini.equal_range(data->currentGroup).first->second;
+	}
+	Group &currentGroup()
+	{
+		return groupByName(data->currentGroup);
+	}
+	Value &valueByName(stdtstring const &group, stdtstring const &item)
+	{
+		return groupByName(group).equal_range(item).first->second;
+	}
+
+	template<typename D, typename... Args>
+	void doDoer(Args... &&args)
+	{
+		static_assert(std::is_base_of<Doer, D>::value, "D must derive Doer");
+		redos.clear();
+		undos.emplace_back(new D{std::forward<Args>(args)...});
+		undos.back()->redo();
+		while(undos.size() > data->undoCount)
+		{
+			undos.pop_front();
+		}
+	}
+	void undo()
+	{
+		if(undos.empty())
+		{
+			return;
+		}
+		redos.emplace_back(std::move(undos.back()));
+		undos.pop_back();
+		redos.back()->undo();
+		while(redos.size() > data->redoCount)
+		{
+			redos.pop_front();
+		}
+	}
+	void redo()
+	{
+		if(redos.empty())
+		{
+			return;
+		}
+		undos.emplace_back(std::move(redos.back()));
+		redos.pop_back();
+		undos.back()->redo();
+		while(undos.size() > data->undoCount)
+		{
+			undos.pop_front();
+		}
+	}
 
 	/* Add your actions, conditions, and expressions
 	 * as real class member functions here. The arguments

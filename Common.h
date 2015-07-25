@@ -27,6 +27,11 @@
 #include <tuple>
 //#include <experimental/filesystem>
 #include <memory>
+#include <deque>
+#include <stdexcept>
+#include <type_traits>
+#include <cstdint>
+#include <codecvt>
 
 #include <Shlwapi.h>
 #include <CommCtrl.h>
@@ -47,6 +52,24 @@ T cast(stdtstring const &value)
 	T t = T();
 	iss >> t;
 	return t;
+}
+
+inline stdtstring lowercase(stdtstring const &s)
+{
+	if(s.empty())
+	{
+		return s;
+	}
+	int result = LCMapStringEx(LOCALE_NAME_USER_DEFAULT, LCMAP_LOWERCASE, s.c_str(), s.length(), NULL, 0, NULL, NULL, 0);
+	if(result > 0)
+	{
+		std::unique_ptr<TCHAR[]> buf {new TCHAR[result + 1]()};
+		if(LCMapStringEx(LOCALE_NAME_USER_DEFAULT, LCMAP_LOWERCASE, s.c_str(), s.length(), buf.get(), result, NULL, NULL, 0) > 0)
+		{
+			return stdtstring{buf.get(), result};
+		}
+	}
+	throw std::runtime_error{"Failed to lowercase a string"};
 }
 
 #include "EditData.hpp"
