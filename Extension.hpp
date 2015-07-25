@@ -189,7 +189,7 @@ public:
 	}
 
 	template<typename D, typename... Args>
-	void doDoer(Args... &&args)
+	void doDoer(Args &&... args)
 	{
 		static_assert(std::is_base_of<Doer, D>::value, "D must derive Doer");
 		redos.clear();

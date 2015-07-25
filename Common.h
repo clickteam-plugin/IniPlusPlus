@@ -66,7 +66,7 @@ inline stdtstring lowercase(stdtstring const &s)
 		std::unique_ptr<TCHAR[]> buf {new TCHAR[result + 1]()};
 		if(LCMapStringEx(LOCALE_NAME_USER_DEFAULT, LCMAP_LOWERCASE, s.c_str(), s.length(), buf.get(), result, NULL, NULL, 0) > 0)
 		{
-			return stdtstring{buf.get(), result};
+			return stdtstring{buf.get(), static_cast<std::size_t>(result)};
 		}
 	}
 	throw std::runtime_error{"Failed to lowercase a string"};
