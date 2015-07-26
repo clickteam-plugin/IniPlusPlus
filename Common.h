@@ -32,6 +32,7 @@
 #include <type_traits>
 #include <cstdint>
 #include <codecvt>
+#include <iterator>
 
 #include <Shlwapi.h>
 #include <CommCtrl.h>

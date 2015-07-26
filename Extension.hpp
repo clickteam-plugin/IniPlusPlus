@@ -9,7 +9,7 @@
  * access to everything included by it.
  */
 
-class Extension
+class Extension final
 {
 public:
 	/* rd
@@ -105,7 +105,15 @@ public:
 		GroupMerge,
 	};
 
-	struct Data //global data
+	struct Doer
+	{
+		virtual ~Doer() = default;
+
+		virtual void undo() const = 0;
+		virtual void redo() const = 0;
+	};
+
+	struct Data final //global data
 	{ //TODO: add missing fields from editdata
 		Ini ini;
 		SearchResults results;
@@ -136,11 +144,16 @@ public:
 		bool autoLoad;
 
 		unsigned undoCount, redoCount;
+		std::deque<std::shared_ptr<Doer>> undos, redos;
 
 		Data(EditData const &ed)
 		{
 			//TODO
 		}
+		Data(Data const &) = default;
+		Data(Data &&) = default;
+		Data &operator=(Data const &) = default;
+		Data &operator=(Data &&) = default;
 	};
 
 	enum struct CallbackPhase
@@ -152,14 +165,6 @@ public:
 		YesSilent, //the warning dialog was already shown
 	};
 
-	struct Doer
-	{
-		virtual ~Doer() = default;
-
-		virtual void undo() const = 0;
-		virtual void redo() const = 0;
-	};
-
 	//data that doesn't need to be global
 	short dialogSettings;
 	char dialogDisplay; //TODO
@@ -168,14 +173,17 @@ public:
 	HWND dialogChild;
 	HIMAGELIST icons; //TODO
 	CallbackPhase duringCallback;
-	std::deque<std::unique_ptr<Doer>> undos, redos;
 
 	//global data stuff
-	static std::map<stdtstring /*global key*/, std::weak_ptr<Data>> gdata;
+	static std::map<stdtstring /*global key*/, std::weak_ptr<Data>> gdata; //TODO: do this properly
 	std::shared_ptr<Data> data;
 
 	//helpers
 	Group &groupByName(stdtstring const &group)
+	{
+		return data->ini.equal_range(data->currentGroup).first->second;
+	}
+	Group const &groupByName(stdtstring const &group) const
 	{
 		return data->ini.equal_range(data->currentGroup).first->second;
 	}
@@ -187,10 +195,25 @@ public:
 	{
 		return groupByName(group).equal_range(item).first->second;
 	}
+	bool hasGroup(stdtstring const &group) const
+	{
+		return data->ini.find(group) != std::end(data->ini);
+	}
+	bool hasItem(stdtstring const &group, stdtstring const &item) const
+	{
+		if(hasGroup(group))
+		{
+			Group const &g = groupByName(group);
+			return g.find(item) != std::end(g);
+		}
+		return false;
+	}
 
 	template<typename D, typename... Args>
 	void doDoer(Args &&... args)
 	{
+		auto &undos = data->undos;
+		auto &redos = data->redos;
 		static_assert(std::is_base_of<Doer, D>::value, "D must derive Doer");
 		redos.clear();
 		undos.emplace_back(new D{std::forward<Args>(args)...});
@@ -202,6 +225,8 @@ public:
 	}
 	void undo()
 	{
+		auto &undos = data->undos;
+		auto &redos = data->redos;
 		if(undos.empty())
 		{
 			return;
@@ -216,6 +241,8 @@ public:
 	}
 	void redo()
 	{
+		auto &undos = data->undos;
+		auto &redos = data->redos;
 		if(redos.empty())
 		{
 			return;
@@ -395,4 +422,86 @@ public:
 	void Action(int ID, RD *rd, long param1, long param2);
 	long Condition(int ID, RD *rd, long param1, long param2);
 	long Expression(int ID, RD *rd, long param);
+
+	//Doers for undo/redo
+	struct ValueDoer final
+	: Doer
+	{
+		Extension &e;
+		stdtstring group, item, newv;
+		bool gexisted, iexisted;
+		stdtstring oldv;
+		ValueDoer(Extension &e, stdtstring const &group, stdtstring const &item, stdtstring const &newv)
+		: e(e)
+		, group{group}
+		, item{item}
+		, newv{newv}
+		, gexisted{e.hasGroup(group)}
+		, iexisted{e.hasItem(group, item)}
+		, oldv{iexisted? e.valueByName(group, item) : stdtstring{}}
+		{
+		}
+
+		virtual void redo() const override
+		{
+			if(!gexisted)
+			{
+				e.data->ini.emplace(group, Group{{item, newv}});
+			}
+			else if(!iexisted)
+			{
+				e.groupByName(group).emplace(item, newv);
+			}
+			else
+			{
+				e.valueByName(group, item) = newv;
+			}
+		}
+		virtual void undo() const override
+		{
+			if(!gexisted)
+			{
+				e.data->ini.erase(group);
+			}
+			else if(!iexisted)
+			{
+				e.groupByName(group).erase(item);
+			}
+			else
+			{
+				e.valueByName(group, item) = oldv;
+			}
+		}
+	};
+	struct DeleteItemDoer final
+	: Doer
+	{
+		Extension &e;
+		stdtstring group, item;
+		bool iexisted;
+		stdtstring oldv;
+		DeleteItemDoer(Extension &e, stdtstring const &group, stdtstring const &item)
+		: e(e)
+		, group{group}
+		, item{item}
+		, iexisted{e.hasItem(group, item)}
+		, oldv{iexisted? e.valueByName(group, item) : stdtstring{}}
+		{
+		}
+
+		virtual void redo() const override
+		{
+			if(iexisted)
+			{
+				e.groupByName(group).erase(item);
+			}
+		}
+		virtual void undo() const override
+		{
+			if(iexisted)
+			{
+				e.groupByName(group).emplace(item, oldv);
+			}
+		}
+	};
 };

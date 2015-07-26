@@ -10,14 +10,24 @@
 
 float Extension::expressionGetItemValueG(TCHAR const *item, float def) //TODO
 {
-	//
+	if(hasItem(data->currentGroup, item))
+	{
+		std::basic_istringstream<TCHAR> iss{valueByName(data->currentGroup, item)};
+		float f = 0.0f;
+		iss >> f;
+		return f;
+	}
+	return def;
 	return 0.0f;
 }
 
 TCHAR const *Extension::expressionGetItemStringG(TCHAR const *item, TCHAR const *def)
 {
-	//
-	return _T("");
+	if(hasItem(data->currentGroup, item))
+	{
+		return Runtime.CopyString(valueByName(data->currentGroup, item).c_str());
+	}
+	return Runtime.CopyString(def);
 }
 
 int Extension::expressionGetXG(TCHAR const *item)
@@ -58,14 +68,23 @@ int Extension::expressionItemCountG()
 
 float Extension::expressionGetItemValue(TCHAR const *group, TCHAR const *item, float def) //TODO
 {
-	//
-	return 0.0f;
+	if(hasItem(group, item))
+	{
+		std::basic_istringstream<TCHAR> iss {valueByName(group, item)};
+		float f = 0.0f;
+		iss >> f;
+		return f;
+	}
+	return def;
 }
 
 TCHAR const *Extension::expressionGetItemString(TCHAR const *group, TCHAR const *item, TCHAR const *def)
 {
-	//
-	return _T("");
+	if(hasItem(group, item))
+	{
+		return Runtime.CopyString(valueByName(group, item).c_str());
+	}
+	return Runtime.CopyString(def);
 }
 
 int Extension::expressionGetX(TCHAR const *group, TCHAR const *item)
@@ -82,7 +101,12 @@ int Extension::expressionGetY(TCHAR const *group, TCHAR const *item)
 
 TCHAR const *Extension::expressionNthGroup(int n)
 {
-	//
+	if(n > 0 && n < data->ini.size())
+	{
+		auto it = data->ini.begin();
+		std::advance(it, n);
+		return Runtime.CopyString(it->first.c_str());
+	}
 	return _T("");
 }
 
@@ -106,8 +130,7 @@ float Extension::expressionNthItemValue(TCHAR const *group, int n) //TODO
 
 int Extension::expressionGroupCount()
 {
-	//
-	return 0;
+	return data->ini.size();
 }
 
 int Extension::expressionItemCount(TCHAR const *group)

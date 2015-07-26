@@ -10,17 +10,29 @@
 
 void Extension::actionSetCurrentGroup(TCHAR const *group, int flag)
 {
-	//
+	if(flag == 0 || !hasGroup(group))
+	{
+		data->currentGroup = group;
+	}
+	else
+	{
+		stdtstring g = group;
+		g += '.';
+		for(unsigned i = 1; hasGroup(g + std::to_wstring(i)); ++i)
+		{
+			data->currentGroup = g + std::to_wstring(i);
+		}
+	}
 }
 
 void Extension::actionSetValueG(TCHAR const *item, int flag, float v) //TODO
 {
-	//
+	return actionSetValue(data->currentGroup.c_str(), item, flag, v);
 }
 
 void Extension::actionSetStringG(TCHAR const *item, TCHAR const *v)
 {
-	//
+	return actionSetString(data->currentGroup.c_str(), item, v);
 }
 
 void Extension::actionSetStringMD5G(TCHAR const *item, TCHAR const *v)
@@ -60,7 +72,7 @@ void Extension::actionDeleteGroupG()
 
 void Extension::actionDeleteItemG(TCHAR const *item)
 {
-	//
+	return actionDeleteItem(data->currentGroup.c_str(), item);
 }
 
 void Extension::actionRenameGroupG(TCHAR const *newname, int mode)
@@ -80,12 +92,13 @@ void Extension::actionMoveItemToGroupG(TCHAR const *item, TCHAR const *group, in
 
 void Extension::actionSetValue(TCHAR const *group, TCHAR const *item, int flag, float v) //TODO
 {
-	//
+	stdtstring value = ((flag == 0)? std::to_wstring(int(v)) : std::to_wstring(v));
+	return doDoer<ValueDoer>(*this, group, item, value);
 }
 
 void Extension::actionSetString(TCHAR const *group, TCHAR const *item, TCHAR const *v)
 {
-	//
+	return doDoer<ValueDoer>(*this, group, item, v);
 }
 
 void Extension::actionSetStringMD5(TCHAR const *group, TCHAR const *item, TCHAR const *v)
@@ -155,7 +168,7 @@ void Extension::actionDeleteGroup(TCHAR const *group)
 
 void Extension::actionDeleteItem(TCHAR const *group, TCHAR const *item)
 {
-	//
+	return doDoer<DeleteItemDoer>(*this, group, item);
 }
 
 void Extension::actionDeleteItemInAllGroups(TCHAR const *item)
@@ -220,22 +233,22 @@ void Extension::actionMergeGroupObject(void *objectname, TCHAR const *objectgrou
 
 void Extension::actionNew(TCHAR const *file, int flag)
 {
-	//
+	//CHRILLEY
 }
 
 void Extension::actionLoad(TCHAR const *file, int flag)
 {
-	//
+	//CHRILLEY
 }
 
 void Extension::actionSave()
 {
-	//
+	//CHRILLEY
 }
 
 void Extension::actionSaveAs(TCHAR const *file)
 {
-	//
+	//CHRILLEY
 }
 
 void Extension::actionBackupTo(TCHAR const *file, int flag, TCHAR const *key)
@@ -255,7 +268,8 @@ void Extension::actionLoadFromString(TCHAR const *inistr, int mode)
 
 void Extension::actionSetAutoSave(int flag_save, int flag_load)
 {
-	//
+	data->bAutoSave = (flag_save? true : false);
+	data->autoLoad = (flag_load? true : false);
 }
 
 void Extension::actionSetCompresson(int flag)
@@ -360,7 +374,15 @@ void Extension::actionEnableSubGroups(int flag_subgroups, int flag_empties)
 
 void Extension::actionSwitchGlobalObject(TCHAR const *dataslot)
 {
-	//
+	if(gdata.find(dataslot) == std::end(gdata))
+	{
+		//the new data slot should be independent from the old
+		gdata.emplace(stdtstring{dataslot}, data = std::make_shared<Data>(*data));
+	}
+	else
+	{
+		data = gdata.at(dataslot).lock();
+	}
 }
 
 void Extension::actionSSS(void *settings, TCHAR const *group)
@@ -400,17 +422,17 @@ void Extension::actionLoadChartSettings(void *objectname, TCHAR const *group) //
 
 void Extension::actionLoadChangeFile(TCHAR const *file, void *settings)
 {
-	//
+	//CHRILLEY
 }
 
 void Extension::actionUndo()
 {
-	//
+	undo();
 }
 
 void Extension::actionRedo()
 {
-	//
+	redo();
 }
 
 void Extension::actionClearUndoStack(int mode)

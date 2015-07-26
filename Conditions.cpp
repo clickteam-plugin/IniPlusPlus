@@ -10,12 +10,12 @@
 
 bool Extension::conditionHasGroupG()
 {
-	return data->ini.find(data->currentGroup) != std::end(data->ini);
+	return hasGroup(data->currentGroup);
 }
 
 bool Extension::conditionHasItemG(TCHAR const *item)
 {
-	return conditionHasGroupG() && currentGroup().find(item) != std::end(currentGroup());
+	return hasItem(data->currentGroup, item);
 }
 
 bool Extension::conditionCompareMD5G(TCHAR const *item, TCHAR const *def, TCHAR const *comp)
@@ -26,12 +26,12 @@ bool Extension::conditionCompareMD5G(TCHAR const *item, TCHAR const *def, TCHAR 
 
 bool Extension::conditionHasGroup(TCHAR const *group)
 {
-	return data->ini.find(group) != std::end(data->ini);
+	return hasGroup(group);
 }
 
 bool Extension::conditionHasItem(TCHAR const *group, TCHAR const *item)
 {
-	return conditionHasGroup(group) && groupByName(group).find(item) != std::end(groupByName(group));
+	return hasItem(group, item);
 }
 
 bool Extension::conditionCompareMD5(TCHAR const *group, TCHAR const *item, TCHAR const *def, TCHAR const *comp)
@@ -48,10 +48,10 @@ bool Extension::conditionWildcatMatch(TCHAR const *pattern, TCHAR const *str, in
 
 bool Extension::conditionHasUndo()
 {
-	return !undos.empty();
+	return !data->undos.empty();
 }
 
 bool Extension::conditionHasRedo()
 {
-	return !redos.empty();
+	return !data->redos.empty();
 }

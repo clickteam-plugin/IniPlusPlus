@@ -46,7 +46,7 @@
 				[18, "Load Object"],
 				[17, "Save Object"],
 				[19, "Save Position"]
-			],
+			]
 		],
 		["Moving and Copying",
 			[22, "Rename Group"],
@@ -163,7 +163,7 @@
 		["Current group",
 			[0, "Group exists"],
 			[1, "Group has item"],
-			[2, "Item has hashed value"],
+			[2, "Item has hashed value"]
 		],
 		[3, "Group exists"],
 		[4, "Group has item"],
@@ -270,7 +270,7 @@
 			"Parameters":
 			[
 				["String", "Group name"],
-				["Integer", "Ensure new group? ( 0 = No, 1 = Yes. If unsure, choose 0 )"]
+				["Integer", "Create a new group if one with the same name already exists? ( 0 = No, 1 = Yes. If unsure, choose 0 )"]
 			]
 		},
 		{//1
@@ -1196,7 +1196,7 @@
 			"Returns": "String",
 			"Parameters":
 			[
-				["Integer", "n"],
+				["Integer", "n"]
 			]
 		},
 		{//22
