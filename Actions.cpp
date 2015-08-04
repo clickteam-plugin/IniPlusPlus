@@ -233,7 +233,15 @@ void Extension::actionMergeGroupObject(void *objectname, TCHAR const *objectgrou
 
 void Extension::actionNew(TCHAR const *file, int flag)
 {
-	//CHRILLEY
+	if(flag == 0)
+	{
+		actionClose();
+	}
+	data->autoSavePath = file;
+	if(flag != 0 && data->bAutoSave)
+	{
+		actionSave();
+	}
 }
 
 void Extension::actionLoad(TCHAR const *file, int flag)
@@ -243,7 +251,7 @@ void Extension::actionLoad(TCHAR const *file, int flag)
 
 void Extension::actionSave()
 {
-	//CHRILLEY
+	actionSaveAs(data->autoSavePath.c_str());
 }
 
 void Extension::actionSaveAs(TCHAR const *file)
@@ -258,7 +266,9 @@ void Extension::actionBackupTo(TCHAR const *file, int flag, TCHAR const *key)
 
 void Extension::actionClose()
 {
-	//
+	data->autoSavePath.clear();
+	data->ini.clear();
+	data->ReadOnly = false;
 }
 
 void Extension::actionLoadFromString(TCHAR const *inistr, int mode)
