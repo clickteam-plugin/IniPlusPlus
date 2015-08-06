@@ -333,3 +333,21 @@ long Extension::Expression(int ID, RD *rd, long param)
 {
 	return long(_T("")); //so that unlinked expressions that return strings won't crash
 }
+
+
+void Extension::loadIni(std::basic_istream<TCHAR> &in)
+{
+	//
+}
+void Extension::saveIni(std::basic_ostream<TCHAR> &out)
+{
+	for(auto const &group : data->ini)
+	{
+		out << _T('[') << escape(group.first) << _T(']') << std::endl;
+		for(auto const &item : group.second)
+		{
+			out << escape(item.first) << _T('=') << escape(item.second) << std::endl;
+		}
+		out << std::endl;
+	}
+}

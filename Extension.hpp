@@ -92,10 +92,10 @@ public:
 	stdtstring const subgroup_separator = _T("/");
 
 	using Value = stdtstring;
-	using Group = std::multimap<stdtstring /*item name*/, Value>;
-	using Ini = std::multimap<stdtstring /*group name*/, Group>;
+	using Group = std::map<stdtstring /*item name*/, Value>;
+	using Ini = std::map<stdtstring /*group name*/, Group>;
 
-	using SearchResults = std::multiset<std::tuple<stdtstring /*group name*/, stdtstring /*item name*/, Value>>;
+	using SearchResults = std::set<std::tuple<stdtstring /*group name*/, stdtstring /*item name*/, Value>>;
 
 	enum struct RepeatMode
 	{
@@ -255,6 +255,27 @@ public:
 			undos.pop_front();
 		}
 	}
+
+	static stdtstring escape(stdtstring const &str)
+	{
+		stdtstring ret;
+		for(auto c : str) switch(c)
+		{
+			case _T('\n'): ret += _T("\\n"); break;
+			case _T('\t'): ret += _T("\\t"); break;
+			case _T(' '): ret += _T("\\ "); break;
+			case _T('"'): ret += _T("\\\""); break;
+			case _T('='): ret += _T("\\="); break;
+			case _T(';'): ret += _T("\\;"); break;
+			case _T('['): ret += _T("\\["); break;
+			case _T(']'): ret += _T("\\]"); break;
+			default: ret += c; break;
+		}
+		return ret;
+	}
+
+	void loadIni(std::basic_istream<TCHAR> &in);
+	void saveIni(std::basic_ostream<TCHAR> &out);
 
 	/* Add your actions, conditions, and expressions
 	 * as real class member functions here. The arguments
