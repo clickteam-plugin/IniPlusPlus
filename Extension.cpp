@@ -142,6 +142,7 @@ Extension::Extension(RD *rd, SerializedED *SED, createObjectInfo *COB)
 	LinkCondition(17, conditionEvent);
 	LinkCondition(18, conditionHasUndo);
 	LinkCondition(19, conditionHasRedo);
+	LinkCondition(20, conditionEvent);
 
 	LinkExpression(0, expressionGetItemValueG);
 	LinkExpression(1, expressionGetItemStringG);
@@ -184,10 +185,11 @@ Extension::Extension(RD *rd, SerializedED *SED, createObjectInfo *COB)
 	LinkExpression(38, expressionCurGroup);
 	LinkExpression(39, expressionCurGroupString);
 	LinkExpression(40, expressionFname);
+	LinkExpression(41, expressionErrorMsg);
 
 
 	//Load settings from editdata and link to global data
-	EditData ed (SED);
+	EditData ed (rd->rHo.hoAdRunHeader->rh4.rh4Mv, SED);
 	auto s = std::make_shared<Data>(ed);
 	if(ed.globalObject)
 	{
@@ -335,18 +337,131 @@ long Extension::Expression(int ID, RD *rd, long param)
 }
 
 
-void Extension::loadIni(std::basic_istream<TCHAR> &in)
+void Extension::loadIni(std::basic_istream<TCHAR> &in) //TODO: quoted values
 {
-	//
+	std::map<std::size_t /*depth*/, stdtstring /*group name*/> groups; //TODO: honor subgroups setting
+	std::size_t depth {};
+	auto groupPath = [&]()
+	-> stdtstring
+	{
+		stdtstring group;
+		for(std::size_t i = 0; i <= depth; ++i)
+		{
+			group += groups[i];
+			if(i != depth)
+			{
+				group += subgroup_separator;
+			}
+		}
+		return group;
+	};
+	stdtstring line;
+	while(std::getline(in, line)) //TODO: nonstandard newlines
+	{
+		stdtstring current, name;
+		bool item = false;
+		depth = 0;
+		for(std::size_t i = 0; i < line.length(); ++i)
+		{
+			auto const c = line[i];
+			if(c == _T('\r') || c == _T(' '))
+			{
+				continue;
+			}
+			else if(c == _T('\t'))
+			{
+				if(current.empty())
+				{
+					++depth;
+					continue;
+				}
+			}
+			else if(c == _T('\\'))
+			{
+				if(i+1 < line.length())
+				{
+					switch(line[i+1])
+					{
+						case _T('n'): current += _T('\n'); ++i; continue;
+						case _T('t'): current += _T('\t'); ++i; continue;
+						default: continue;
+					}
+				}
+			}
+			else if(c == _T(';'))
+			{
+				break;
+			}
+			else if(c == _T('['))
+			{
+				continue;
+			}
+			else if(c == _T(']'))
+			{
+				groups[depth] = current;
+				auto groupname = groupPath();
+				if(data->groupRepeatSetting == RepeatMode::TakeLast)
+				{
+					data->ini.erase(groupname);
+				}
+				if(data->groupRepeatSetting == RepeatMode::Rename)
+				{
+					if(hasGroup(groupname))
+					{
+						std::size_t n = 1;
+						while(hasGroup(groupname + _T('.') + to_tstring(n))) ++n;
+						groups[depth] += _T('.') + to_tstring(n);
+					}
+				}
+				groupname = groupPath(); //may have been changed
+				if((data->groupRepeatSetting == RepeatMode::TakeFirst && !hasGroup(groupname))
+				|| (data->groupRepeatSetting == RepeatMode::GroupMerge)
+				|| (data->allowEmptyGroup))
+				{
+					data->ini[groupname]; //guarantee group is created
+				}
+				break;
+			}
+			else if(c == _T('='))
+			{
+				name += current;
+				current.clear();
+				item = true;
+				continue;
+			}
+			current += c;
+		}
+		if(item)
+		{
+			auto const groupname = groupPath();
+			if(hasItem(groupname, name))
+			{
+				if(data->itemRepeatSetting == RepeatMode::TakeLast)
+				{
+					valueByName(groupname, name) = current;
+				}
+				else if(data->itemRepeatSetting == RepeatMode::Rename)
+				{
+					std::size_t n = 1;
+					while(hasItem(groupname, name + _T('.') + to_tstring(n))) ++n;
+					valueByName(groupname, name + _T('.') + to_tstring(n)) = current;
+				}
+			}
+			else
+			{
+				valueByName(groupname, name) = current;
+			}
+		}
+	}
 }
-void Extension::saveIni(std::basic_ostream<TCHAR> &out)
+void Extension::saveIni(std::basic_ostream<TCHAR> &out) const //TODO
 {
 	for(auto const &group : data->ini)
 	{
-		out << _T('[') << escape(group.first) << _T(']') << std::endl;
+		out << _T('[') << escape(group.first) << _T("]\r\n");
 		for(auto const &item : group.second)
 		{
-			out << escape(item.first) << _T('=') << escape(item.second) << std::endl;
+			out << escape(item.first) << _T('=') << escape(item.second) << _T("\r\n");
 		}
 		out << std::endl;
 	}

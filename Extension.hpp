@@ -104,6 +104,17 @@ public:
 		Rename,
 		GroupMerge,
 	};
+	static RepeatMode getRepeatMode(int m)
+	{
+		switch(m)
+		{
+			case 0: return RepeatMode::TakeFirst; break;
+			case 1: return RepeatMode::TakeLast; break;
+			case 2: return RepeatMode::Rename; break;
+			default:
+			case 3: return RepeatMode::GroupMerge; break;
+		}
+	}
 
 	struct Doer
 	{
@@ -114,11 +125,15 @@ public:
 	};
 
 	struct Data final //global data
-	{ //TODO: add missing fields from editdata
+	{
 		Ini ini;
 		SearchResults results;
 		stdtstring defaultDirectory;
 		stdtstring currentGroup;
+
+		bool b_defaultFile;
+		stdtstring defaultFile;
+		stdtstring defaultText;
 
 		bool bAutoSave;
 		bool CaseSensitive;
@@ -147,8 +162,33 @@ public:
 		std::deque<std::shared_ptr<Doer>> undos, redos;
 
 		Data(EditData const &ed)
+		: b_defaultFile(ed.b_defaultFile)
+		, ReadOnly(ed.b_ReadOnly)
+		, defaultFile(ed.defaultFile)
+		, defaultDirectory(/*TODO*/)
+		, defaultText(ed.defaultText)
+		, bool_CanCreateFolders(ed.bool_CanCreateFolders)
+		, bAutoSave(ed.bool_AutoSave)
+		, AutoSaveCompressed(ed.bool_compress)
+		, AutoSaveEncrypted(ed.bool_encrypt)
+		, AutoSaveKey(ed.encrypt_key)
+		, StandardNewLines(!ed.bool_newline)
+		, NewLineChar(ed.newline)
+		, NeverQuoteStrings(!ed.bool_QuoteStrings)
+		, groupRepeatSetting(getRepeatMode(ed.repeatGroups))
+		, itemRepeatSetting(getRepeatMode(ed.repeatItems))
+		, undoCount(ed.undoCount)
+		, redoCount(ed.redoCount)
+		, saveRepeats(ed.saveRepeated)
+		, EscapeCharsInGroups(ed.bool_EscapeGroup)
+		, EscapeCharsInItem(ed.bool_EscapeItem)
+		, EscapeCharsInValue(ed.bool_EscapeValue)
+		, CaseSensitive(ed.bool_CaseSensitive)
+		, index(ed.index)
+		, autoLoad(ed.autoLoad)
+		, subGroups(ed.subGroups)
+		, allowEmptyGroup(ed.allowEmptyGroups)
 		{
-			//TODO
 		}
 		Data(Data const &) = default;
 		Data(Data &&) = default;
@@ -181,11 +221,11 @@ public:
 	//helpers
 	Group &groupByName(stdtstring const &group)
 	{
-		return data->ini.equal_range(data->currentGroup).first->second;
+		return data->ini[group];
 	}
 	Group const &groupByName(stdtstring const &group) const
 	{
-		return data->ini.equal_range(data->currentGroup).first->second;
+		return data->ini.at(group);
 	}
 	Group &currentGroup()
 	{
@@ -193,7 +233,7 @@ public:
 	}
 	Value &valueByName(stdtstring const &group, stdtstring const &item)
 	{
-		return groupByName(group).equal_range(item).first->second;
+		return groupByName(group)[item];
 	}
 	bool hasGroup(stdtstring const &group) const
 	{
@@ -256,6 +296,14 @@ public:
 		}
 	}
 
+	stdtstring error_msg;
+	void doError(stdtstring const &msg)
+	{
+		error_msg = msg;
+		Runtime.GenerateEvent(20);
+		error_msg.clear();
+	}
+
 	static stdtstring escape(stdtstring const &str)
 	{
 		stdtstring ret;
@@ -275,7 +323,7 @@ public:
 	}
 
 	void loadIni(std::basic_istream<TCHAR> &in);
-	void saveIni(std::basic_ostream<TCHAR> &out);
+	void saveIni(std::basic_ostream<TCHAR> &out) const;
 
 	/* Add your actions, conditions, and expressions
 	 * as real class member functions here. The arguments
@@ -428,6 +476,7 @@ public:
 	TCHAR const *expressionCurGroup();
 	TCHAR const *expressionCurGroupString();
 	TCHAR const *expressionFname();
+	TCHAR const *expressionErrorMsg();
 
 
 	short Handle();         //defined & documented in Extension.cpp

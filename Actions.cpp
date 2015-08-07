@@ -246,12 +246,21 @@ void Extension::actionNew(TCHAR const *file, int flag)
 
 void Extension::actionLoad(TCHAR const *file, int flag)
 {
-	//CHRILLEY
+	data->ReadOnly = (flag? true : false);
+	std::basic_ifstream<TCHAR> ifs (file);
+	if(ifs)
+	{
+		return loadIni(ifs);
+	}
+	else
+	{
+		return doError(stdtstring{_T("Unable to read file ")}+file);
+	}
 }
 
 void Extension::actionSave()
 {
-	actionSaveAs(data->autoSavePath.c_str());
+	return actionSaveAs(data->autoSavePath.c_str());
 }
 
 void Extension::actionSaveAs(TCHAR const *file)
@@ -273,7 +282,12 @@ void Extension::actionClose()
 
 void Extension::actionLoadFromString(TCHAR const *inistr, int mode)
 {
-	//
+	if(mode == 0)
+	{
+		data->ini.clear();
+	}
+	std::basic_istringstream<TCHAR> iss {inistr};
+	return loadIni(iss);
 }
 
 void Extension::actionSetAutoSave(int flag_save, int flag_load)

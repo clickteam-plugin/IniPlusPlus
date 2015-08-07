@@ -238,7 +238,11 @@ void *MMF2Func GetPropValue(mv *mV, SerializedED *SED, UINT PropID)
 	{
 	case Prop::Version:
 		{
-			return new CPropStringValue(_T("v1.6 July 2015"));
+			#ifdef UNICODE
+			return new CPropStringValue(_T("Unicode v1.6 August 2015"));
+			#else
+			return new CPropStringValue(_T("ANSI v1.6 August 2015"));
+			#endif
 		}
 	case Prop::DefPath:
 		{

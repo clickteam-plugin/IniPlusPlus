@@ -1024,6 +1024,10 @@
 		{//19
 			"Title": "Is redo available?",
 			"Triggered": false
+		},
+		{//20
+			"Title": "On error",
+			"Triggered": true
 		}
 	],
 	"Expressions":
@@ -1339,6 +1343,10 @@
 		},
 		{//40
 			"Title": "Filename$(",
+			"Returns": "String"
+		},
+		{//41
+			"Title": "ErrorMsg$(",
 			"Returns": "String"
 		}
 	]

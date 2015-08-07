@@ -175,8 +175,10 @@ public:
 	 * constructor is used to update from
 	 * older versions of your editdata as well.
 	 */
-	EditData(SerializedED *SED)
+	EditData(mv *mV, SerializedED *SED)
 	{
+		loadGlobal(mV);
+
 		if(SED->Header.extVersion == 1) //Ini++1.5
 		{
 			struct V1
@@ -302,11 +304,6 @@ public:
 				MB_ICONWARNING
 			);
 		}
-	}
-	EditData(mv *mV, SerializedED *SED)
-	: EditData(SED)
-	{
-		loadGlobal(mV);
 	}
 
 	/* <destructor>

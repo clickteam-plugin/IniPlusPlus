@@ -33,6 +33,7 @@
 #include <cstdint>
 #include <codecvt>
 #include <iterator>
+#include <fstream>
 
 #include <Shlwapi.h>
 #include <CommCtrl.h>
@@ -53,6 +54,13 @@ T cast(stdtstring const &value)
 	T t = T();
 	iss >> t;
 	return t;
+}
+template<typename T>
+stdtstring to_tstring(T t)
+{
+	std::basic_ostringstream<TCHAR> oss;
+	oss << t;
+	return oss.str();
 }
 
 inline stdtstring lowercase(stdtstring const &s)

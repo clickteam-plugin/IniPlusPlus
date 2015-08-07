@@ -183,8 +183,9 @@ TCHAR const *Extension::expressionGetNthSearchResultPath(int n, TCHAR const *sep
 
 TCHAR const *Extension::expressionWriteStream()
 {
-	//
-	return _T("");
+	std::basic_ostringstream<TCHAR> oss;
+	saveIni(oss);
+	return Runtime.CopyString(oss.str().c_str());
 }
 
 TCHAR const *Extension::expressionHashString(TCHAR const *str)
@@ -277,3 +278,7 @@ TCHAR const *Extension::expressionFname()
 	return _T("");
 }
 
+TCHAR const *Extension::expressionErrorMsg()
+{
+	return Runtime.CopyString(error_msg.c_str());
+}
