@@ -81,5 +81,80 @@ inline stdtstring lowercase(stdtstring const &s)
 	throw std::runtime_error{"Failed to lowercase a string"};
 }
 
+inline std::string utf8from16(std::wstring const &s)
+{
+	if(s.empty())
+	{
+		return {};
+	}
+	int r1 = WideCharToMultiByte
+	(
+		CP_UTF8,
+		0,
+		s.c_str(),
+		s.size(),
+		NULL,
+		0,
+		NULL,
+		NULL
+	);
+	if(r1 == 0)
+	{
+		return {};
+	}
+	std::unique_ptr<std::string::value_type[]> buf {new std::string::value_type[r1]};
+	int r2 = WideCharToMultiByte
+	(
+		CP_UTF8,
+		0,
+		s.c_str(),
+		s.size(),
+		buf.get(),
+		r1,
+		NULL,
+		NULL
+	);
+	if(r2 == 0)
+	{
+		return {};
+	}
+	return std::string(buf.get(), r2);
+}
+inline std::wstring utf16from8(std::string const &s)
+{
+	if(s.empty())
+	{
+		return {};
+	}
+	int r1 = MultiByteToWideChar
+	(
+		CP_UTF8,
+		0,
+		s.c_str(),
+		s.size(),
+		NULL,
+		0
+	);
+	if(r1 == 0)
+	{
+		return {};
+	}
+	std::unique_ptr<std::wstring::value_type[]> buf {new std::wstring::value_type[r1]};
+	int r2 = MultiByteToWideChar
+	(
+		CP_UTF8,
+		0,
+		s.c_str(),
+		s.size(),
+		buf.get(),
+		r1
+	);
+	if(r2 == 0)
+	{
+		return {};
+	}
+	return std::wstring(buf.get(), r2);
+}
+
 #include "EditData.hpp"
 #include "Extension.hpp"

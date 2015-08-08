@@ -33,12 +33,12 @@ void MMF2Func InitParameter(mv *mV, short ID, paramExt *p) //TODO: cleanup
 	case 0: //object selector 1
 	case 1: //object selector 2
 		{
-			_tcscpy((TCHAR *)&(p->pextData[0]), _T("Ini++ v1.6"));
+			strcpy(&(p->pextData[0]), "Ini++ v1.6");
 			p->pextSize = sizeof(paramExt) - sizeof(p->pextData) + (_tcslen((TCHAR *)(p->pextData))+1)*sizeof(TCHAR);
 		} break;
 	case 3: //object selector 3
 		{
-			_tcscpy((TCHAR *)&(p->pextData[0]), _T("Chart"));
+			strcpy(&(p->pextData[0]), "Chart");
 			p->pextSize = sizeof(paramExt) - sizeof(p->pextData) + (_tcslen((TCHAR *)(p->pextData))+1)*sizeof(TCHAR);
 		} break;
 	case 2: //dialog selector
@@ -258,7 +258,8 @@ void MMF2Func GetParameterString(mv *mV, short ID, paramExt const *p, LPTSTR des
 	case 6: //object selector 4
 	case 7: //object selector 5
 		{
-			_tcsncpy(dest, (TCHAR *)(p->pextData), size/sizeof(TCHAR));
+			auto str = utf16from8(p->pextData);
+			_tcsncpy(dest, str.c_str(), size/sizeof(TCHAR));
 		} break;
 	case 2: //dialog selector
 		{
@@ -331,7 +332,8 @@ BOOL CALLBACK ObjectSelector(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lPar
 			SetWindowLong(hDlg, DWL_USER, lParam);
 			ParamInfo &pi = *(ParamInfo *)lParam;
 
-			SetDlgItemText(hDlg, IDC_EDIT, (TCHAR *)pi.p.pextData);
+			auto str = utf16from8(pi.p.pextData);
+			SetDlgItemText(hDlg, IDC_EDIT, str.c_str());
 
 			switch(pi.p.pextCode - PARAM_EXTBASE)
 			{
@@ -352,8 +354,12 @@ BOOL CALLBACK ObjectSelector(HWND hDlg, UINT msgType, WPARAM wParam, LPARAM lPar
 			{
 			case IDOK:
 				{
-					GetDlgItemText(hDlg, IDC_EDIT, (TCHAR *)pi.p.pextData, (PARAM_EXTMAXSIZE-sizeof(paramExt))/sizeof(TCHAR));
-					pi.p.pextSize = sizeof(paramExt) - sizeof(pi.p.pextData) + (_tcslen((TCHAR *)pi.p.pextData)+1)*sizeof(TCHAR);
+					int size = GetWindowTextLength(GetDlgItem(hDlg, IDC_EDIT));
+					std::unique_ptr<std::wstring::value_type[]> buf {new std::wstring::value_type[size+1]};
+					GetDlgItemText(hDlg, IDC_EDIT, buf.get(), size+1);
+					auto str = utf8from16(buf.get());
+					strncpy(pi.p.pextData, str.c_str(), PARAM_EXTMAXSIZE-sizeof(paramExt));
+					pi.p.pextSize = sizeof(paramExt) - sizeof(pi.p.pextData) + str.size()+1;
 					EndDialog(hDlg, TRUE);
 				} break;
 			case IDCANCEL:
