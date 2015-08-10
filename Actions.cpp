@@ -444,9 +444,55 @@ void Extension::actionLoadChartSettings(void *objectname, TCHAR const *group) //
 	//
 }
 
-void Extension::actionLoadChangeFile(TCHAR const *file, void *settings)
+void Extension::actionLoadChangeFile(TCHAR const *file, paramExt *settings) //TODO: bugproof
 {
-	//CHRILLEY
+	enum struct LoadType
+	{
+		Load,
+		Nothing
+	};
+	enum struct FNameType
+	{
+		Change,
+		Nothing,
+		ChangeIfOk
+	};
+	enum struct DeleteType
+	{
+		Clear,
+		Nothing,
+		ClearIfOk
+	};
+	LoadType   lt = LoadType  (settings->pextData[0]);
+	FNameType  ft = FNameType (settings->pextData[1]);
+	DeleteType dt = DeleteType(settings->pextData[2]);
+	bool saveNow  = (((settings->pextData[3]) & 1)? true : false);
+	bool readOnly = (((settings->pextData[3]) & 2)? true : false);
+
+	bool exists = false;
+	if(std::ifstream ifs {file})
+	{
+		exists = true;
+	}
+
+	if(dt == DeleteType::Clear || (dt == DeleteType::ClearIfOk && exists))
+	{
+		data->ini.clear();
+	}
+
+	if(lt == LoadType::Load)
+	{
+		loadIni(std::basic_ifstream<TCHAR>{file});
+		data->ReadOnly = readOnly;
+	}
+	if(ft == FNameType::Change || (ft == FNameType::ChangeIfOk && exists))
+	{
+		data->autoSavePath = file;
+	}
+	if(saveNow)
+	{
+		saveIni(std::basic_ofstream<TCHAR>{file});
+	}
 }
 
 void Extension::actionUndo()

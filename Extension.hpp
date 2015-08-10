@@ -415,7 +415,7 @@ public:
 	void actionFromChart(void *objectname, TCHAR const *group); //TODO
 	void actionSaveChartSettings(void *objectname, TCHAR const *group); //TODO
 	void actionLoadChartSettings(void *objectname, TCHAR const *group); //TODO
-	void actionLoadChangeFile(TCHAR const *file, void *settings);
+	void actionLoadChangeFile(TCHAR const *file, paramExt *settings);
 	void actionUndo();
 	void actionRedo();
 	void actionClearUndoStack(int mode);
