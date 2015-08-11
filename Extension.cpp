@@ -358,17 +358,38 @@ void Extension::loadIni(std::basic_istream<TCHAR> &in) //TODO: quoted values
 	stdtstring line;
 	while(std::getline(in, line)) //TODO: nonstandard newlines
 	{
+		line.erase(0, line.find_first_not_of(_T(' '))); //trim unescaped leading spaces (TODO: deal with tabs first)
 		stdtstring current, name;
 		bool item = false;
+		std::size_t spaces = 0;
 		depth = 0;
 		for(std::size_t i = 0; i < line.length(); ++i)
 		{
 			auto const c = line[i];
-			if(c == _T('\r') || c == _T(' '))
+			if(c == _T(' '))
+			{
+				++spaces; //count spaces that might be trailing or might be inner
+				continue;
+			}
+			else if(c == _T('\r'))
 			{
 				continue;
 			}
-			else if(c == _T('\t'))
+			else if(c == _T('='))
+			{
+				name += current;
+				current.clear();
+				spaces = 0;
+				item = true;
+				if(i+1 < line.length())
+				{
+					line.erase(i+1, line.find_first_not_of(_T(' '), i+1)-i-1); //trim unescaped leading spaces
+				}
+				continue;
+			}
+			current.append(spaces, _T(' ')); //add the spaces since they're clearly inner and not trailing
+			spaces = 0;
+			if(c == _T('\t'))
 			{
 				if(current.empty())
 				{
@@ -384,6 +405,7 @@ void Extension::loadIni(std::basic_istream<TCHAR> &in) //TODO: quoted values
 					{
 						case _T('n'): current += _T('\n'); ++i; continue;
 						case _T('t'): current += _T('\t'); ++i; continue;
+						case _T(' '): current += _T(' ' ); ++i; continue;
 						default: continue;
 					}
 				}
@@ -421,13 +443,6 @@ void Extension::loadIni(std::basic_istream<TCHAR> &in) //TODO: quoted values
 					data->ini[groupname]; //guarantee group is created
 				}
 				break;
-			}
-			else if(c == _T('='))
-			{
-				name += current;
-				current.clear();
-				item = true;
-				continue;
 			}
 			current += c;
 		}

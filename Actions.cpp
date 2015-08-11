@@ -247,10 +247,12 @@ void Extension::actionNew(TCHAR const *file, int flag)
 void Extension::actionLoad(TCHAR const *file, int flag)
 {
 	data->ReadOnly = (flag? true : false);
-	std::basic_ifstream<TCHAR> ifs (file);
+	std::ifstream ifs (file);
 	if(ifs)
 	{
-		return loadIni(ifs);
+		//load entire file and convert it to unicode
+		std::basic_istringstream<TCHAR> iss {utf16from8(std::string(std::istreambuf_iterator<char>(ifs), {}))};
+		return loadIni(iss);
 	}
 	else
 	{
@@ -265,7 +267,11 @@ void Extension::actionSave()
 
 void Extension::actionSaveAs(TCHAR const *file)
 {
-	//CHRILLEY
+	//TODO: optionally create folders if they don't exist
+	std::basic_ostringstream<TCHAR> oss;
+	saveIni(oss);
+	auto str = utf8from16(oss.str());
+	std::ofstream{file} << str;
 }
 
 void Extension::actionBackupTo(TCHAR const *file, int flag, TCHAR const *key)
@@ -482,8 +488,7 @@ void Extension::actionLoadChangeFile(TCHAR const *file, paramExt *settings) //TO
 
 	if(lt == LoadType::Load)
 	{
-		loadIni(std::basic_ifstream<TCHAR>{file});
-		data->ReadOnly = readOnly;
+		actionLoad(file, readOnly);
 	}
 	if(ft == FNameType::Change || (ft == FNameType::ChangeIfOk && exists))
 	{
@@ -491,7 +496,7 @@ void Extension::actionLoadChangeFile(TCHAR const *file, paramExt *settings) //TO
 	}
 	if(saveNow)
 	{
-		saveIni(std::basic_ofstream<TCHAR>{file});
+		actionSave();
 	}
 }
 
