@@ -1,0 +1,54 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: V2Template32 - Win32 Release_Small--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x409 /fo".\Release/Extobj.res" /i "..\inc" /d "NDEBUG" /d "EDITOR" /d "EDIT_MODE" /d "INCLUDE_DIALOG" "E:\Documents\Programming\Multimedia Fusion Extensions\Ini++ Release\Ini++ Latest Source Code\Code\Extobj.rc"" 
+Creating temporary file "C:\Users\Jack\AppData\Local\Temp\RSP1729.tmp" with contents
+[
+comctl32.lib shell32.lib shlwapi.lib kernel32.lib user32.lib ..\lib\mmfs2.lib /nologo /dll /incremental:no /pdb:".\Release_Small/INI++15.pdb" /machine:I386 /def:".\Extobj32.def" /out:".\Release_Small/INI++15.mfx" /implib:".\Release_Small/INI++15.lib" 
+".\Release_Small\adler32.obj"
+".\Release_Small\compress.obj"
+".\Release_Small\crc32.obj"
+".\Release_Small\deflate.obj"
+".\Release_Small\example.obj"
+".\Release_Small\gzclose.obj"
+".\Release_Small\gzlib.obj"
+".\Release_Small\gzread.obj"
+".\Release_Small\gzwrite.obj"
+".\Release_Small\infback.obj"
+".\Release_Small\inffast.obj"
+".\Release_Small\inflate.obj"
+".\Release_Small\inftrees.obj"
+".\Release_Small\trees.obj"
+".\Release_Small\uncompr.obj"
+".\Release_Small\zutil.obj"
+".\Release_Small\common dialog.obj"
+".\Release_Small\Edittime.obj"
+".\Release_Small\General.obj"
+".\Release_Small\helper_to_main.obj"
+".\Release_Small\Huffman.obj"
+".\Release_Small\Main.obj"
+".\Release_Small\md5c.obj"
+".\Release_Small\md5class.obj"
+".\Release_Small\MMFArrayWrapper.obj"
+".\Release_Small\Runtime.obj"
+".\Release_Small\SuperINI.obj"
+".\Release\Extobj.res"
+]
+Creating command line "link.exe @C:\Users\Jack\AppData\Local\Temp\RSP1729.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Linking...
+   Creating library .\Release_Small/INI++15.lib and object .\Release_Small/INI++15.exp
+
+
+
+<h3>Results</h3>
+INI++15.mfx - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

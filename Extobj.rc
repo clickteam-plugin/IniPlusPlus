@@ -1,0 +1,1549 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "..\inc\ccx.h"
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+1 VERSIONINFO
+ FILEVERSION 2,0,0,1
+ PRODUCTVERSION 2,0,0,1
+ FILEFLAGSMASK 0x0L
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x10001L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "Comments", "\0"
+            VALUE "CompanyName", "Clickteam\0"
+            VALUE "FileDescription", "INI++ Object\0"
+            VALUE "FileVersion", "2.01\0"
+            VALUE "InternalName", "INIPLUSPLUS\0"
+            VALUE "LegalCopyright", "Copyright © 2006-2015 Jack Webster\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "INI++1.5.MFX\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "\0"
+            VALUE "ProductVersion", "2, 0, 0, 1\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Data
+//
+
+KPX_MAGICNUMBER RCDATA MOVEABLE PURE 
+BEGIN
+    0x6554, "\166" 
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+EXO_IMAGE               BITMAP  MOVEABLE PURE   "EXTIMG.BMP"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+#if defined(APSTUDIO_INVOKED) || defined(EDIT_MODE)
+#if defined(APSTUDIO_INVOKED)
+MN_CONDITIONS$(EDIT_MODE) MENU DISCARDABLE 
+#else
+MN_CONDITIONS MENU DISCARDABLE 
+#endif
+BEGIN
+    POPUP ""
+    BEGIN
+        MENUITEM SEPARATOR
+        POPUP "Current group"
+        BEGIN
+            MENUITEM "Group exists",                CID_conditionHasGroupG
+            MENUITEM "Group has Item",              CID_conditionHasItemG
+            MENUITEM "Item has hashed value",       CID_conditionCompareMD5G
+        END
+        MENUITEM "Group exists",                CID_conditionHasGroup
+        MENUITEM "Group has item",              CID_conditionHasItem
+        MENUITEM "Item has hashed value",       CID_conditionCompareMD5
+        MENUITEM SEPARATOR
+        POPUP "Dialog box"
+        BEGIN
+            MENUITEM "On open",                     ID__DIALOGBOX_ONOPEN
+            MENUITEM "On close",                    ID__DIALOGBOX_ONCLOSE
+            MENUITEM "On modified",                 ID__DIALOGBOX_ONMODIFIED
+        END
+        POPUP "Search Results"
+        BEGIN
+            MENUITEM "On Results Found",            ID__ONRESULTSFOUND
+            MENUITEM "On No Results Found",         ID__ONNORESULTSFOUND
+        END
+        POPUP "Undo"
+        BEGIN
+            MENUITEM "Has Undo",                    ID__UNDO_HASUNDO
+            MENUITEM "Has Redo",                    ID__UNDO_HASREDO
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "On Merge",                    ID__ONMERGE
+        MENUITEM "On Data Modified",            ID__ONMODIFIED
+        MENUITEM "On New Item",                 ID__ONNEWITEM
+        MENUITEM "On Save",                     ID__ONAUTOSAVE
+        MENUITEM SEPARATOR
+        POPUP "Extra Functions"
+        BEGIN
+            MENUITEM "Is Wildcat Match?",           CID_conditionWildcatMatch
+
+            MENUITEM "On uncompression OK",         ID__EXTRAFUNCTIONS_ONUNCOMPRESSIONOK
+
+            MENUITEM "On uncompression fail",       ID__EXTRAFUNCTIONS_ONUNCOMPRESSIONFAIL
+
+        END
+    END
+END
+#endif
+
+#if defined(APSTUDIO_INVOKED) || defined(EDIT_MODE)
+#if defined(APSTUDIO_INVOKED)
+MN_ACTIONS$(EDIT_MODE) MENU DISCARDABLE 
+#else
+MN_ACTIONS MENU DISCARDABLE 
+#endif
+BEGIN
+    POPUP ""
+    BEGIN
+        MENUITEM SEPARATOR
+        MENUITEM "Set Current Group",           AID_actionSetCurrentGroup
+        POPUP "Current Group"
+        BEGIN
+            MENUITEM "Set Value",                   AID_actionSetValueG
+            MENUITEM "Set String",                  AID_actionSetStringG
+            MENUITEM "Set String (MD5 Hashed)",     AID_actionSetStringMD5G
+            MENUITEM SEPARATOR
+            MENUITEM "Save Object",                 AID_actionSaveObjectG
+            MENUITEM "Load Object",                 AID_actionLoadObjectG
+            MENUITEM "Save Position",               AID_actionSavePositionG
+            MENUITEM "Save global values",          AID_actionSaveGlobalValuesG
+
+            MENUITEM "Load global values",          AID_actionLoadGlobalValuesG
+
+            MENUITEM SEPARATOR
+            MENUITEM "Delete group",                AID_actionDeleteGroupG
+            MENUITEM "Delete item",                 AID_actionDeleteItemG
+            MENUITEM SEPARATOR
+            MENUITEM "Rename group",                AID_actionRenameGroupG
+            MENUITEM "Rename item",                 AID_actionRenameItemG
+            MENUITEM "Move Item to another Group",  AID_actionMoveItemToGroupG
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "Setting Items"
+        BEGIN
+            MENUITEM "Set Value",                   AID_actionSetValue
+            MENUITEM "Set String",                  AID_actionSetString
+            MENUITEM "Set String (MD5 Hashed)",     AID_actionSetStringMD5
+            MENUITEM SEPARATOR
+            POPUP "Global Values"
+            BEGIN
+                MENUITEM "Load Global Values",          AID_actionLoadAltValues
+
+                MENUITEM "Save Global Values",          AID_actionSaveAltValues
+
+            END
+            POPUP "Objects && Positions"
+            BEGIN
+                MENUITEM "Load Object",                 AID_actionLoadObject
+                MENUITEM "Save Object",                 AID_actionSaveObject
+                MENUITEM "Save Position",               AID_actionSavePosition
+
+            END
+        END
+        POPUP "Moving and Copying"
+        BEGIN
+            MENUITEM "Rename Group ",               AID_actionRenameGroup
+            MENUITEM "Rename item",                 AID_actionRenameItem
+            MENUITEM SEPARATOR
+            MENUITEM "Move Item",                   AID_actionMoveItem
+            MENUITEM "Move Item between groups",    AID_actionMoveItemToGroup
+
+            MENUITEM SEPARATOR
+            MENUITEM "Copy Group",                  AID_actionCopyGroup
+            MENUITEM "Copy Item",                   AID_actionCopyItem
+        END
+        POPUP "Deleting"
+        BEGIN
+            MENUITEM "Delete group",                AID_actionDeleteGroup
+            MENUITEM "Delete item",                 AID_actionDeleteItem
+            MENUITEM "Delete item in all groups",   AID_actionDeleteItemInAllGroups
+
+            MENUITEM "Delete by pattern",           AID_actionDeleteFromPattern
+
+            MENUITEM SEPARATOR
+            MENUITEM "Clear all",                   AID_actionClearAll
+        END
+        POPUP "Searching"
+        BEGIN
+            MENUITEM "Perform Search",              AID_actionPerformSearch
+            MENUITEM "Clear Results",               AID_actionClearResults
+            MENUITEM SEPARATOR
+            MENUITEM "Search and put result in Ini file", 
+                                                    AID_actionCreateSubINI
+            MENUITEM "Search and put result in Ini++ object", 
+                                                    AID_actionCreateSubINIObject
+
+            MENUITEM SEPARATOR
+            POPUP "Advanced Searching"
+            BEGIN
+                MENUITEM "Find 'Subgroups'",            ID__SEARCHING_FINDSUBGROUPS
+
+                MENUITEM "Find 'Repeats' of Item",      AID_actionPerformMultiplesSearch
+
+            END
+        END
+        POPUP "Merging"
+        BEGIN
+            MENUITEM "Merge (with file)",           AID_actionMergeFile
+            MENUITEM "Merge Group (with file)",     AID_actionMergeGroupFile
+            MENUITEM SEPARATOR
+            MENUITEM "Merge (with other Ini++ object)", AID_actionMerge
+            MENUITEM "Merge Group (with other Ini++ object)", 
+                                                    AID_actionMergeGroupObject
+
+        END
+        POPUP "Loading and Saving"
+        BEGIN
+            MENUITEM "New/Load/Change file",        ID__FILELOADCHANGE
+            MENUITEM "Save file",                   AID_actionSave
+            MENUITEM "Close",                       AID_actionClose
+            MENUITEM SEPARATOR
+            MENUITEM "Load From String",            AID_actionLoadFromString
+            MENUITEM SEPARATOR
+            MENUITEM "Change global data slot",     ID__LOADINGANDSAVING_SWITCHTOGLOBALDATASLOT
+
+            MENUITEM SEPARATOR
+            POPUP "Settings"
+            BEGIN
+                MENUITEM "Set read only",               AID_actionSetReadOnly
+
+                MENUITEM "Set encryption",              AID_actionSetEncryption
+
+                MENUITEM "Set compression",             AID_actionSetCompresson
+
+                MENUITEM "Set auto load/save",          AID_actionSetAutoSave
+
+            END
+            POPUP "Export"
+            BEGIN
+                MENUITEM "Save as",                     AID_actionSaveAs
+                MENUITEM "Backup to",                   AID_actionBackupTo
+                MENUITEM SEPARATOR
+                MENUITEM "Import/Export CSV",           ID__LOADINGANDSAVING_SAVEASCSV
+
+                MENUITEM "Import/Export CSV Array",     ID__LOADINGANDSAVING_IMPORTCSV
+
+            END
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Reorder a group",             ID__MOVINGANDCOPYING_SHIFTSORTSHUFFLEGROUP
+
+        MENUITEM SEPARATOR
+        POPUP "Advanced Features"
+        BEGIN
+            MENUITEM "Add Repeated Item",           AID_actionAddRepeat
+            MENUITEM "Set part in item",            ID__SETARRAY
+            MENUITEM SEPARATOR
+            POPUP "Undo"
+            BEGIN
+                MENUITEM "Perform Undo",                ID__ADVANCEDFEATURES_UNDO_PERFORMUNDO
+
+                MENUITEM "Perform Redo",                ID__ADVANCEDFEATURES_UNDO_PERFORMREDO
+
+                MENUITEM SEPARATOR
+                MENUITEM "Clear stack(s)",              ID__ADVANCEDFEATURES_UNDO_CLEARSTACKS
+
+                POPUP "Manual mode (Advanced)"
+                BEGIN
+                    MENUITEM "Set mode",                    ID__ADVANCEDFEATURES_UNDO_SETAUTOMATICMODE
+
+                    MENUITEM "Force add new undo block",    ID__ADVANCEDFEATURES_UNDO_FORCEADDNEWUNDOBLOCK
+
+                END
+            END
+            POPUP "Dialog Box"
+            BEGIN
+                MENUITEM "Open Dialog",                 AID_actionOpenDialog
+                MENUITEM "Close dialog",                ID__DIALOG_CLOSEDIALOG
+
+                MENUITEM "Refresh Dialog",              ID__DIALOG_REFRESHDIALOG
+
+            END
+            POPUP "Chart Object"
+            BEGIN
+                MENUITEM "Put data into chart object",  ID__CHARTOBJECT_DISPLAYDATAINCHARTOBJECT
+
+                MENUITEM "Get data from chart object",  ID__ADVANCEDFEATURES_CHARTOBJECT_GETDATAFROMCHARTOBJECT
+
+                MENUITEM SEPARATOR
+                MENUITEM "Put settings into chart object", 
+                                                        ID_LOADCHARTSETTINGS
+                MENUITEM "Get settings from chart object", 
+                                                        ID_SAVECHARTSETTINGS
+            END
+            POPUP "Array"
+            BEGIN
+                MENUITEM "Get data from array",         ID__ADVANCEDFEATURES_LOADFROMARRAY
+
+                MENUITEM "Put data into array (numerical only)", 
+                                                        ID__ADVANCEDFEATURES_SAVETOANARRAY
+
+            END
+            MENUITEM SEPARATOR
+            POPUP "Advanced Settings"
+            BEGIN
+                MENUITEM "Set case sensitivity",        AID_actionSetCaseSensitive
+
+                MENUITEM "Escape character settings",   AID_actionSetEscapeChars
+
+                MENUITEM "Enable/Disable 'always quote strings'", 
+                                                        AID_actionNeverQuoteStrings
+
+                MENUITEM "Set repeat modes",            AID_actionSetRepeatModes
+
+                MENUITEM "Set new line string",         AID_actionSetNewLineChar
+
+                MENUITEM "Set default directory",       AID_actionSetDefaultDirectory
+
+                MENUITEM "Group settings (Subgroups, Empty groups)", 
+                                                        ID__ADVANCEDSETTINGS_SETSUBGROUPSMODE
+
+            END
+            MENUITEM SEPARATOR
+            POPUP "Extra Functions"
+            BEGIN
+                MENUITEM "Compress file",               AID_actionCompressFile
+
+                MENUITEM "Decompress file",             AID_actionDeCompressFile
+
+            END
+        END
+        MENUITEM SEPARATOR
+    END
+END
+#endif
+
+#if defined(APSTUDIO_INVOKED) || defined(EDIT_MODE)
+#if defined(APSTUDIO_INVOKED)
+MN_EXPRESSIONS$(EDIT_MODE) MENU DISCARDABLE 
+#else
+MN_EXPRESSIONS MENU DISCARDABLE 
+#endif
+BEGIN
+    POPUP ""
+    BEGIN
+        MENUITEM SEPARATOR
+        POPUP "Current group"
+        BEGIN
+            MENUITEM "Get Item Value ( item , default value)", 
+                                                    EID_expressionGetItemValueG
+
+            MENUITEM "Get Item String ( item . default string)", 
+                                                    EID_expressionGetItemStringG
+
+            MENUITEM SEPARATOR
+            MENUITEM "Get position X ( item )",     EID_expressionGetXG
+            MENUITEM "Get position Y ( item )",     EID_expressionGetYG
+            MENUITEM SEPARATOR
+            MENUITEM "Get N-th Item name ( n )",    EID_expressionNthItemG
+            MENUITEM "Get N-th Item value ( n )",   EID_expressionNthItemValueG
+
+            MENUITEM "Get N-th Item string ( n )",  EID_expressionNthItemStringG
+
+            MENUITEM SEPARATOR
+            MENUITEM "Get current group name",      ID__CURRENTGROUP_GETCURRENTGROUPNAME
+
+            MENUITEM "Get Item Count",              EID_expressionItemCountG
+            MENUITEM SEPARATOR
+            MENUITEM "Get current group as string", ID__CURRENTGROUP_GETCURRENTGROUPASSTRING
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Get Item Value (group , item , default value)", 
+                                                EID_expressionGetItemValue
+        MENUITEM "Get Item String (group , item , default string)", 
+                                                EID_expressionGetItemString
+        MENUITEM SEPARATOR
+        MENUITEM "Get part in item (group, item, index, default)", 
+                                                ID__GETPARTINITEM
+        MENUITEM SEPARATOR
+        MENUITEM "Get X Position (group , item)", EID_expressionGetX
+        MENUITEM "Get Y Position (group , item)", EID_expressionGetY
+        MENUITEM SEPARATOR
+        MENUITEM "Get current file name",       ID__GETCURRENTFILENAME
+        MENUITEM "Get INI as String",           EID_expressionWriteStream
+        MENUITEM "Get INI as CSV String",       ID__GETINIASCSVSTRING
+        MENUITEM SEPARATOR
+        POPUP "Counting and Calculations"
+        BEGIN
+            MENUITEM "Get Group Count",             EID_expressionGroupCount
+            MENUITEM "Get Item Count (Group)",      EID_expressionItemCount
+            MENUITEM "Get Total Item Count",        EID_expressionTotalItems
+            MENUITEM "Get number of unique item names", 
+                                                    ID__COUNTINGANDCALCULATIONS_GETNUMBEROFUNIQUEITEMNAMES
+
+            MENUITEM "Perform Calculations (Click for info)", 
+                                                    ID__GROUPANDITEMCOUNTS_INNERPRODUCT
+
+            MENUITEM "Find Max or Min Group (Click for info)", 
+                                                    ID__GROUPSANDITEMS_MAXMIN
+
+        END
+        POPUP "List Groups and Items"
+        BEGIN
+            MENUITEM "Get N-th Group name ( n )",   EID_expressionNthGroup
+            MENUITEM "Get N-th Item name ( group , n )", 
+                                                    EID_expressionNthItem
+            MENUITEM "Get N-th Item string ( group , n )", 
+                                                    EID_expressionNthItemString
+
+            MENUITEM "Get N-th Item value ( group , n )", 
+                                                    EID_expressionNthItemValue
+
+            MENUITEM SEPARATOR
+            MENUITEM "Get N-th Sorted Item name ( group , n )", 
+                                                    ID__LISTGROUPSANDITEMS_GETNTHSORTEDITEMNAMEGROUPN
+
+            MENUITEM "Get N-th Sorted Item Value ( group , n )", 
+                                                    ID__LISTGROUPSANDITEMS_GETNTHSORTEDITEMVALUEGROUPN
+
+            MENUITEM SEPARATOR
+            MENUITEM "Get N-th Item used in any group ( n )", 
+                                                    ID__LISTGROUPSANDITEMS_GETNTHITEMUSEDINANYGROUPN
+
+        END
+        POPUP "Search Results"
+        BEGIN
+            MENUITEM "Number of search results",    EID_expressionSearchResultCounts
+
+            MENUITEM "Get N-th Search Result Group ( n )", 
+                                                    EID_expressionGetNthSearchResultGroup
+
+            MENUITEM "Get N-th Search Result Item Name ( n )", 
+                                                    EID_expressionGetNthSearchResultItem
+
+            MENUITEM "Get N-th Search Result Item Value ( n )", 
+                                                    EID_expressionGetNthSearchResultItemValue
+
+            MENUITEM "Get N-th Search Result Item String ( n )", 
+                                                    EID_expressionGetNthSearchResultItemString
+
+            MENUITEM "Get N-th Search Result Path ( n , separator )", 
+                                                    EID_expressionGetNthSearchResultPath
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "Extra Functions"
+        BEGIN
+            MENUITEM "Hash String ( string )",      EID_expressionHashString
+            MENUITEM "Escape String ( string )",    EID_expressionEscapeString
+
+            MENUITEM "Unescape String ( string )",  EID_expressionUnEscapeString
+
+        END
+        MENUITEM SEPARATOR
+    END
+END
+#endif
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""..\\inc\\ccx.h""\r\n"
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    KPX_MARK                "MF2"
+    KPX_NAME                "Ini++ v1.5 Object"
+    M_DESC                  " %s : Ini++ Object"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDST_OBJNAME            "Ini++ Object"
+    IDST_AUTHOR             "Jack Webster"
+    IDST_COPYRIGHT          "Copyright © 2006-2015 Jack Webster"
+    IDST_COMMENT            "An improved version of the Ini object. Allows advanced manipulation of Ini files. v1.5 is an update of the original. April 2015 build."
+    IDST_HTTP               "http://www.clickteam.com"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    CID_conditionHasGroupG  "%o: Current group exists"
+    CID_conditionHasItemG   "%o: Current group has item %0"
+    CP0ID_conditionHasItemG "Item name"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    CID_conditionCompareMD5G 
+                            "%o: %0 in current group is equal to %2 with default value %1 (hashed) "
+    CP0ID_conditionCompareMD5G "Item name"
+    CP1ID_conditionCompareMD5G "Default string (if item does not exist)"
+    CP2ID_conditionCompareMD5G "String to compare to"
+    CID_conditionHasGroup   "%o: Group %0 exists"
+    CP0ID_conditionHasGroup "Group name"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    CID_conditionHasItem    "%o: Group %0 has item %1"
+    CP0ID_conditionHasItem  "Group name"
+    CP1ID_conditionHasItem  "Item name"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    CID_conditionCompareMD5 "%o: %1 in %0 is equal to %3 with default value %2 (hashed) "
+    CP0ID_conditionCompareMD5 "Group name"
+    CP1ID_conditionCompareMD5 "Item name"
+    CP2ID_conditionCompareMD5 "Default value (if item does not exist)"
+    CP3ID_conditionCompareMD5 "String to compare to"
+    CID_conditionWildcatMatch "%o: Wildcat match %1 to pattern %0"
+    CP0ID_conditionWildcatMatch "Pattern (. or * allowed)"
+    CP1ID_conditionWildcatMatch "String"
+    CP2ID_conditionWildcatMatch "Case Sensitive? ( 0 = No , 1 = Yes )"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AID_actionSetCurrentGroup "Set current group to %0"
+    AP0ID_actionSetCurrentGroup "Group name"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AID_actionSetValueG     "Set item %0 to value %2 (Setting = %1)"
+    AP0ID_actionSetValueG   "Item name"
+    AP1ID_actionSetValueG   "Value to set to"
+    AP2ID_actionSetValueG   "Type (0 = Integer [Whole numbers] , 1 = Floating Point [Decimal Points])"
+    AID_actionSetStringG    "Set item %0 to string %1"
+    AP0ID_actionSetStringG  "Item name"
+    AP1ID_actionSetStringG  "String to set to"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AID_actionSetStringMD5G "Set item %0 to %1 (Hashed)"
+    AP0ID_actionSetStringMD5G "Item name"
+    AP1ID_actionSetStringMD5G "String to set to"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AID_actionSaveObjectG   "Save %0 (Save: Position = %1, Alt Values = %2)"
+    AP0ID_actionSaveObjectG "Object to save"
+    AP1ID_actionSaveObjectG "Save position? (0 = No, 1 = Yes)"
+    AP2ID_actionSaveObjectG "Save alt values? (0 = No, 1 = Yes)"
+    AP3ID_actionSaveObjectG "Save flags? (No longer used!)"
+    AID_actionLoadObjectG   "Load %0"
+    AP0ID_actionLoadObjectG "Object to load"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AID_actionSavePositionG "Save position %1 to item %0"
+    AP0ID_actionSavePositionG "Position"
+    AP0ID2_actionSavePositionG "Item name"
+    AID_actionSaveGlobalValuesG "Save global values"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AID_actionLoadGlobalValuesG "Load global values"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AID_actionDeleteGroupG  "Delete current group"
+    AID_actionDeleteItemG   "Delete %0 in current group"
+    AP0ID_actionDeleteItemG "Item name"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AID_actionRenameGroupG  "Rename current group to %0 (Setting = %1)"
+    AP0ID_actionRenameGroupG "New name"
+    AP1ID_actionRenameGroupG 
+                            "Overwrite Mode ( 0 = Overwrite , 1 = Merge , 2 = Never overwrite )"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AID_actionRenameItemG   "Rename item %0 to %1 (Setting = %2)"
+    AP0ID_actionRenameItemG "Old name"
+    AP1ID_actionRenameItemG "New name"
+    AP2ID_actionRenameItemG "Allow overwriting? ( 0 = No , 1 = Yes )"
+    AID_actionMoveItemToGroupG "Move %0 to group %1"
+    AP0ID_actionMoveItemToGroupG "Item name"
+    AP1ID_actionMoveItemToGroupG "New group name"
+    AP2ID_actionMoveItemToGroupG "Allow overwrites? (0 = No, 1 = Yes)"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AID_actionSetValue      "Set item %1 in group %0 to value %3 (Setting = %2)"
+    AP0ID_actionSetValue    "Group name"
+    AP1ID_actionSetValue    "Item name"
+    AP2ID_actionSetValue    "Value"
+    AID_actionSetString     "Set item %1 in group %0 to %2"
+    AP0ID_actionSetString   "Group"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AP1ID_actionSetString   "Item"
+    AP2ID_actionSetString   "String to set to"
+    AID_actionSetStringMD5  "Set item %1 in group %0 to %2 (Hashed)"
+    AP0ID_actionSetStringMD5 "Group"
+    AP1ID_actionSetStringMD5 "Item"
+    AP2ID_actionSetStringMD5 "Value"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AID_actionSaveObject    "Save object %0 into group %1 (Pos = %2, Alt Values = %3)"
+    AP0ID_actionSaveObject  "Group"
+    AP1ID_actionSaveObject  "Object"
+    AID_actionLoadObject    "Load object %0 from group %1"
+    AP0ID_actionLoadObject  "Group"
+    AP1ID_actionLoadObject  "Object"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AID_actionSavePosition  "Save position %2 into group %0, item %1"
+    AP0ID_actionSavePosition "Group name"
+    AP1ID_actionSavePosition "Position"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AID_actionSaveAltValues "Save global values to group %0"
+    AP0ID_actionSaveAltValues "Group"
+    AID_actionLoadAltValues "Load global values from group %0"
+    AP0ID_actionLoadAltValues "Group"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AID_actionRenameGroup   "Rename group with name %0 to %1"
+    AP0ID_actionRenameGroup "Old Group Name"
+    AP1ID_actionRenameGroup "New Group Name"
+    AP2ID_actionRenameGroup "Overwrite Mode ( 0 = Overwrite , 1 = Merge , 2 = Never overwrite )"
+    AID_actionRenameItem    "Move %0 -> %1 to %0 -> %1 (Overwrite = %3)"
+    AP0ID_actionRenameItem  "Group Name"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AP1ID_actionRenameItem  "Old item name"
+    AP2ID_actionRenameItem  "New item name"
+    AP3ID_actionRenameItem  "<<not used>>"
+    AP4ID_actionRenameItem  "Allow overwrite? (0 = No, 1 = Yes)"
+    AID_actionMoveItem      "Move %0 -> %1 to %2 -> %3 (Overwriting=%4)"
+    AP0ID_actionMoveItem    "Old Group Name"
+    AP1ID_actionMoveItem    "Old item name"
+    AP2ID_actionMoveItem    "New group name"
+    AP3ID_actionMoveItem    "New item name"
+    AP4ID_actionMoveItem    "Allow overwrite? (0 = No, 1 = Yes)"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AID_actionMoveItemToGroup "Move %1 from group %0 to %2"
+    AP0ID_actionMoveItemToGroup "Old Group Name"
+    AP1ID_actionMoveItemToGroup "Item name"
+    AP2ID_actionMoveItemToGroup "New group name"
+    AP3ID_actionMoveItemToGroup "Allow overwrite? (0 = No, 1 = Yes)"
+    AID_actionCopyGroup     "Copy group from %0 to %1 (Mode = %2)"
+    AP0ID_actionCopyGroup   "Source group name"
+    AP1ID_actionCopyGroup   "Destination group name"
+    AP2ID_actionCopyGroup   "Overwrite Mode ( 0 = Replace old group , 1 = Merge with old group )"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AID_actionCopyItem      "Copy item %0 -> %1 to %2 -> %3"
+    AP0ID_actionCopyItem    "Source group"
+    AP1ID_actionCopyItem    "Source item"
+    AP2ID_actionCopyItem    "Destination group"
+    AP3ID_actionCopyItem    "Destination item"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AID_actionDeleteGroup   "Delete group %0"
+    AP0ID_actionDeleteGroup "Group to delete"
+    AID_actionDeleteItem    "Delete item %1 in group %0"
+    AP0ID_actionDeleteItem  "Group"
+    AP1ID_actionDeleteItem  "Item"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AID_actionDeleteItemInAllGroups "Delete item %0 from all groups"
+    AP0ID_actionDeleteItemInAllGroups "Item name"
+    AID_actionDeleteFromPattern 
+                            "Delete all items with pattern ( %0 ,%1 , %2 )"
+    AP0ID_actionDeleteFromPattern "Pattern for groups"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AP1ID_actionDeleteFromPattern "Pattern for items"
+    AP2ID_actionDeleteFromPattern "Pattern for values"
+    AP3ID_actionDeleteFromPattern "Case Sensitive ( 0 = No , 1 = Yes )"
+    AID_actionClearAll      "Clear all"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AID_actionPerformSearch "Find items matching ( %0, %1 , %2 ). %3"
+    AP0ID_actionPerformSearch 
+                            "Group condition (Use '.', '*' or start with a '!' for 'not')"
+    AP1ID_actionPerformSearch 
+                            "Item condition (Use '.', '*' or start with a '!' for 'not')"
+    AP2ID_actionPerformSearch 
+                            "Value condition (Use '.', '*' or start with a '!' for 'not')"
+    AP3ID_actionPerformSearch "Case sensitive? (0 = No, 1 = Yes)"
+    AID_actionPerformMultiplesSearch "Find repeats of %0->%1"
+    AP0ID_actionPerformMultiplesSearch "Group"
+    AP1ID_actionPerformMultiplesSearch "Item"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AID_actionClearResults  "Clear Results"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AID_actionCreateSubINI  "Search for (%1,%2,%3) and put result into file %0"
+    AP0ID_actionCreateSubINI 
+                            "#Title#Destination Path#Filter#Ini Files|*.ini|All files|*.*|"
+    AP1ID_actionCreateSubINI "Group condition"
+    AP2ID_actionCreateSubINI "Item condition"
+    AP3ID_actionCreateSubINI "Value condition"
+    AID_actionCreateSubINIObject 
+                            "Search for (%1,%2,%3) and put result into object %0"
+    AP0ID_actionCreateSubINIObject 
+                            "THERE IS NO WAY TO GET THIS DATA YET (TODO)"
+    AP1ID_actionCreateSubINIObject "Group condition"
+    AP2ID_actionCreateSubINIObject "Item condition"
+    AP3ID_actionCreateSubINIObject "Value condition"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AID_actionMergeFile     "Merge from file %0"
+    AP0ID_actionMergeFile   "#Title#File to merge from#Filter#Ini Files|*.ini|All files|*.*|"
+    AP1ID_actionMergeFile   "Allow overwrites ( 0 = No , 1 = Yes )"
+    AID_actionMergeGroupFile "Merge group %1 from file %0"
+    AP0ID_actionMergeGroupFile 
+                            "#Title#File to merge from#Filter#Ini Files|*.ini|All files|*.*|"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AP1ID_actionMergeGroupFile "Source Group name"
+    AP2ID_actionMergeGroupFile "Destination Group name"
+    AP3ID_actionMergeGroupFile "Allow overwrites ( 0 = No , 1 = Yes )"
+    AID_actionMerge         "Merge from object %0"
+    AP0ID_actionMerge       "Address of INI++ Object (Use ""Get Memory Address"" expression in other object)"
+    AP1ID_actionMerge       "Allow overwrites ( 0 = No , 1 = Yes )"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AID_actionMergeGroupObject "Merge group %1 from object %0"
+    AP0ID_actionMergeGroupObject "CANNOT SEE YET"
+    AP1ID_actionMergeGroupObject "Source Group name"
+    AP2ID_actionMergeGroupObject "Destination Group name"
+    AP3ID_actionMergeGroupObject "Allow overwrites ( 0 = No , 1 = Yes )"
+    AID_actionNew           "New Ini with file name %0 (Clear all data = %1)"
+    AP0ID_actionNew         "#Title#File name (if blank it will be kept in memory)#Filter#Ini Files|*.ini|All files|*.*|"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AID_actionLoad          "Load Ini %0 (Read only = %1)"
+    AP0ID_actionLoad        "#Title#File to load#Filter#Ini Files|*.ini|All files|*.*|"
+    AP1ID_actionLoad        "Read only? ( 0 = No , 1 = Yes )"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AID_actionSave          "Save Ini"
+    AID_actionSaveAs        "Save Ini As %0"
+    AP0ID_actionSaveAs      "Path"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AID_actionBackupTo      "Backup Ini To %0 (Compressed = %1, Key = %2)"
+    AP0ID_actionBackupTo    "#Title#File to backup to#Filter#Ini Files|*.ini|All files|*.*|"
+    AP1ID_actionBackupTo    "Compressed? ( 0 = No , 1 = Yes )"
+    AP2ID_actionBackupTo    "Encrypted? (Type key or use blank string for none)"
+    AID_actionClose         "Close Ini"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AID_actionLoadFromString "Load %0 into Ini"
+    AP0ID_actionLoadFromString "Text (in Ini format) to load"
+    IDS_LoadFromString_Clear "Mode ( 0 = Replace , 1 = Merge )"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AID_actionSetAutoSave   "Set autosave to %0"
+    AP0ID_actionSetAutoSave "Auto Save (0 = Off , 1 = On)"
+    AID_actionSetCompresson "Set compression to %0"
+    AP0ID_actionSetCompresson "0 = Off , 1 = On"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AID_actionSetEncryption "Set Encryption to %0"
+    AP0ID_actionSetEncryption 
+                            "Type the key, or an empty string to not use encryption"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AID_actionSetReadOnly   "Set Read Only to %0"
+    AP0ID_actionSetReadOnly "0 = No , 1 = Yes"
+    AID_actionSetCaseSensitive "Set Case Sensitive to %0"
+    AP0ID_actionSetCaseSensitive "0 = Not case sensitive , 1 = Case sensitive"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AID_actionSetEscapeChars "Use escape characters ( %0 , %1 , %2 )"
+    AP0ID_actionSetEscapeChars "Use in groups ( 0 = No , 1 = Yes )"
+    AP1ID_actionSetEscapeChars "Use in item names ( 0 = No , 1 = Yes )"
+    AP2ID_actionSetEscapeChars "Use in item values ( 0 = No , 1 = Yes )"
+    AID_actionNeverQuoteStrings "Quote strings = %0"
+    AP0ID_actionNeverQuoteStrings "0 = No , 1 = Yes"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AID_actionSetRepeatModes "Set repeat modes to ( %0 , %1 , %2 )"
+    AP0ID_actionSetRepeatModes 
+                            "For groups ( 0 = First , 1 = Last , 2 = Rename , 3 = Merge )"
+    AP1ID_actionSetRepeatModes 
+                            "For items ( 0 = First , 1 = Last , 2 = Rename  )"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AID_actionSetNewLineChar "Set new line string to %0"
+    AP0ID_actionSetNewLineChar 
+                            "Type the new line string or type an empty string to use the Standard mode"
+    AID_actionSetDefaultDirectory "Set default directory to %0"
+    AP0ID_actionSetDefaultDirectory "Default directory"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AID_actionCompressFile  "Compress %0 to %1"
+    AP0ID_actionCompressFile "#Title#Source#Filter#All files|*.*|"
+    AP1ID_actionCompressFile "#Title#Destination#Filter#All files|*.*|"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AID_actionDeCompressFile "Decompress %0 to %1"
+    AP0ID_actionDeCompressFile "#Title#Source#Filter#All files|*.*|"
+    AP1ID_actionDeCompressFile "#Title#Destination#Filter#All files|*.*|"
+    AID_actionOpenDialog    "Open dialog with title %0 (Settings: %1)"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    EID_expressionGetItemValueG "GetItemValueG("
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    EID_expressionGetItemStringG "GetItemStringG$("
+    EID_expressionGetXG     "PosXG("
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    EID_expressionGetYG     "PosYG("
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    EID_expressionNthItemG  "NthItemG$("
+    EID_expressionNthItemValueG "NthItemValueG("
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    EID_expressionNthItemStringG "NthItemStringG$("
+    EID_expressionItemCountG "ItemCountG("
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    EID_expressionGetItemValue "GetItemValue("
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    EID_expressionGetItemString "GetItemString$("
+    EID_expressionGetX      "PosX("
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    EID_expressionGetY      "PosY("
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    EID_expressionNthGroup  "NthGroup$("
+    EID_expressionNthItem   "NthItemName$("
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    EID_expressionNthItemString "NthItemString$("
+    EID_expressionNthItemValue "NthItemValue("
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    EID_expressionGroupCount "GroupCount("
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    EID_expressionItemCount "ItemCount("
+    EID_expressionTotalItems "TotalItems("
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    EID_expressionSearchResultCounts "SearchResultsCount("
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    EID_expressionGetNthSearchResultGroup "SearchGroup$("
+    EID_expressionGetNthSearchResultItem "SearchItemName$("
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    EID_expressionGetNthSearchResultItemValue "SearchItemValue("
+    EID_expressionGetNthSearchResultItemString "SearchItemString$("
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    EID_expressionGetNthSearchResultPath "SearchItemPath$("
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    EID_expressionWriteStream "WriteStream$("
+    EID_expressionHashString "Hash$("
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    EID_expressionEncryptString "Crypt$("
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    EID_expressionEscapeString "Escape$("
+    EID_expressionUnEscapeString "Unescape$("
+    IDS_STRING27291         "Temp string"
+    IDS_STRING27292         "Default File"
+    IDS_STRING27293         "The file to be initially loaded. Relative paths may be used. If the field is left blank or the check-box unchecked no file will be loaded."
+    IDS_STRING27294         "Base Folder"
+    IDS_STRING27295         "The folder that all relative paths are relative to."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_STRING27296         "Initial Data"
+    IDS_STRING27297         "Data loaded into the object after the default file is loaded. Object settings are used except encryption and compression."
+    IDS_STRING27298         "File and Path Settings"
+    IDS_STRING27299         "Create folders for files if they do not exist?"
+    IDS_STRING27300         "Allow the Save functions to create folders if they do not exist. If not selected, folders (but not files) must exist."
+    IDS_STRING27301         "Format Settings"
+    IDS_STRING27302         "Use Standard Settings?"
+    IDS_STRING27303         "Use standard Ini file settings with no encryption or compression. Disables 'special' features."
+    IDS_STRING27304         "Advanced Settings"
+    IDS_STRING27305         "Use Compression?"
+    IDS_STRING27306         "If selected, the Ini file will be decompressed when loaded and compressed when saved."
+    IDS_STRING27307         "Encryption"
+    IDS_STRING27308         "If the box is checked then the Ini file will be decrypted when loaded and encrypted when saved, with the key specified."
+    IDS_STRING27309         "Enable 'Auto Save'"
+    IDS_STRING27310         "When the object is written to when a file is open, automatically resave the file?"
+    IDS_STRING27311         "Custom settings can only be used if ""Standard Ini"" mode is disabled."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_STRING27312         "New line"
+    IDS_STRING27313         "The string which represents new lines. If the box is unchecked then the standard Windows new line is used."
+    IDS_STRING27314         "Always quote strings?"
+    IDS_STRING27315         "If this is selected then string values are always quoted. Otherwise, they will be only if they have leading or trailing white space."
+    IDS_STRING27316         "Repeated Groups"
+    IDS_STRING27317         "See documentation."
+    IDS_STRING27318         "Repeated Items"
+    IDS_STRING27319         "Escape characters in group names?"
+    IDS_STRING27320         "Escape characters in item names?"
+    IDS_STRING27321         "Escape characters in item values?"
+    IDS_STRING27322         "Case sensitive?"
+    IDS_STRING27323         "If selected, group and item names are case sensitive."
+    IDS_STRING27324         "Read Only?"
+    IDS_STRING27325         "If selected, the file specified above will be opened in Read Only mode. This does not apply if another file is opened or created."
+    IDS_STRING27326         "Pause MMF? (0 = Run in own thread, 1 = Pause MMF)"
+    IDS_STRING27327         "Settings (E.g. 3 to disallow deleting. See docs for more info. Use 0 if unsure.)"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_STRING27328         "Title for dialog box"
+    IDS_STRING27329         "Display mode for tree items (0 to 6. See docs. Use 0 if unsure.)"
+    IDS_STRING27330         "Group Name"
+    IDS_STRING27331         "Item Name"
+    IDS_STRING27332         "String to set to (Use Str$(...) if you wish to set to a value)"
+    IDS_STRING27333         "Mode ( 0 = New item ; 1 = New group )"
+    IDS_STRING27334         "Add repeated (%0,%1,%2) with mode %3"
+    IDS_STRING27335         "Ensure new group? ( 0 = No, 1 = Yes. If unsure, choose 0 )"
+    IDS_STRING27336         "Global Data?"
+    IDS_STRING27337         "If this is checked, then the data is shared with all Ini++ objects with this property, even across frames. Important: Only one object may have this property per frame."
+    IDS_STRING27338         "%o: On Dialog Box Opened"
+    IDS_STRING27339         "%o: On Dialog Box Closed"
+    IDS_STRING27340         "%o: On Dialog Box Modified"
+    IDS_STRING27341         "%o: On Data Modified"
+    IDS_STRING27342         "%o: On Save"
+    IDS_STRING27343         "Save repeated items as original?"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_STRING27344         "If selected, repeated items will be saved without all the text before the last dot. This may result in multiple items having the same name."
+    IDS_STRING27345         "Save repeated items as original? (0 = No, 1 = Yes)"
+    IDS_STRING27346         "Group Name"
+    IDS_STRING27347         "Item Name"
+    IDS_STRING27348         "Default Value"
+    IDS_STRING27349         "String to compare with"
+    IDS_STRING27350         "%o: Group %0 Item %1 %3 (Default value: %2)"
+    IDS_STRING27351         "%o: On New Item"
+    IDS_STRING27352         "Close dialog"
+    IDS_STRING27353         "Refresh dialog (Mode = %0)"
+    IDS_STRING27354         "%o: On Search Results Found"
+    IDS_STRING27355         "%o: On No Search Results Found"
+    IDS_STRING27356         "%o: On Merge"
+    IDS_STRING27357         "Mode (0 for full refresh, 1 for 'quick' item name refresh)"
+    IDS_STRING27358         "Calc("
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_STRING27360         "CalcStr$("
+    IDS_STRING27362         "NthSortedName$("
+    IDS_STRING27363         "NthSortedItem("
+    IDS_STRING27364         "1-based index"
+    IDS_STRING27365         "If selected, any specified index will start at 1. Otherwise it will start at 0."
+    IDS_STRING27366         "GetCSV$("
+    IDS_STRING27367         "#Title#Path to save to#Filter#CSV Files|*.csv|All files|*.*|"
+    IDS_STRING27368         "Group to save. Leave blank to save/load all."
+    IDS_STRING27369         "Seperator symbol"
+    IDS_STRING27370         "CSV Import/Export (%0) to file %1, seperator %2"
+    IDS_STRING27371         "CSV Array Import/Export (%1) to file %1, seperator %2"
+    IDS_STRING27372         "#Title#Path to load from#Filter#CSV Files|*.csv|All files|*.*|"
+    IDS_STRING27373         "0 = Import, 1 = Export"
+    IDS_STRING27374         "Seperator symbol"
+    IDS_STRING27375         "Put data into chart object %0 from group %1"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_STRING27376         "Group Name"
+    IDS_STRING27377         "null"
+    IDS_STRING27378         "null"
+    IDS_STRING27379         "Enable 'Auto Load'"
+    IDS_STRING27380         "Before any condition, expression or action, reload the file. Avoid this opition if possible."
+    IDS_STRING27381         "Find subgroups of '%0' (Levels = %1)"
+    IDS_STRING27382         "Group to find subgroups of"
+    IDS_STRING27383         "Number of levels (0 for unlimited. n for at most n levels, -n means exactly n levels)"
+    IDS_STRING27384         "Load and Save Subgroups"
+    IDS_STRING27385         "When selected, indented groups will be considered 'subgroups', and they will be renamed to the 'path' of the group."
+    IDS_STRING27386         "Auto Load ( 0 = Off , 1 = On )"
+    IDS_STRING27387         "Allow empty groups"
+    IDS_STRING27388         "With this selected, empty groups will still be said to exist."
+    IDS_STRING27389         "Clear current data? (0 = No, 1 = Yes)"
+    IDS_STRING27390         "Subgroups enabled = %0, Empty Groups allowed = %1."
+    IDS_STRING27391         "Enable subgroup loading and saving? (0 = No, 1 = Yes)"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_STRING27392         "Allow empty groups? (0 = No, 1 = Yes)"
+    IDS_STRING27393         "Import = 0, Export = 1"
+    IDS_STRING27394         "Global data key"
+    IDS_STRING27395         "A key can be selected. All global Ini++ objects with the same key share the same data."
+    IDS_STRING27396         "Name of data slot"
+    IDS_STRING27397         "Changed global data slot to %0"
+    IDS_STRING27398         "%0 group %1"
+    IDS_STRING27399         "Group to apply to"
+    IDS_STRING27400         "NthOverallItem$("
+    IDS_STRING27401         "UniqueItemCount("
+    IDS_STRING27402         "Compression & Encyption"
+    IDS_STRING27403         "GetItemPart$("
+    IDS_STRING27404         "Part to set"
+    IDS_STRING27405         "Set part %2 of the item %1 from group %0 to %3"
+    IDS_STRING27406         "Load data from array '%0' into group '%1'"
+    IDS_STRING27407         "Put data into array '%0' from group '%1' "
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_STRING27408         "%o: File was uncompressed"
+    IDS_STRING27409         "%o: File failed to be uncompressed"
+    IDS_STRING27410         "Get data from chart object %0 into group %1"
+    IDS_STRING27411         "Put properties to chart object %0 from group %1"
+    IDS_STRING27412         "Get properties from chart object %0 into %1"
+    IDS_STRING27413         "%0 : %1"
+    IDS_STRING27414         "CurrentGroupName$("
+    IDS_STRING27415         "CurrentGroupString$("
+    IDS_STRING27416         "Filename$("
+    IDS_STRING27417         "Perform undo"
+    IDS_STRING27418         "Perform redo"
+    IDS_STRING27419         "Undo:"
+    IDS_STRING27420         "Redo:"
+    IDS_STRING27421         "Undo/Redo Buffer Size"
+    IDS_STRING27422         "Number of actions that can be undone. -1 for infinite."
+    IDS_STRING27423         "Number of 'undo's that can be redone. -1 for infinite."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_STRING27424         "Clear undo/redo stack. Mode = %0"
+    IDS_STRING27425         "Which? (1 = Undo Stack, 2 = Redo Stack, 3 = Both)"
+    IDS_STRING27426         "Is undo available?"
+    IDS_STRING27427         "Is redo available?"
+    IDS_STRING27428         "Add a new undo stack block"
+    IDS_STRING27429         "Set automatic mode to %0"
+    IDS_STRING27430         "1 = Automatic, 2 = Manual"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.K.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENG)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_UK
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+EXO_ICON                BITMAP  DISCARDABLE     "EXTIMG2.BMP"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+#if defined(APSTUDIO_INVOKED) || defined(EDIT_MODE)
+#if defined(APSTUDIO_INVOKED)
+IDD_DEBUG$(EDIT_MODE) DIALOG DISCARDABLE  0, 0, 365, 144
+#else
+IDD_DEBUG DIALOG DISCARDABLE  0, 0, 365, 144
+#endif
+STYLE DS_SYSMODAL | DS_SETFOREGROUND | DS_CENTER | WS_MINIMIZEBOX | 
+    WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "Ini++ Data Editor"
+FONT 10, "Verdana"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,311,127,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,258,127,50,14
+    EDITTEXT        IDC_DATA,0,0,365,124,ES_MULTILINE | ES_AUTOVSCROLL | 
+                    ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
+END
+#endif
+
+#if defined(APSTUDIO_INVOKED) || defined(EDIT_MODE)
+#if defined(APSTUDIO_INVOKED)
+IDD_OBJECTSELECT$(EDIT_MODE) DIALOG DISCARDABLE  0, 0, 405, 51
+#else
+IDD_OBJECTSELECT DIALOG DISCARDABLE  0, 0, 405, 51
+#endif
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "Select Object"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,348,30,50,14
+    LTEXT           "Please type the name of the object you wish to use. This is case sensitive.",
+                    IDC_INFO,7,7,336,23
+    EDITTEXT        IDC_EDIT,7,32,334,12,ES_AUTOHSCROLL
+    LISTBOX         IDC_LIST,241,7,102,23,LBS_SORT | LBS_NOINTEGRALHEIGHT | 
+                    NOT WS_VISIBLE | WS_VSCROLL | WS_TABSTOP
+END
+#endif
+
+#if defined(APSTUDIO_INVOKED) || defined(INCLUDE_DIALOG)
+#if defined(APSTUDIO_INVOKED)
+IDD_DEBUG2$(INCLUDE_DIALOG) DIALOG DISCARDABLE  0, 0, 310, 163
+#else
+IDD_DEBUG2 DIALOG DISCARDABLE  0, 0, 310, 163
+#endif
+STYLE DS_SYSMODAL | DS_SETFOREGROUND | DS_CENTER | WS_MINIMIZEBOX | 
+    WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "Ini++ Debugger (Tree View)"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "Tree1",IDC_TREE,"SysTreeView32",TVS_HASBUTTONS | 
+                    TVS_HASLINES | TVS_LINESATROOT | TVS_DISABLEDRAGDROP | 
+                    TVS_NOTOOLTIPS | WS_BORDER | WS_TABSTOP,0,0,309,162
+END
+#endif
+
+#if defined(APSTUDIO_INVOKED) || defined(INCLUDE_DIALOG)
+#if defined(APSTUDIO_INVOKED)
+IDD_EDITITEM$(INCLUDE_DIALOG) DIALOGEX 0, 0, 274, 52
+#else
+IDD_EDITITEM DIALOGEX 0, 0, 274, 52
+#endif
+STYLE DS_SYSMODAL | DS_MODALFRAME | DS_SETFOREGROUND | DS_CENTER | WS_POPUP | 
+    WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Group and Item Editor"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,224,38,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,172,38,50,14
+    EDITTEXT        IDC_NAME,29,3,244,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_VALUE,29,20,244,15,ES_AUTOHSCROLL
+    RTEXT           "Name:",IDC_STATIC,1,5,26,8
+    RTEXT           "Value:",IDC_STATIC,0,22,26,9
+    PUSHBUTTON      "Delete",IDC_DELETE,120,38,50,14
+END
+#endif
+
+#if defined(APSTUDIO_INVOKED) || defined(EDIT_MODE)
+#if defined(APSTUDIO_INVOKED)
+IDD_OPENDIALOG$(EDIT_MODE) DIALOG DISCARDABLE  0, 0, 280, 84
+#else
+IDD_OPENDIALOG DIALOG DISCARDABLE  0, 0, 280, 84
+#endif
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog Box Settings"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,223,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,223,24,50,14
+    CONTROL         "Disallow deleting groups",IDC_CHECK1,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,7,7,92,10
+    CONTROL         "Disallow deleting items",IDC_CHECK2,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,7,19,87,10
+    CONTROL         "Disallow renaming groups",IDC_CHECK3,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,7,31,96,10
+    CONTROL         "Disallow renaming items",IDC_CHECK4,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,7,42,96,10
+    CONTROL         "Values are read-only",IDC_CHECK5,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,7,53,96,10
+    CONTROL         "No 'Refresh' menu option",IDC_CHECK6,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,112,7,96,10
+    CONTROL         "Disallow adding groups",IDC_CHECK7,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,112,17,96,10
+    CONTROL         "Disallow adding items",IDC_CHECK8,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,112,28,96,10
+    CONTROL         "Do not refresh item values",IDC_CHECK9,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,112,39,153,10
+    COMBOBOX        IDC_COMBO,66,65,143,36,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    CONTROL         "Pause program whilst open",IDC_CHECK10,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,112,50,108,10
+    LTEXT           "Item formatting:",IDC_STATIC,7,66,55,11
+END
+#endif
+
+#if defined(APSTUDIO_INVOKED) || defined(EDIT_MODE)
+#if defined(APSTUDIO_INVOKED)
+IDD_SLOTVIEW$(EDIT_MODE) DIALOG DISCARDABLE  0, 0, 238, 121
+#else
+IDD_SLOTVIEW DIALOG DISCARDABLE  0, 0, 238, 121
+#endif
+STYLE DS_SYSMODAL | DS_MODALFRAME | DS_SETFOREGROUND | DS_CENTER | WS_POPUP | 
+    WS_CAPTION | WS_SYSMENU
+CAPTION "Global Data Slots viewer"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LISTBOX         IDC_LIST1,7,7,224,107,LBS_SORT | LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+END
+#endif
+
+#if defined(APSTUDIO_INVOKED) || defined(EDIT_MODE)
+#if defined(APSTUDIO_INVOKED)
+IDD_SSS$(EDIT_MODE) DIALOGEX 0, 0, 262, 164
+#else
+IDD_SSS DIALOGEX 0, 0, 262, 164
+#endif
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Reorder Group"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "Sort by value",IDC_RADIO,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,14,20,57,10
+    CONTROL         "Sort by name",IDC_RADIO10,"Button",BS_AUTORADIOBUTTON,
+                    14,30,57,10
+    CONTROL         "Sort by first part",IDC_RADIO11,"Button",
+                    BS_AUTORADIOBUTTON,14,40,65,10
+    CONTROL         "Shuffle",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,14,50,
+                    38,10
+    CONTROL         "Remove first",IDC_RADIO3,"Button",BS_AUTORADIOBUTTON,14,
+                    60,55,10
+    CONTROL         "Remove last",IDC_RADIO5,"Button",BS_AUTORADIOBUTTON,14,
+                    70,55,10
+    CONTROL         "Cycle Up",IDC_RADIO4,"Button",BS_AUTORADIOBUTTON,14,80,
+                    45,10
+    CONTROL         "Cycle Down",IDC_RADIO6,"Button",BS_AUTORADIOBUTTON,14,
+                    90,54,10
+    CONTROL         "Reverse",IDC_RADIO7,"Button",BS_AUTORADIOBUTTON,14,100,
+                    43,10
+    CONTROL         "Swap items and values",IDC_RADIO8,"Button",
+                    BS_AUTORADIOBUTTON,14,110,89,10
+    CONTROL         "Renumber items",IDC_RADIO9,"Button",BS_AUTORADIOBUTTON,
+                    14,120,67,10
+    EDITTEXT        IDC_DESCRIPTIONTEXT,117,16,137,67,ES_MULTILINE | 
+                    ES_READONLY,WS_EX_DLGMODALFRAME | WS_EX_STATICEDGE
+    CONTROL         "'Alphanum' intelligent sorting",IDC_SORTINGRADIO1,
+                    "Button",BS_AUTORADIOBUTTON | WS_GROUP,124,100,104,10
+    CONTROL         "Standard sorting (case insensitive)",IDC_SORTINGRADIO2,
+                    "Button",BS_AUTORADIOBUTTON,124,112,123,10
+    CONTROL         "Standard sorting (case sensitive)",IDC_SORTINGRADIO3,
+                    "Button",BS_AUTORADIOBUTTON,124,124,118,10
+    DEFPUSHBUTTON   "OK",IDOK,103,143,55,14
+    GROUPBOX        "Description",IDC_STATIC,113,4,146,83
+    GROUPBOX        "Sorting",IDC_STATIC,113,89,146,49,WS_GROUP
+    GROUPBOX        "Operation",IDC_STATIC,5,4,103,134,WS_GROUP
+END
+#endif
+
+#if defined(APSTUDIO_INVOKED) || defined(EDIT_MODE)
+#if defined(APSTUDIO_INVOKED)
+IDD_SEARCH$(EDIT_MODE) DIALOG DISCARDABLE  0, 0, 230, 67
+#else
+IDD_SEARCH DIALOG DISCARDABLE  0, 0, 230, 67
+#endif
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Search Options"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,173,46,50,14
+    GROUPBOX        "Mode",IDC_STATIC,7,6,97,54
+    CONTROL         "Discard previous results",IDC_RADIO,"Button",
+                    BS_AUTORADIOBUTTON,13,18,95,9
+    CONTROL         "Or",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,13,28,47,9
+    CONTROL         "And",IDC_RADIO3,"Button",BS_AUTORADIOBUTTON,13,38,47,9
+    CONTROL         "Xor",IDC_RADIO4,"Button",BS_AUTORADIOBUTTON,13,48,27,10
+    CONTROL         "Add group name only to results",IDC_CHECK2,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,110,29,113,10
+    CONTROL         "Match any of the conditions",IDC_CHECK3,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,110,19,107,10
+    CONTROL         "Case sensitive",IDC_CHECK4,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,110,9,61,10
+END
+#endif
+
+#if defined(APSTUDIO_INVOKED) || defined(EDIT_MODE)
+#if defined(APSTUDIO_INVOKED)
+IDD_LOADMODE$(EDIT_MODE) DIALOG DISCARDABLE  0, 0, 315, 234
+#else
+IDD_LOADMODE DIALOG DISCARDABLE  0, 0, 315, 234
+#endif
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Load or Change File"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,258,213,50,14
+    GROUPBOX        "Load File",IDC_STATIC,7,27,301,56
+    CONTROL         "Load file into Ini++ object",IDC_RADIO1,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,10,40,117,10
+    CONTROL         "Don't load the file into the object",IDC_RADIO3,"Button",
+                    BS_AUTORADIOBUTTON,10,51,117,10
+    GROUPBOX        "Change Current File",IDC_STATIC,7,86,301,63
+    CONTROL         "Set current file to new path",IDC_RADIO5,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,10,99,97,10
+    CONTROL         "Keep old path name",IDC_RADIO6,"Button",
+                    BS_AUTORADIOBUTTON,10,110,97,10
+    CONTROL         "Only change path if exists",IDC_RADIO7,"Button",
+                    BS_AUTORADIOBUTTON,10,121,97,10
+    CONTROL         "Save Ini straight away",IDC_CHECK1,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,133,85,10
+    CONTROL         "Read Only Mode",IDC_CHECK2,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,64,72,10
+    GROUPBOX        "Clearing current data in object",IDC_STATIC,7,153,301,
+                    57
+    CONTROL         "Clear old data",IDC_RADIO8,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,10,163,59,10
+    CONTROL         "Keep old data",IDC_RADIO9,"Button",BS_AUTORADIOBUTTON,
+                    10,174,61,10
+    CONTROL         "Clear data only if file exists",IDC_RADIO10,"Button",
+                    BS_AUTORADIOBUTTON,10,186,117,10
+    LTEXT           "Please select how the want Ini++  to load the file, set the current file and erase the current data in the object.",
+                    IDC_STATIC,7,7,301,17
+    LTEXT           "Usually you will want the file to be loaded in this action, but sometimes you may not. For instances, if you want to change the  path of the object without caring what file is there for a ""New"" command.",
+                    IDC_STATIC,141,35,161,45,WS_BORDER
+    LTEXT           "The 'current file path' is the path that the 'Save' action and the auto-save/load features use.\n\nUsually you will wish to change the path to the path of the file you are loading, but you may not.",
+                    IDC_STATIC,141,94,161,51,WS_BORDER
+    LTEXT           "Before this action is run, there may be data already in the Ini++ object, possibly from previous 'Load' actions or from 'Set Value' actions.\nShould this data be erased or should it be preserved?",
+                    IDC_STATIC,141,160,161,46,WS_BORDER
+END
+#endif
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON1               ICON    DISCARDABLE     "icon1.ico"
+IDI_ICON2               ICON    DISCARDABLE     "icon2.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    "IDD_SSS$(EDIT_MODE)", DIALOG
+    BEGIN
+        BOTTOMMARGIN, 157
+    END
+
+    "IDD_LOADMODE$(EDIT_MODE)", DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 308
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 227
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // English (U.K.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

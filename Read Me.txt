@@ -1,0 +1,538 @@
+Note: Run_Only can be smaller, but won't be in this release. I will make it smaller when the chart function is added.
+
+Ini++ Change Log
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Ini++ RC 1
+
+Change:		Internally the new vector has completely replaced the std::vector class.
+Bug fix:	rdPtrFavorite was not being zeroed.
+Bug fix:	The bug-of-doom
+Change:		Has hashed value will now hash the default value.
+Change:		On Merge is not called if the file did not exist
+Bug fix:	Pause and resume called with dialog box
+Bug fix:	Safer 'Set Position' method used in 'Load Object'
+Change:		Help path is now "Help\Ini++\index.htm"
+
+01:26 06/11/2007 (5f) and 10:22 20/12/2007
+
+=================
+
+Beta 5e
+
+New Feature:	New search dialog box
+New Feature:	'Add groups names' search feature
+New Feautre:	'Match any of the conditions' search feature
+New Feature:	'Not' operator (start the search with a '!')
+New Feature:	'Get N-th Item from any group'
+New Feature:	Get Number of unique items
+
+Also included is the start of an example showing off some uses for Ini++.
+
+10:45 03/11/2007
+
+=================
+
+Beta 5d
+
+Bug fix:	Callbacks in constructer do not crash anymore
+Bug fix:	Empty group option saved across global objects
+Bug fix:	Now settings are respected in the merge (group) from file action
+Change:		Sub groups are deleted if the mode allows it when loading file
+New Feature:	New "Shift, Sort, Shuffle" action (and a new dialog box to go with it!)
+
+07:34 31/10/2007
+
+=================
+
+Beta 5c
+
+Improvement:	New file renamed to Set current file
+Improvement:	Various case changes in the menu
+Improvement:	Folder option renamed 'Create folders for files if they do not exit?'
+Bug fix:	Set global data slot assumed there was already a global object about. Now it doesn't.
+
+01:40 25/10/2007
+
+===============
+
+Beta 5b
+
+New Feature:	Global data slot viewer
+
+09:56 24/10/2007
+
+================
+
+Beta 5a
+
+New Feature: 	'And' mode. 'Xor' mode for searching.
+New Feature:	'New File' now has a 'Clear All Data' parameter.
+New Feature:	'Group Settings' advanced setting action to change repeated groups or empty groups.
+New Feature:	Import/Export CSV Array
+New Feature:	Global data slots
+New Feature:	Change global data slot action
+New Feature:	New 'Allow empty groups' opition.
+
+Change:		PerformMultiplesSearch now works even if the item does not exist.
+Change:		'Save as' resets the Read Only status if sucessful.
+Change:		'Create Sub Ini by Search' action now gives the created Ini file the settings of the current object.
+Change:		Empty groups setting can cause data to change.
+Change:		CSV Import and CSV Export are now the same action.
+Change:		Merge, Import CSV, Import CSV Array no longer create folders if they don't exist, irrespecitve of mode.
+Change:		Compress and Uncompress 'bonus' actions now accept relative paths and will create folders if the Ini settings allow it.
+Change:		Max number of characters in 'inital data' is down from 5000 to 3000.
+Change:		New file code makes for a much smaller file size. Some of STL rewritten for smaller filesize.
+
+Bug fix: 	Auto-save setting was ignored in standard mode.
+Bug fix: 	Now in search mode, 'or' will not allowed repeated items.
+Bug fix: 	Number of search results gives wrong answer.
+Bug fix:	CSV working again.
+Bug fix:	Case supported better in the rename/copy/move actions.
+Bug fix: 	When a groups parent group does not exist, it is now made.
+
+Improvement:	'option' was spelt wrong in the dialog box for the 'Open Dialog' action.
+Improvement:	'New' renamed to 'New File' and 'Save As...' renamed to 'Save As' in action menu
+Improvement:	Title in 'Auto Save' dialog made clearer.
+Improvement:	'Advanced settings' menu better labelled now
+Improvement: 	PerformSearch's tooltips are better.
+Improvement:	Case of items in the 'Deleting' menu was odd.
+
+08:54 24/10/2007
+
+===============
+
+Beta 4a
+
+1) New Feature: Now you are forcably stopped from modifying data on the 'On Data Modified' event. A dialog box explains to you why and gives you the chance to quit.
+
+2) The index is much better respected now. (It was ignored in a few cases, and mixed up in other cases.)
+
+3) New action: "Find Subgroups"
+
+4) Subgroups are now supported by 'Load' and 'Save'. They work as follows. In the Ini++ object themselves they are represented as paths like 'group/subgroup'. Now when 'Load and Save Subgroups' is enabled, the following two things happen:
+
+	a) The 'Load' function will automatically name subgroups correctly if they are indented. For instance:
+
+		[hello]
+		a = b
+			[subgroup]
+			c = d
+		e = f
+
+	Will be loaded as if it were:
+
+		[hello]
+		a = b
+		e = f
+		[hello/subgroup]
+		c = d
+
+	b) Save will save groups in the form [a/b] in that form.
+
+	Both handle groups within groups within groups within groups within... (etc.)
+
+5) Text for 'Set repeat mode' has all three parameters now.
+
+6) Now you can set 'Auto load' at runtime (using the 'Set Auto Load/Save' action)
+
+04:09 27/09/2007
+
+========================
+
+
+Beta 3ii mark 2: Made On Merge work. 01:05 27/09/2007
+
+Beta 3i
+
+1) Much leaner "Run_Only_Small" mode, as all the unused resources have been removed.
+  (From ~360Kb to 255Kb, which is quite low when you think this doesn't use Win32 functions to do the work)
+	[NOTE: THESE IMPROVEMENTS ARE NOT YET VISIBLE AS 'RUN_ONLY_SMALL' IS NOT INCLUDED]
+
+2) French display mode
+
+3) Export to CVS, Write as CVS String and Import CVS functions.
+
+4) Now the case of groups and items are saved. This updates many functions. 
+
+5) SetCaseSensitivity has been completely rewrittien.
+
+6) AutoSave was not requested from CopyGroup sometimes.
+
+7) New 'AutoLoad' opition. Off by default.
+
+8) 'Chart' action put in but of course it doesn't do anything yet.
+
+02:13 26/09/2007
+
+==========================
+
+Beta 3h
+
+1) Now there are alt strings, values and flags.
+2) New "Max and Min" expression.
+3) "On Data Change" is called from the tree again, that was a bug.
+4) New functions for getting items and values in sorted order.
+
+Included is an example to show how easy (4) makes custom high score tables.
+
+01:44 25/09/2007
+
+==========================
+
+Beta 3g
+
+1) Icon changed in message box
+2) New mode added for final combination: IAvg/~~/#. Second param only. Sums the values and then divides by total number of items in the object. Use + as the first parameter and this as the second and you will get overall average.
+3) Two dialog box bugs fixed:
+	a. Enter didn't open dialog box unless cursor was over item
+	b. Delete would delete group '0'.
+
+11:16 24/09/2007
+
+===========================
+
+Beta 3f
+
+1) New expression: "Generalised Inner Product". Really needs renaming!
+
+n	count		(item only)
++	add
+*	multiply
+max	max
+min	min
+~	average
+
+
+2) Now a new file isn't created if the checkbox isn't checked in the opition pane. This was a feature a few versions ago, but it was a rubbish feature.
+
+Also, an included example of how to use it.
+
+06:47 24/09/2007
+
+==============================
+
+Beta 3e
+
+1) Bug fix: "On Modified" event called less.
+2) To make the dialog faster, auto-refresh doesn't resort.
+3) Added a 'mode' opition to the refresh action.
+4) Now the ordering of the internal Ini puts numbers ahead.
+5) Memory leaks fixed:
+	a. SaveToFile
+	b. The edit box from the tree
+	c. There could be one left in the LoadObject routine!
+6) SaveObject and SaveGlobals both pause Autosave now.
+7) Slightly different description to that check box on the dialog box settings parameter screen.
+
+Not yet done: Still doesn't remember the case of key and group names.
+
+12:36 24/09/2007
+
+==============================
+
+Beta 3d
+
+1) Dialog: Too many items being created bug (Nova #1) fixed
+
+2) Dialog: New display mode: ITEM_COLON_VALUE 6
+
+3) Dialog: REFRESH_ON_NEW mode removed (useless and buggy)
+
+4) Dialog: New groups are now created expanded.
+
+5) New "Close Dialog" and "Refresh Dialog" actions.
+
+6) New events: On Merge, On Search Results, On No Search Results.
+
+7) Brand new dialog for the 'Open Dialog' action which makes everything so easy. 
+   (Check out the tooltip too which tells you all the opitions in a list.)
+
+01:04 24/09/2007
+
+================
+
+Beta 3c
+
+1) Ini++ shared data is now shared with the sub app
+
+2) Now more than one Ini++ object can use the share data at
+   a time. The settings are respected for:
+	- All actions, conditions and expressions
+	- The debugger
+	- They technically aren't in the debugging dialog,
+	  the none of the settings make a difference anyway.
+
+3) Lots of bug fixes, all the same bug. I did something very
+   silly. But it would cause the tree to crash when there were
+   very large numbers of items, for instance, so that is fixed
+   now.
+
+4) The SearchResults structure wasn't deleted, opps.
+
+5) The "Select Object" dialog has changed a bit (still
+   not really what I want, but going to have to wait til
+   a patch for that I think). Also, it now disallows you
+   merging or saving into an object if it shares data with
+   it (for that doesn't make sense).
+
+6) New "On New Item" condition
+
+7) Tree changes:
+	-> Right clicking the icon now counts as right clicking an item (so the menu reacts)
+	-> A new auto-refresh mode. Whenever the Ini object is modified, it updates the labels of every item
+	-> A new opition to disable the above: NO_AUTO_REFRESH = 256
+	-> A new opition to do a full refresh upon adding a new item: REFRESH_ON_NEW = 512.
+	-> The code has been sorted out a bit
+
+For interest, here is my "To Do" list which I've decided I won't do now:
+	a. Conditions for "Item has value...". I tried and it didn't work for some reason.
+	b. Full autorefresh which figures out if there are new items or groups smoothly
+	c. The ability for the dialog to be a control on the window
+
+05:33 20/09/2007
+
+=================
+
+Beta 3b
+
+1) New events related to dialog box:
+	On Open
+	On Close
+	On Modified
+
+2) New general events:
+	On Data Modified
+	On Save
+
+3) 'Standard Ini' checkbox has been relabelled, hopefully to
+   be clearer now that the setting aren't collapsed.
+
+4) Adding folders to the tree should be better now
+
+5) When ran from MMF, the default path is that of the MFA file now. If the
+   file is unsaved, it uses the temp directory of the EXE. The property 
+   editor also makes it more clear that it only uses the _inital_ current 
+   folder.
+
+6) Now, if that title check box next to 'Load File' isn't checked then the
+   file name is used but the file is not loaded. (IS THIS OK?)
+
+7) Now, the inital data is loaded into the object before the file is loaded
+   (if there is a file to be loaded). As soon as the file is loaded, it will
+   be saved again (if auto save is on).
+
+8) A new opition to save repeated items (i.e. those in form 'Item_name.*')
+   as the original item ('Item_name'). This applies to groups as well and
+   can result in there being repeated items or groups in the Ini file.
+
+   [ Note: Although these functions do mean that repeated items can be loaded
+   and saved correctly, in memory there still cannot be multiple items with
+   the same name. However, if the repeat mode is set to 'rename' they will
+   be renamed in the form 'Item_name.#', where # is a number, so that the
+   save setting works ]
+
+
+NOTE ON ON_CLOSE:
+  when it is closed from either the debugger or by going to the next frame,
+   there is no close message. But if you open one replacing another, there 
+  *will* be a close message. (although the new 'open' message will be first)
+
+12:05 18/09/2007
+
+
+=================
+
+
+Beta 3a
+
+1) Updated to use new SDK
+
+2) Filters in all parameters which take file names are now specified
+
+3) Global values and strings can now be saved and loaded
+
+4) Bug fix: Ini data was not being freed!
+
+5) New setting: Global data. As you might suppose, every Ini++
+   which has this setting keeps the data global. This is good
+   if you want to keep data internal but across frames.
+   
+   It should be noted that it is only the data itself which is
+   shared. The settings are not. However, for all except one the
+   data is independant of the settings, and that is the case
+   sensitive setting. If it is on one frame but not on the other
+   will result in the whole Ini file be made case insensitive,
+   and so data lose may occur.
+
+   Only one Ini++ object may access the global data on one frame.
+   This is enforced with a popup window in edit mode. The object
+   will just fail to be created in run only mode.
+   (The reason for it is that the settings on the latter one would
+   not be respected, and it'd require to much reprogramming to 
+   change that, whilst nobody will want two objects on the same
+   frame anyway). 
+
+The example has also been updated to use global data instead of a temporary Ini file.
+
+10:53 16/09/2007
+
+==============
+
+
+
+Beta 2c
+
+1) Menu does not fold anymore. Better or worse?
+
+2) New action: Add Repeated Item. Adds a repeated item (or group). This will
+   set a value without every overwriting the old value. The opition specifies
+   whether it does this by adding new groups or new items. The new items will
+   be the old one with .n at the end, where n is the smallest number such that
+   the group didn't previously exist..
+
+3) New parameter to "Set Current Group" asks if you want to ensure it is new.
+   As above, if the original exists then it goes for the old one with .n appended
+   to it, where n is the smallest number such that the group didn't previously
+   exist. (Does this just complicate things?)
+
+4) In the tree, the right click menu now respects the disallow delete group and
+   disallow delete item opitions more faithly. (Previously it just didn't show
+   it if either opition was set)
+
+5) Bug fix: AutoSave was completely broken!
+
+6) Tree refreshes better in a few cases
+
+7) Delete key and enter keys work on tree
+
+The example is updated to include a level editor which uses "Add Repeated Item"
+
+03:29 16/09/2007
+
+===============
+
+Beta 2b
+
+1) The tree update is better (it only deletes everything and remakes it all if you rename a group)
+
+2) Only one dialog can be shown at a time now. The old one will automatically close.
+
+3) The 'display mode' for items in the tree can be set to one of 6 styles. These are:
+
+	Number		Name			Example
+	==============================================================
+	0		INI Display		data = 'value'
+	1		Item Only		data
+	2		Bracket Display		data ('value')
+	3		Value Only		'value'
+	4		English Style 1		Item 'item' has value 'value'
+	5		English Style 2		Item: 'item', Value: 'value'
+
+4) Tree dialog now has right click menus with: Refresh, Delete, Add Group, Add Item.
+
+5) New settings for dialog box: 
+	NO_REFRESH: Disallows the refresh button			 32
+	NO_ADD_GROUP: Disallows the adding of groups			 64
+	NO_ADD_ITEM: Disallows the adding of items			128
+	
+	(Therefore, DEBUG_MODE_TITLE is renumbered to 1024)
+
+	[Note: When the dialog box pauses MMF, NO_REFESH is automatic.]
+
+Also, I've included an example.
+
+01:12 16/09/2007
+
+======
+
+Beta 2a
+
+1) Now the new tree view is always on top
+
+2) The items in the tree menu have a slightly different icon (Looking for 16x16 icons for that)
+
+3) Both debugging dialog boxes may now be resized (after taking more than an hour to notice I'd forgotten a 'break')
+
+4) The tree view now allows editting and deleting of groups and items. It does not allow new items to be added.
+
+5) A new action: 'Open dialog', for lazy editing.
+For the settings,Add any of these numbers together:
+
+No delete button for groups		 1
+No delete button for items		 2
+Groups may not be renamed		 4
+Item names may not be renamed		 8
+Item values may not be changed		16
+
+(Note: Groups can still be removed by removing all items in a group if 2 is set)
+
+Note:
+- Opening more than one at a time causes settings to
+  change to that of the last opened for all of them.
+- If more than one is open, they will not all be
+  kept updated to each others changes
+- If the frame changes, there will be a crash
+- If the data otherwise changes, it will not be updated
+
+6) There is now a brief description of the object. Is it okay?
+
+7) I've tried to make the capitalisation of 'Ini' consistant.
+Is this Joshtek's 4 or is there more?
+
+8) Joshtek's points 6 and 7 have been changed. However, there are
+still lots of cases where action information doesn't state everything.
+Tell me if you notice any specific examples!
+
+12:36 15/09/2007
+
+===============
+
+Beta 1e
+
+1) New tree debugging item
+
+2) Icon now in true colour
+
+10:39 13/09/2007
+=================
+
+Beta 1d
+
+1) Get Total Item Count has been renamed in the expression editor
+
+2) Default base folder is now Program Folder, not Windows folder
+
+3) Icon changed to "famfamfam.com" one
+
+4) The dialog box has been changed a little bit as right now, there is no way to cancel one.
+
+5) A few menu items renamed
+
+06:18 13/09/2007
+=================
+
+Beta 1c
+
+1) GetMemoryAddress expression removed
+
+2) New expression: Get Total Item Count
+
+3) All three actions which took an INI++ object as a parameter now ask for the name in a new custom dialog box. This is not finished.
+
+12:10 13/09/2007
+
+=================
+
+Beta 1b
+
+Changes from last:
+
+1) Now when a float is converted to a string, only the first 6 decimal places are noted.
+
+2) Some changes to titles, etc. Object renamed to "INI++" (including file name changed)
+
+3) Smaller file size
+
+4) Messagebox when not in Run-only mode when the memory address of a SuperINI object is detected to be incorrect.
+
+08:34 11/09/2007
