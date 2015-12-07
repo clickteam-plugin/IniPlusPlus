@@ -262,7 +262,7 @@ void Extension::actionLoad(TCHAR const *file, int flag)
 
 void Extension::actionSave()
 {
-	if(!data->autoSavePath.empty())
+	if(!data->autoSavePath.empty() && !data->ReadOnly)
 	{
 		return actionSaveAs(data->autoSavePath.c_str());
 	}

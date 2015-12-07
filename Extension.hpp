@@ -251,7 +251,7 @@ public:
 
 	void autosave()
 	{
-		if(data->bAutoSave && !data->ReadOnly)
+		if(data->bAutoSave)
 		{
 			actionSave();
 		}
