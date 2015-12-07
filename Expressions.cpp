@@ -101,7 +101,7 @@ int Extension::expressionGetY(TCHAR const *group, TCHAR const *item)
 
 TCHAR const *Extension::expressionNthGroup(int n)
 {
-	if(n > 0 && n < data->ini.size())
+	if(n >= 0 && n < data->ini.size())
 	{
 		auto it = data->ini.begin();
 		std::advance(it, n);
@@ -112,19 +112,46 @@ TCHAR const *Extension::expressionNthGroup(int n)
 
 TCHAR const *Extension::expressionNthItem(TCHAR const *group, int n)
 {
-	//
+	if(hasGroup(group))
+	{
+		auto g = groupByName(group);
+		if(n >= 0 && n < g.size())
+		{
+			auto it = g.begin();
+			std::advance(it, n);
+			return Runtime.CopyString(it->first.c_str());
+		}
+	}
 	return _T("");
 }
 
 TCHAR const *Extension::expressionNthItemString(TCHAR const *group, int n)
 {
-	//
+	if(hasGroup(group))
+	{
+		auto g = groupByName(group);
+		if(n >= 0 && n < g.size())
+		{
+			auto it = g.begin();
+			std::advance(it, n);
+			return Runtime.CopyString(it->second.c_str());
+		}
+	}
 	return _T("");
 }
 
 float Extension::expressionNthItemValue(TCHAR const *group, int n) //TODO
 {
-	//
+	if(hasGroup(group))
+	{
+		auto g = groupByName(group);
+		if(n >= 0 && n < g.size())
+		{
+			auto it = g.begin();
+			std::advance(it, n);
+			return expressionGetItemValue(group, it->first.c_str(), 0.0f);
+		}
+	}
 	return 0.0f;
 }
 
@@ -135,14 +162,21 @@ int Extension::expressionGroupCount()
 
 int Extension::expressionItemCount(TCHAR const *group)
 {
-	//
+	if(hasGroup(group))
+	{
+		return groupByName(group).size();
+	}
 	return 0;
 }
 
 int Extension::expressionTotalItems()
 {
-	//
-	return 0;
+	std::size_t n = 0;
+	for(auto const &group : data->ini)
+	{
+		n += group.second.size();
+	}
+	return n;
 }
 
 int Extension::expressionSearchResultCounts()
