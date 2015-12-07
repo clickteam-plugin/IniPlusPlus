@@ -247,7 +247,7 @@ void Extension::actionNew(TCHAR const *file, int flag)
 void Extension::actionLoad(TCHAR const *file, int flag)
 {
 	data->ReadOnly = (flag? true : false);
-	std::ifstream ifs (file);
+	std::ifstream ifs (file, std::ios::binary);
 	if(ifs)
 	{
 		//load entire file and convert it to unicode
@@ -274,7 +274,7 @@ void Extension::actionSaveAs(TCHAR const *file)
 	std::basic_ostringstream<TCHAR> oss;
 	saveIni(oss);
 	auto str = utf8from16(oss.str());
-	std::ofstream{file} << str;
+	std::ofstream{file, std::ios::binary} << str;
 }
 
 void Extension::actionBackupTo(TCHAR const *file, int flag, TCHAR const *key)
