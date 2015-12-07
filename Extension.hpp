@@ -249,6 +249,14 @@ public:
 		return false;
 	}
 
+	void autosave()
+	{
+		if(data->bAutoSave && !data->ReadOnly)
+		{
+			actionSave();
+		}
+	}
+
 	template<typename D, typename... Args>
 	void doDoer(Args &&... args)
 	{
@@ -262,6 +270,7 @@ public:
 		{
 			undos.pop_front();
 		}
+		autosave();
 	}
 	void undo()
 	{
@@ -278,6 +287,7 @@ public:
 		{
 			redos.pop_front();
 		}
+		autosave();
 	}
 	void redo()
 	{
@@ -294,6 +304,7 @@ public:
 		{
 			undos.pop_front();
 		}
+		autosave();
 	}
 
 	stdtstring error_msg;
