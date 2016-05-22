@@ -53,30 +53,30 @@ struct EditData
 	 * default values are needed.
 	 */
 	EditData()
-	: b_defaultFile(true)
-	, b_ReadOnly()
-	, defaultFolder(2)
-	, bool_CanCreateFolders(true)
-	, bool_AutoSave(true)
-	, bool_stdINI(true)
-	, bool_compress()
-	, bool_encrypt()
-	, bool_newline()
-	, bool_QuoteStrings()
-	, repeatGroups(3)
-	, repeatItems(1)
-	, undoCount()
-	, redoCount()
-	, saveRepeated()
-	, bool_EscapeGroup()
-	, bool_EscapeItem()
-	, bool_EscapeValue()
-	, bool_CaseSensitive()
-	, globalObject()
-	, index()
-	, autoLoad()
-	, subGroups()
-	, allowEmptyGroups(true)
+	: b_defaultFile{true}
+	, b_ReadOnly{}
+	, defaultFolder{2}
+	, bool_CanCreateFolders{true}
+	, bool_AutoSave{true}
+	, bool_stdINI{true}
+	, bool_compress{}
+	, bool_encrypt{}
+	, bool_newline{}
+	, bool_QuoteStrings{}
+	, repeatGroups{3}
+	, repeatItems{1}
+	, undoCount{}
+	, redoCount{}
+	, saveRepeated{}
+	, bool_EscapeGroup{}
+	, bool_EscapeItem{}
+	, bool_EscapeValue{}
+	, bool_CaseSensitive{}
+	, globalObject{}
+	, index{}
+	, autoLoad{}
+	, subGroups{}
+	, allowEmptyGroups{true}
 	{
 	}
 
