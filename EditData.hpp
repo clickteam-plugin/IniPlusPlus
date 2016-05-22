@@ -176,6 +176,7 @@ public:
 	 * older versions of your editdata as well.
 	 */
 	EditData(mv *mV, SerializedED *SED)
+	: EditData{}
 	{
 		loadGlobal(mV);
 
