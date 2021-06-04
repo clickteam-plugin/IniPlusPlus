@@ -50,14 +50,14 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "Clickteam\0"
             VALUE "FileDescription", "INI++ Object\0"
-            VALUE "FileVersion", "2.01\0"
+            VALUE "FileVersion", "2.02\0"
             VALUE "InternalName", "INIPLUSPLUS\0"
-            VALUE "LegalCopyright", "Copyright © 2006-2015 Jack Webster\0"
+            VALUE "LegalCopyright", "Copyright © 2006-2017 Jack Webster\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "INI++1.5.MFX\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "\0"
-            VALUE "ProductVersion", "2, 0, 0, 1\0"
+            VALUE "ProductVersion", "2, 0, 0, 2\0"
             VALUE "SpecialBuild", "\0"
         END
     END
@@ -545,8 +545,8 @@ STRINGTABLE DISCARDABLE
 BEGIN
     IDST_OBJNAME            "Ini++ Object"
     IDST_AUTHOR             "Jack Webster"
-    IDST_COPYRIGHT          "Copyright © 2006-2015 Jack Webster"
-    IDST_COMMENT            "An improved version of the Ini object. Allows advanced manipulation of Ini files. v1.5 is an update of the original. April 2015 build."
+    IDST_COPYRIGHT          "Copyright © 2006-2017 Jack Webster"
+    IDST_COMMENT            "An improved version of the Ini object. Allows advanced manipulation of Ini files. v1.5 is an update of the original. April 2nd, 2019 build."
     IDST_HTTP               "http://www.clickteam.com"
 END
 

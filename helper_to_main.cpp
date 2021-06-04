@@ -433,16 +433,20 @@ void iSaveObject( LPRDATA rdPtr , std::string grp , LPRO p1 , int p2 , int p3 )
 
 	if ( p3 && (p1->roHo.hoOEFlags & OEFLAG_VALUES))
 	{
-		rVal* rov = (rVal*)((LPBYTE)&p1->roHo + p1->roHo.hoOffsetValue);
+		rVal25* rov = (rVal25*)((LPBYTE)&p1->roHo + p1->roHo.hoOffsetValue);
 		int n = 0;
 			rdPtr->ini->SetItem( grp , "flags" 
 				, rdPtr->ini->toString(rov->rvValueFlags) );
-		for ( n = 0 ; n < VALUES_NUMBEROF_ALTERABLE ; n++ )
+
+		DWORD MMFVersion = p1->roHo.hoAdRunHeader->rh4.rh4Mv->mvGetVersion();
+		for ( n = 0 ; n < min(100,max(rov->rvNumberOfValues,VALUES_NUMBEROF_ALTERABLE)) ; n++ )
 		{
 			std::string x = rdPtr->ini->toString(n);
 			if ( x.length() == 1 ) x = "0" + x;
 
-			if (  rov->rvpValues[n].m_type == TYPE_INT )
+			if ( n >= rov->rvNumberOfValues )
+				rdPtr->ini->SetItem( grp , "val" + x , rdPtr->ini->toString(0) );
+			else if (  rov->rvpValues[n].m_type == TYPE_INT )
 				rdPtr->ini->SetItem( grp , "val" + x , rdPtr->ini->toString(rov->rvpValues[n].m_long) );
 			else if (  rov->rvpValues[n].m_type == TYPE_FLOAT )
 			{
@@ -451,18 +455,38 @@ void iSaveObject( LPRDATA rdPtr , std::string grp , LPRO p1 , int p2 , int p3 )
 				rdPtr->ini->SetItem( grp , "val" + x ,  MyString );
 			}
 		}
-		for ( n = 0 ; n < STRINGS_NUMBEROF_ALTERABLE ; n++ )
+		if ( (MMFVersion & MMFBUILD_MASK) >= 292 )
 		{
-			std::string x = rdPtr->ini->toString(n);
-			if ( x.length() == 1 ) x = "0" + x;
-			if( rov->rvStrings[n] != 0 )
+			rVal25P* rov2 = (rVal25P*)rov;
+			for ( n = 0 ; n < min(100,max(rov2->rvNumberOfStrings,STRINGS_NUMBEROF_ALTERABLE)) ; n++ )
 			{
-				// It might be unicode in memory, or it might not. But buffer will always be UTF8
-				char* buffer = toMultiByteForm(rdPtr,rov->rvStrings[n]);
-				rdPtr->ini->SetItem( grp , "str" + x , std::string(buffer) );
-				free(buffer);
+				std::string x = rdPtr->ini->toString(n);
+				if ( x.length() == 1 ) x = "0" + x;
+				if( n < rov2->rvNumberOfStrings && rov2->rvpStrings[n] != 0 )
+				{
+					// It might be unicode in memory, or it might not. But buffer will always be UTF8
+					char* buffer = toMultiByteForm(rdPtr,rov2->rvpStrings[n]);
+					rdPtr->ini->SetItem( grp , "str" + x , std::string(buffer) );
+					free(buffer);
+				}
+				else rdPtr->ini->SetItem( grp , "str" + x , "" );
 			}
-			else rdPtr->ini->SetItem( grp , "str" + x , "" );
+		}
+		else
+		{
+			for ( n = 0 ; n < STRINGS_NUMBEROF_ALTERABLE ; n++ )
+			{
+				std::string x = rdPtr->ini->toString(n);
+				if ( x.length() == 1 ) x = "0" + x;
+				if( rov->rvStrings[n] != 0 )
+				{
+					// It might be unicode in memory, or it might not. But buffer will always be UTF8
+					char* buffer = toMultiByteForm(rdPtr,rov->rvStrings[n]);
+					rdPtr->ini->SetItem( grp , "str" + x , std::string(buffer) );
+					free(buffer);
+				}
+				else rdPtr->ini->SetItem( grp , "str" + x , "" );
+			}
 		}
 	}
 	rdPtr->ini->PauseAutoSave(false);
@@ -501,11 +525,48 @@ void iLoadObject( LPRDATA rdPtr , std::string grp , LPRO obj )
 	//Load the valXX items. Must decide if it is an integer or a float
 	if ( obj->roHo.hoOEFlags & OEFLAG_VALUES )
 	{
-		rVal* rov = (rVal*)((LPBYTE)&obj->roHo + obj->roHo.hoOffsetValue);
+		rVal25* rov = (rVal25*)((LPBYTE)&obj->roHo + obj->roHo.hoOffsetValue);
 		if ( rdPtr->ini->HasItem(grp,"flags") )
 			rov->rvValueFlags = atoi(rdPtr->ini->GetItem( grp , "flags" , "0" ).c_str());
+
+		// Get number of values stored in INI
 		int n = 0;
-		for ( n = 0 ; n < VALUES_NUMBEROF_ALTERABLE ; n++ )
+		int nValues = 0;
+		for ( nValues = 0 ; nValues < 100 ; nValues++ )		// VALUES_NUMBEROF_ALTERABLE
+		{
+			std::string x = rdPtr->ini->toString(nValues);
+			if ( x.length() == 1 ) x = "0" + x;
+			x = "val" + x;
+			if ( !rdPtr->ini->HasItem( grp , x ) )
+				break;
+		}
+
+		// Reallocate object values to new size
+		if ( nValues > rov->rvNumberOfValues )
+		{
+			CValue* newValues=(CValue*)mvReAlloc(rdPtr->rHo.hoAdRunHeader->rh4.rh4Mv, rov->rvpValues, sizeof(CValue)*nValues);
+			if ( newValues != NULL )
+			{
+				rov->rvpValues = newValues;
+				rov->rvNumberOfValues = nValues;
+				for (n=rov->rvNumberOfValues; n<nValues; n++)
+				{
+					rov->rvpValues[n].m_long = 0;
+					rov->rvpValues[n].m_type = TYPE_INT;
+				}
+			}
+		}
+		else
+		{
+			for (n=nValues; n<rov->rvNumberOfValues; n++)
+			{
+				rov->rvpValues[n].m_long = 0;
+				rov->rvpValues[n].m_type = TYPE_INT;
+			}
+		}
+
+		// Read value
+		for ( n = 0 ; n < nValues ; n++ )		// VALUES_NUMBEROF_ALTERABLE
 		{
 			std::string x = rdPtr->ini->toString(n);
 			if ( x.length() == 1 ) x = "0" + x;
@@ -529,23 +590,74 @@ void iLoadObject( LPRDATA rdPtr , std::string grp , LPRO obj )
 			}
 		}
 		
-		//Now load the strXX items if they exist
-		for ( n = 0; n < STRINGS_NUMBEROF_ALTERABLE ; n++ )
+		// Get number of string stored in INI
+		int nStrings = STRINGS_NUMBEROF_ALTERABLE;
+		LPMV mV = rdPtr->rHo.hoAdRunHeader->rh4.rh4Mv;
+		DWORD MMFVersion = mV->mvGetVersion();
+		if ( (MMFVersion & MMFBUILD_MASK) < 292 )
 		{
-			LPMV mV = rdPtr->rHo.hoAdRunHeader->rh4.rh4Mv;
-			std::string x = rdPtr->ini->toString(n);
-			if ( x.length() == 1 ) x = "0" + x;
-			x = "str" + x;
-			if ( rdPtr->ini->HasItem( grp , x ) )
+			//Now load the strXX items if they exist
+			for ( n = 0; n < nStrings ; n++ )
 			{
-				std::string data = rdPtr->ini->GetItem(grp,x,"");
-				char* old = rov->rvStrings[n];
-				rov->rvStrings[n] = convertToCorrectForm(rdPtr,data.c_str(),0);
-				if ( old != NULL )
-					mvFree(mV,old);
+				std::string x = rdPtr->ini->toString(n);
+				if ( x.length() == 1 ) x = "0" + x;
+				x = "str" + x;
+				if ( rdPtr->ini->HasItem( grp , x ) )
+				{
+					std::string data = rdPtr->ini->GetItem(grp,x,"");
+					char* old = rov->rvStrings[n];
+					rov->rvStrings[n] = convertToCorrectForm(rdPtr,data.c_str(),0);
+					if ( old != NULL )
+						mvFree(mV,old);
+				}
 			}
 		}
+		else
+		{
+			for ( n = STRINGS_NUMBEROF_ALTERABLE ; n < 100 ; n++ )		// minimum STRINGS_NUMBEROF_ALTERABLE
+			{
+				std::string x = rdPtr->ini->toString(n);
+				if ( x.length() == 1 ) x = "0" + x;
+				x = "str" + x;
+				if ( rdPtr->ini->HasItem( grp , x ) )
+					nStrings = n + 1;
+			}
 
+			// Reallocate object strings to new size
+			rVal25P* rov2 = (rVal25P*)rov;
+			if ( nStrings > rov2->rvNumberOfStrings )
+			{
+				LPTSTR* newStrings = (LPTSTR*)mvReAlloc(mV, rov2->rvpStrings, sizeof(LPTSTR)*nStrings);
+				if ( newStrings != NULL )
+				{
+					rov2->rvpStrings = newStrings;
+					rov2->rvNumberOfStrings = nStrings;
+					for (n=rov2->rvNumberOfStrings; n<nStrings; n++)
+						rov2->rvpStrings[n] = NULL;
+				}
+			}
+			else
+			{
+				for (n=nStrings; n<rov2->rvNumberOfStrings; n++)
+					rov2->rvpStrings[n] = NULL;
+			}
+
+			//Now load the strXX items if they exist
+			for ( n = 0; n < nStrings ; n++ )
+			{
+				std::string x = rdPtr->ini->toString(n);
+				if ( x.length() == 1 ) x = "0" + x;
+				x = "str" + x;
+				if ( rdPtr->ini->HasItem( grp , x ) )
+				{
+					std::string data = rdPtr->ini->GetItem(grp,x,"");
+					LPTSTR old = rov2->rvpStrings[n];
+					rov2->rvpStrings[n] = convertToCorrectForm(rdPtr,data.c_str(),0);
+					if ( old != NULL )
+						mvFree(mV,old);
+				}
+			}
+		}
 	} 
 }
 

@@ -287,6 +287,7 @@ struct FileClass
 	{
 		long curGuess = 1024;
 		long pos = 0;
+		isize = 0;
 		char* buffer = (char*)malloc(curGuess);
 		
 		rewind(handle);
@@ -303,6 +304,7 @@ struct FileClass
 			int can = curGuess - pos;
 			int read = fread( buffer + pos , sizeof(char) , can , handle );
 			pos += read;
+			isize += read;
 
 		}
 

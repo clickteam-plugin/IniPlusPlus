@@ -1445,7 +1445,7 @@ void SuperINI::Strip( std::string& str )
 {
 	while ( str[0] == ' ' || str[0] == '\t' )
 		str = str.substr(1);
-	while ( str[str.length()-1] == ' ' || str[str.length()-1] == '\t' )
+	while ( str.length() != 0 && (str[str.length()-1] == ' ' || str[str.length()-1] == '\t') )
 		str = str.substr(0,str.length()-1);
 	return;
 }
@@ -1900,7 +1900,7 @@ std::string SuperINI::WriteStream( )
 					itmName = "\\" + itmName;
 				std::string itmValue = GetItem( grpNameUnProcessed , itmNameUnProcessed , "" );
 				itmValue = ApplyEscapes( itmValue , EscapeCharsInValue , NeverQuoteStrings , false );
-				if ( ! NeverQuoteStrings && (itmValue[0] == ' ' || itmValue[itmValue.length()-1] == ' ') )
+				if ( ! NeverQuoteStrings && (itmValue[0] == ' ' || (itmValue.length() != 0 && itmValue[itmValue.length()-1] == ' ')) )
 					itmValue = "\"" + itmValue + "\"";
 				if (! saveRepeats )
 					out += itmName + "=" + itmValue + GetNewLine();
