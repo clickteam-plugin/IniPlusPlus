@@ -1,0 +1,3 @@
+[submodule "lSDK"]
+	path = lSDK
+	url = https://github.com/LB--/lSDK.git

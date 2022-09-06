@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Edittime|Win32">
+      <Configuration>Edittime</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Runtime|Win32">
+      <Configuration>Runtime</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{e4493bcb-1b11-4ad1-9eef-32e19d648d00}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <PlatformToolset>v143</PlatformToolset>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Edittime|Win32'" Label="Configuration">
+    <PlatformToolset>v143</PlatformToolset>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Runtime|Win32'" Label="Configuration">
+    <PlatformToolset>v143</PlatformToolset>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="Common.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Edittime|Win32'">
+    <Import Project="Common.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Runtime|Win32'">
+    <Import Project="Common.props" />
+  </ImportGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>DEBUG;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <PostBuildEvent>
+      <Command>"$(ProjectDir)lSDK\extensions\AutoInstall.bat" "$(TargetPath)" \Extensions\Unicode 2&gt; nul</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Edittime|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <StringPooling>true</StringPooling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+    </Link>
+    <PostBuildEvent>
+      <Command>"$(ProjectDir)lSDK\extensions\AutoInstall.bat" "$(TargetPath)" \Extensions\Unicode 2&gt; nul</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Runtime|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>NDEBUG;FUSION_RUNTIME_ONLY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <StringPooling>true</StringPooling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <ModuleDefinitionFile>exports-runtime.def</ModuleDefinitionFile>
+    </Link>
+    <PostBuildEvent>
+      <Command>"$(ProjectDir)lSDK\extensions\AutoInstall.bat" "$(TargetPath)" \Data\Runtime\Unicode 2&gt; nul</Command>
+    </PostBuildEvent>
+    <ResourceCompile>
+      <PreprocessorDefinitions>FUSION_RUNTIME_ONLY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="ACEs.cpp" />
+    <ClCompile Include="CustomParams.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Runtime|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Edittime.cpp" />
+    <ClCompile Include="General.cpp" />
+    <ClCompile Include="lSDK\src\FusionAPI.cpp" />
+    <ClCompile Include="lSDK\src\lSDK\UnicodeUtilities.cpp" />
+    <ClCompile Include="Menus.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Runtime|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Properties.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Runtime|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Runtime.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CustomParams.hpp" />
+    <ClInclude Include="EditData.hpp" />
+    <ClInclude Include="Resources.h" />
+    <ClInclude Include="RunData.hpp" />
+    <ClInclude Include="Settings.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="exports-edittime.def" />
+    <None Include="exports-runtime.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Extension.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>

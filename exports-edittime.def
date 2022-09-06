@@ -1,0 +1,65 @@
+EXPORTS
+	; edittime & runtime
+	GetInfos
+	GetRunObjectInfos
+
+	; runtime only
+	GetRunObjectDataSize
+	CreateRunObject
+	DestroyRunObject
+	HandleRunObject
+	DisplayRunObject
+	PauseRunObject
+	ContinueRunObject
+	SaveRunObject
+	LoadRunObject
+	StartApp
+	EndApp
+
+	; edittime only
+	GetObjInfos
+	GetHelpFileName
+	CreateObject
+
+	; action menu
+	GetActionMenu
+	GetActionCodeFromMenu
+	GetActionInfos
+	GetActionTitle
+	GetActionString
+
+	; condition menu
+	GetConditionMenu
+	GetConditionCodeFromMenu
+	GetConditionInfos
+	GetConditionTitle
+	GetConditionString
+
+	; expression menu
+	GetExpressionMenu
+	GetExpressionCodeFromMenu
+	GetExpressionInfos
+	GetExpressionString
+	GetExpressionParam
+
+	; properties
+	GetProperties
+	GetPropCreateParam
+	ReleasePropCreateParam
+	ReleaseProperties
+	IsPropEnabled
+	GetPropValue
+	GetPropCheck
+	SetPropValue
+	SetPropCheck
+	EditProp
+
+	; custom parameters
+	InitParameter
+	EditParameter
+	GetParameterString
+
+	; runtime debugger (only needed in edittime build)
+;	GetDebugTree
+;	GetDebugItem
+;	EditDebugItem

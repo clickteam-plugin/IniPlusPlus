@@ -1,0 +1,851 @@
+#include "Resources.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+#include "lSDK/include/FusionAPI/Ccx.h"
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "Windows.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+#undef APSTUDIO_READONLY_SYMBOLS
+
+KPX_MAGICNUMBER RCDATA 
+BEGIN
+	0x6554, "\166"
+END
+
+STRINGTABLE 
+BEGIN
+	KPX_MARK "MF2"
+	KPX_NAME "Ini++ Unicode"
+END
+
+#ifndef FUSION_RUNTIME_ONLY
+
+EXO_ICON BITMAP "Icon.bmp"
+EXO_IMAGE BITMAP "Icon.bmp"
+
+STRINGTABLE 
+BEGIN
+	RIPP_NAME L"Ini++ Unicode"
+	RIPP_AUTHOR L"Jack ""Jax"" Webster"
+	RIPP_COPYRIGHT L"Copyright © 2006-2015 Jack Webster"
+	RIPP_DESCRIPTION L"Allows advanced manipulation of INI files. Now with Unicode support!\nNot all functionality is available in this version, report missing features to LB@MayContainCode.com"
+	RIPP_WEBSITE L"https://sites.google.com/site/jlnwebster/multimedia-fusion/extension-list/ini"
+	RIPP_HELP L"Help/Ini++/index.htm"
+
+	//ABCDEFGHIJKLMNOPQRSTUVWXYZ
+	RIPPAM_SET_CURRENT_GROUP L"Set Current Group"
+	RIPPAM_CURRENT_GROUP L"Current Group"
+	RIPPAM_SET_VALUE L"Set Value"
+	RIPPAM_SET_STRING L"Set String"
+	RIPPAM_SET_STRING_MD5 L"Set String (MD5 Hashed)"
+	RIPPAM_SAVE_OBJECT L"Save Object"
+	RIPPAM_LOAD_OBJECT L"Load Object"
+	RIPPAM_SAVE_POSITION L"Save Position"
+	RIPPAM_SAVE_GLOBALS L"Save global values"
+	RIPPAM_LOAD_GLOBALS L"Load global values"
+	RIPPAM_DELETE_GROUP L"Delete group"
+	RIPPAM_DELETE_ITEM L"Delete item"
+	RIPPAM_RENAME_GROUP L"Rename group"
+	RIPPAM_RENAME_ITEM L"Rename item"
+	RIPPAM_MOVE_ITEM_ANOTHER L"Move Item to another Group"
+	RIPPAM_SETTING_ITEMS L"Setting Items"
+	RIPPAM_MOVING_COPYING L"Moving && Copying"
+	RIPPAM_MOVE_ITEM L"Move Item"
+	RIPPAM_COPY_GROUP L"Copy Group"
+	RIPPAM_COPY_ITEM L"Copy Item"
+	RIPPAM_DELETING L"Deleting"
+	RIPPAM_DELETE_ITEM_EVERYWHERE L"Delete item in all groups"
+	RIPPAM_DELETE_PATTERN L"Delete by pattern"
+	RIPPAM_CLEAR_ALL L"Clear all"
+	RIPPAM_SEARCHING L"Searching"
+	RIPPAM_PERFORM_SEARCH L"Perform Search"
+	RIPPAM_CLEAR_RESULTS L"Clear Results"
+	RIPPAM_SEARCH_STORE_INI L"Search and put result in Ini file"
+	RIPPAM_SEARCH_STORE_INIPP L"Search and put result in Ini++ object"
+	RIPPAM_FIND_SUBGROUPS L"Find 'Subgroups'"
+	RIPPAM_FIND_REPEATS_ITEM L"Find 'Repeats' of Item"
+	RIPPAM_MERGING L"Merging"
+	RIPPAM_MERGE_WITH_FILE L"Merge (with file)"
+	RIPPAM_MERGE_GROUP_WITH_FILE L"Merge Group (with file)"
+	RIPPAM_MERGE_WITH_INIPP L"Merge (with other Ini++ object)"
+	RIPPAM_MERGE_GROUP_WITH_INIPP L"Merge Group (with other Ini++ object)"
+	RIPPAM_LOADING_SAVING L"Loading && Saving"
+	RIPPAM_CHANGE_FILE L"New/Load/Change file"
+	RIPPAM_SAVE_FILE L"Save file"
+	RIPPAM_CLOSE L"Close"
+	RIPPAM_LOAD_FROM_STRING L"Load From String"
+	RIPPAM_CHANGE_GLOBAL_KEY L"Change global data slot"
+	RIPPAM_SETTINGS L"Settings"
+	RIPPAM_SET_READ_ONLY L"Set read only"
+	RIPPAM_SET_ENCRYPTION L"Set encryption"
+	RIPPAM_SET_COMPRESSION L"Set compression"
+	RIPPAM_SET_AUTO_LOAD_SAVE L"Set auto load/save"
+	RIPPAM_EXPORT L"Export"
+	RIPPAM_SAVE_AS L"Save as"
+	RIPPAM_BACKUP_TO L"Backup to"
+	RIPPAM_IO_CSV L"Import/Export CSV"
+	RIPPAM_IO_CSV_ARRAY L"Import/Export CSV Array"
+	RIPPAM_REORDER_GROUP L"Reorder a group"
+	RIPPAM_ADVANCED_FEATURES L"Advanced Features"
+	RIPPAM_ADD_REPEATED_ITEM L"Add Repeated Item"
+	RIPPAM_SET_PART_IN_ITEM L"Set part in item"
+	RIPPAM_UNDO L"Undo"
+	RIPPAM_PERFORM_UNDO L"Perform Undo"
+	RIPPAM_PERFORM_REDO L"Perform Redo"
+	RIPPAM_CLEAR_STACKS L"Clear stack(s)"
+	RIPPAM_MANUAL_MODE L"Manual mode (Advanced)"
+	RIPPAM_SET_MODE L"Set mode"
+	RIPPAM_FORCE_ADD_UNDO_BLOCK L"Force add new undo block"
+	RIPPAM_DIALOG_BOX L"Dialog Box"
+	RIPPAM_OPEN_DIALOG L"Open Dialog"
+	RIPPAM_CLOSE_DIALOG L"Close Dialog"
+	RIPPAM_REFRESH_DIALOG L"Refresh Dialog"
+	RIPPAM_CHART_OBJECT L"Chart Object"
+	RIPPAM_PUT_DATA_INTO_CHART L"Put data into chart object"
+	RIPPAM_GET_DATA_FROM_CHART L"Get data from chart object"
+	RIPPAM_PUT_SETTINGS_INTO_CHART L"Put settings into chart object"
+	RIPPAM_GET_SETTINGS_FROM_CHART L"Get settings from chart object"
+	RIPPAM_ARRAY L"Array"
+	RIPPAM_GET_DATA_FROM_ARRAY L"Get data from array"
+	RIPPAM_PUT_DATA_INTO_ARRAY L"Put data into array (numerical only)"
+	RIPPAM_ADVANCED_SETTINGS L"Advanced Settings"
+	RIPPAM_SET_CASE_SENSITIVE L"Set case sensitivity"
+	RIPPAM_SET_ESCAPE_CHARS L"Escape character settings"
+	RIPPAM_SET_ALWAYS_QUOTE L"Enable/Disable 'always quote strings'"
+	RIPPAM_SET_REPEAT_MODES L"Set repeat modes"
+	RIPPAM_SET_NEWLINE_STR L"Set new line string"
+	RIPPAM_SET_DEFAULT_DIR L"Set default directory"
+	RIPPAM_SET_GROUP_OPTS L"Group settings (Subgroups, Empty groups)"
+	RIPPAM_EXTRA_FUNCTIONS L"Extra Functions"
+	RIPPAM_COMPRESS_FILE L"Compress file"
+	RIPPAM_DECOMPRESS_FILE L"Deompress file"
+
+	//ABCDEFGHIJKLMNOPQRSTUVWXYZ
+	RIPPCM_GROUP_EXISTS L"Group exists"
+	RIPPCM_GROUP_HAS_ITEM L"Group has item"
+	RIPPCM_ITEM_HAS_HASH L"Item has hashed value"
+	RIPPCM_ON_OPEN L"On open"
+	RIPPCM_ON_CLOSE L"On close"
+	RIPPCM_ON_MODIFIED L"On modified"
+	RIPPCM_SEARCH_RESULTS L"Search Results"
+	RIPPCM_ON_RESULTS_FOUND L"On Results Found"
+	RIPPCM_ON_NO_RESULTS_FOUND L"On No Results Found"
+	RIPPCM_HAS_UNDO L"Has Undo"
+	RIPPCM_HAS_REDO L"Has Redo"
+	RIPPCM_ON_MERGE L"On Merge"
+	RIPPCM_ON_DATA_MODIFIED L"On Data Modified"
+	RIPPCM_ON_NEW_ITEM L"On New Item"
+	RIPPCM_ON_SAVE L"On Save"
+	RIPPCM_IS_WILDCAT_MATCH L"Is Wildcat Match?" //🐯?
+	RIPPCM_ON_UNCOMPRESSION_OK L"On uncompression OK"
+	RIPPCM_ON_UNCOMPRESSION_FAIL L"On uncompression fail"
+
+	//ABCDEFGHIJKLMNOPQRSTUVWXYZ
+	RIPPEM_GROUP_GET_ITEM_VALUE L"Get Item Value ( item , default value)"
+	RIPPEM_GROUP_GET_ITEM_STRING L"Get Item String ( item , default string)"
+	RIPPEM_GROUP_GET_POSITION_X L"Get position X ( item )"
+	RIPPEM_GROUP_GET_POSITION_Y L"Get position Y ( item )"
+	RIPPEM_GROUP_GET_NTH_ITEM_NAME L"Get N-th Item name ( n )"
+	RIPPEM_GROUP_GET_NTH_ITEM_VALUE L"Get N-th Item value ( n )"
+	RIPPEM_GROUP_GET_NTH_ITEM_STRING L"Get N-th Item string ( n )"
+	RIPPEM_GROUP_GET_NAME L"Get current group name"
+	RIPPEM_GROUP_GET_NUM_ITEMS L"Get Item Count"
+	RIPPEM_GROUP_GET_STRINGIFIED L"Get current group as string"
+	RIPPEM_GET_ITEM_VALUE L"Get Item Value (group , item , default value)"
+	RIPPEM_GET_ITEM_STRING L"Get Item String (group , item , default string)"
+	RIPPEM_GET_PART_IN_ITEM L"Get part in item (group, item, index, default)"
+	RIPPEM_GET_POSITION_X L"Get X Position (group , item)"
+	RIPPEM_GET_POSITION_Y L"Get Y Position (group , item)"
+	RIPPEM_GET_FILENAME L"Get current file name"
+	RIPPEM_GET_STRINGIFIED L"Get INI as String"
+	RIPPEM_GET_CSVIFIED L"Get INI as CSV String"
+	RIPPEM_COUNTING_CALCS L"Counting and Calculations"
+	RIPPEM_GET_NUM_GROUPS L"Get Group Count"
+	RIPPEM_GET_NUM_ITEMS L"Get Item Count (Group)"
+	RIPPEM_GET_NUM_ITEMS_EVERYWHERE L"Get Total Item Count"
+	RIPPEM_GET_NUM_UNIQUE_ITEM_NAMES L"Get number of unique item names"
+	RIPPEM_PERFORM_CALCULATIONS L"Perform Calculations (Click for info)"
+	RIPPEM_FIND_MIN_OR_MAX_GROUP L"Find Max or Min Group (Click for info)"
+	RIPPEM_LIST_GROUPS_ITEMS L"List Groups and Items"
+	RIPPEM_GET_NTH_GROUP L"Get N-th Group name ( n )"
+	RIPPEM_GET_NTH_ITEM_NAME L"Get N-th Item name ( group , n )"
+	RIPPEM_GET_NTH_ITEM_STRING L"Get N-th Item string ( group , n )"
+	RIPPEM_GET_NTH_ITEM_VALUE L"Get N-th Item value ( group , n )"
+	RIPPEM_GET_SORTED_NTH_ITEM_NAME L"Get N-th Sorted Item name ( group , n )"
+	RIPPEM_GET_SORTED_NTH_ITEM_VALUE L"Get N-th Sorted Item Value ( group , n )"
+	RIPPEM_GET_NTH_ITEM_EVERYWHERE L"Get N-th Item used in any group ( n )"
+	RIPPEM_GET_NUM_SEARCH_RESULTS L"Number of search results"
+	RIPPEM_GET_NTH_SEARCH_RESULT_GROUP L"Get N-th Search Result Group ( n )"
+	RIPPEM_GET_NTH_SEARCH_RESULT_ITEM_NAME L"Get N-th Search Result Item Name ( n )"
+	RIPPEM_GET_NTH_SEARCH_RESULT_ITEM_VALUE L"Get N-th Search Result Item Value ( n )"
+	RIPPEM_GET_NTH_SEARCH_RESULT_ITEM_STRING L"Get N-th Search Result Item String ( n )"
+	RIPPEM_GET_NTH_SEARCH_RESULT_PATH L"Get N-th Search Result Path ( n , separator )"
+	RIPPEM_HASH_STRING L"Hash String ( string )"
+	RIPPEM_ESCAPE_STRING L"Escape String ( string )"
+	RIPPEM_UNESCAPE_STRING L"Unescape String ( string )"
+
+	RIPPP_GROUP L"Group name"
+	RIPPP_CREATE_DUPLICATE_GROUP L"Create a new group if one with the same name already exists? ( 0 = No, 1 = Yes. If unsure, choose 0 )"
+	RIPPP_ITEM L"Item name"
+	RIPPP_TYPE L"Type (0 = Integer [Whole numbers] , 1 = Floating Point [Decimal Points])"
+	RIPPP_VALUE L"Value"
+	RIPPP_STRING L"String"
+	RIPPP_SAVE_OBJECT L"Object to save"
+	RIPPP_SAVE_POSITION L"Save position? (0 = No, 1 = Yes)"
+	RIPPP_SAVE_ALT_VALUES L"Save alt values? (0 = No, 1 = Yes)"
+	RIPPP_LOAD_OBJECT L"Object to load"
+	RIPPP_POSITION L"Position"
+	RIPPP_NEW_NAME L"New name"
+	RIPPP_OVERWRITE_MODE_012 L"Overwrite Mode ( 0 = Overwrite , 1 = Merge , 2 = Never overwrite )"
+	RIPPP_OLD_NAME L"Old name"
+	RIPPP_ALLOW_OVERWRITE L"Allow overwriting? ( 0 = No , 1 = Yes )"
+	RIPPP_NEW_GROUP_NAME L"New group name"
+	RIPPP_OLD_GROUP_NAME L"Old group name"
+	RIPPP_OLD_ITEM_NAME L"Old item name"
+	RIPPP_NEW_ITEM_NAME L"New item name"
+	RIPPP_SRC_GROUP_NAME L"Source group name"
+	RIPPP_DST_GROUP_NAME L"Destination group name"
+	RIPPP_OVERWRITE_MODE_01 L"Overwrite Mode ( 0 = Replace old group , 1 = Merge with old group )"
+	RIPPP_SRC_ITEM L"Source item"
+	RIPPP_DST_ITEM L"Destination item"
+	RIPPP_GROUP_TO_DELETE L"Group to delete"
+	RIPPP_PATTERN_GROUP L"Pattern for groups"
+	RIPPP_PATTERN_ITEM L"Pattern for items"
+	RIPPP_PATTERN_VALUE L"Pattern for values"
+	RIPPP_CASE_SENSITIVE L"Case Sensitive ( 0 = No , 1 = Yes )"
+	RIPPP_CONDITION_GROUP L"Group condition (Use '.', '*' or start with a '!' for 'not')"
+	RIPPP_CONDITION_ITEM L"Item condition (Use '.', '*' or start with a '!' for 'not')"
+	RIPPP_CONDITION_VALUE L"Value condition (Use '.', '*' or start with a '!' for 'not')"
+	RIPPP_SEARCH_SETTINGS L"Search Settings"
+	RIPPP_DESTINATION_FILE L"#Title#Destination Path#Filter#Ini Files|*.ini|All files|*.*|"
+	RIPPP_OBJECT_SELECTOR L"Object selector"
+	RIPPP_FILE_TO_MERGE_FROM L"#Title#File to merge from#Filter#Ini Files|*.ini|All files|*.*|"
+	RIPPP_OTHER_INIPP L"Other INI++ Object"
+	RIPPP_FILE_OR_BLANK L"#Title#File name (if blank it will be kept in memory)#Filter#Ini Files|*.ini|All files|*.*|"
+	RIPPP_CLEAR_EXISTING L"Clear current data? (0 = No, 1 = Yes)"
+	RIPPP_FILE_TO_LOAD L"#Title#File to load#Filter#Ini Files|*.ini|All files|*.*|"
+	RIPPP_READ_ONLY L"Read only? ( 0 = No , 1 = Yes )"
+	RIPPP_FILE_TO_BACKUP_TO L"#Title#File to backup to#Filter#Ini Files|*.ini|All files|*.*|"
+	RIPPP_COMPRESSED L"Compressed? ( 0 = No , 1 = Yes )"
+	RIPPP_ENCRYPTED L"Encrypted? (Type key or use blank string for none)"
+	RIPPP_INI_TEXT L"Text (in Ini format) to load"
+	RIPPP_MODE_REPLACE_MERGE L"Mode ( 0 = Replace , 1 = Merge )"
+	RIPPP_AUTO_SAVE L"Auto Save (0 = Off , 1 = On)"
+	RIPPP_AUTO_LOAD L"Auto Load ( 0 = Off , 1 = On )"
+	RIPPP_USE_IN_GROUPS L"Use in groups ( 0 = No , 1 = Yes )"
+	RIPPP_USE_IN_ITEMS L"Use in item names ( 0 = No , 1 = Yes )"
+	RIPPP_USE_IN_VALUES L"Use in item values ( 0 = No , 1 = Yes )"
+	RIPPP_QUOTE_STRINGS L"Quote strings? (0 = No , 1 = Yes)"
+	RIPPP_REPEAT_MODE_GROUPS L"Repeat mode for groups ( 0 = First , 1 = Last , 2 = Rename , 3 = Merge )"
+	RIPPP_REPEAT_MODE_ITEMS L"Repeat mode for items ( 0 = First , 1 = Last , 2 = Rename  )"
+	RIPPP_SAVE_REPEATS_AS_ORIGINAL L"Save repeated items as original? (0 = No, 1 = Yes)"
+	RIPPP_NEWLINE_OR_EMPTY L"Type the new line string or type an empty string to use the Standard mode"
+	RIPPP_DEFAULT_DIRECTORY L"Default directory"
+	RIPPP_FILE_SRC L"#Title#Source#Filter#All files|*.*|"
+	RIPPP_FILE_DST L"#Title#Destination#Filter#All files|*.*|"
+	RIPPP_DIALOG_TITLE L"Title for dialog box"
+	RIPPP_DIALOG_SETTINGS L"Dialog Settings"
+	RIPPP_STRING_OR_VALUE L"String to set to (Use Str$(...) if you wish to set to a value)"
+	RIPPP_REPEATED_MODE L"Mode ( 0 = New item ; 1 = New group )"
+	RIPPP_DIALOG_REFRESH_MODE L"Mode (0 for full refresh, 1 for 'quick' item name refresh)"
+	RIPPP_IMPORT_EXPORT_MODE L"Import = 0, Export = 1"
+	RIPPP_CSV_FILE L"#Title#Path to CSV file#Filter#CSV Files|*.csv|All files|*.*|"
+	RIPPP_IMPORT_EXPORT_GROUP L"Group to save. Leave blank to save/load all."
+	RIPPP_SEPARATOR_SYMBOL L"Seperator symbol"
+	RIPPP_CHART_OBJECT L"Chart object name"
+	RIPPP_SUBGROUPS_GROUP L"Group to find subgroups of"
+	RIPPP_DEPTH L"Number of levels (0 for unlimited. n for at most n levels, -n means exactly n levels)"
+	RIPPP_ALLOW_SUBGROUPS L"Enable subgroup loading and saving? (0 = No, 1 = Yes)"
+	RIPPP_ALLOW_EMPTY_GROUPS L"Allow empty groups? (0 = No, 1 = Yes)"
+	RIPPP_DATA_SLOT L"Name of data slot"
+	RIPPP_SSS_SETTINGS L"Shift/Sort/Shuffle settings"
+	RIPPP_ARRAY_OBJECT L"Array name"
+	RIPPP_FILE_SETTINGS L"File settings"
+	RIPPP_UNDO_REDO_BOTH L"Which? (1 = Undo Stack, 2 = Redo Stack, 3 = Both)"
+	RIPPP_AUTOMATIC_MODE L"1 = Automatic, 2 = Manual"
+	RIPPP_DEFAULT_STRING L"Default string (if item does not exist)"
+	RIPPP_COMPARE_STRING L"String to compare to"
+	RIPPP_PATTERN L"Pattern (. or * allowed)"
+	RIPPP_ITEM_S L"Item $"
+	RIPPP_DEFAULT_VALUE L"Default Value"
+	RIPPP_DEFAULT_VALUE_S L"Default Value $"
+	RIPPP_N L"n"
+	RIPPP_GROUP_S L"Group $"
+	RIPPP_SEPARATOR_S L"Separator $"
+	RIPPP_STRING_S L"String $"
+	RIPPP_KEY_S L"Key $"
+	RIPPP_CONSULT_DOCUMENTATION L"see help docs"
+
+	RIPPA_SET_CURRENT_GROUP L"Set current group to %0"
+	RIPPA_SET_VALUE L"Set item %0 to value %2 (Setting = %1)"
+	RIPPA_SET_STRING L"Set item %0 to string %1"
+	RIPPA_SET_STRING_MD5 L"Set item %0 to %1 (Hashed)"
+	RIPPA_SAVE_OBJECT L"Save %0 (Save: Position = %1, Alt Values = %2)"
+	RIPPA_LOAD_OBJECT L"Load %0"
+	RIPPA_SAVE_POSITION L"Save position %1 to item %0"
+	RIPPA_SAVE_GLOBALS L"Save global values"
+	RIPPA_LOAD_GLOBALS L"Load global values"
+	RIPPA_DELETE_CURRENT_GROUP L"Delete current group"
+	RIPPA_DELETE_ITEM L"Delete %0 in current group"
+	RIPPA_RENAME_CURRENT_GROUP L"Rename current group to %0 (Setting = %1)"
+	RIPPA_RENAME_ITEM L"Rename item %0 to %1 (Setting = %2)"
+	RIPPA_MOVE_ITEM_ANOTHER L"Move %0 to group %1"
+	RIPPA_GROUP_SET_VALUE L"Set item %1 in group %0 to value %3 (Setting = %2)"
+	RIPPA_GROUP_SET_STRING L"Set item %1 in group %0 to %2"
+	RIPPA_GROUP_SET_STRING_MD5 L"Set item %1 in group %0 to %2 (Hashed)"
+	RIPPA_GROUP_SAVE_OBJECT L"Save object %0 into group %1 (Pos = %2, Alt Values = %3)"
+	RIPPA_GROUP_LOAD_OBJECT L"Load object %0 from group %1"
+	RIPPA_GROUP_SAVE_POSITION L"Save position %2 into group %0, item %1"
+	RIPPA_GROUP_SAVE_GLOBALS L"Save global values to group %0"
+	RIPPA_GROUP_LOAD_GLOBALS L"Load global values from group %0"
+	RIPPA_RENAME_GROUP L"Rename group with name %0 to %1 (Overwrite = %2)"
+	RIPPA_GROUP_RENAME_ITEM L"Move %0 -> %1 to %0 -> %2 (Overwrite = %3)"
+	RIPPA_MOVE_ITEM L"Move %0 -> %1 to %2 -> %3 (Overwriting=%4)"
+	RIPPA_GROUP_MOVE_ITEM_ANOTHER L"Move %1 from group %0 to %2"
+	RIPPA_COPY_GROUP L"Copy group from %0 to %1 (Mode = %2)"
+	RIPPA_COPY_ITEM L"Copy item %0 -> %1 to %2 -> %3"
+	RIPPA_DELETE_GROUP L"Delete group %0"
+	RIPPA_GROUP_DELETE_ITEM L"Delete item %1 in group %0"
+	RIPPA_DELETE_ITEM_EVERYWHERE L"Delete item %0 from all groups"
+	RIPPA_DELETE_PATTERN L"Delete all items with pattern ( %0 , %1 , %2 )"
+	RIPPA_CLEAR_ALL L"Clear all"
+	RIPPA_PERFORM_SEARCH L"Find items matching ( %0, %1 , %2 ). %3"
+	RIPPA_FIND_REPEATS_ITEM L"Find repeats of %0->%1"
+	RIPPA_CLEAR_RESULTS L"Clear Results"
+	RIPPA_SEARCH_STORE_INI L"Search for (%1,%2,%3) and put result into file %0"
+	RIPPA_SEARCH_STORE_INIPP L"Search for (%1,%2,%3) and put result into object %0"
+	RIPPA_MERGE_WITH_FILE L"Merge from file %0"
+	RIPPA_MERGE_GROUP_WITH_FILE L"Merge group %1 from file %0"
+	RIPPA_MERGE_WITH_INIPP L"Merge from object %0"
+	RIPPA_MERGE_GROUP_WITH_INIPP L"Merge group %1 from object %0"
+	RIPPA_NEW_FILE L"New Ini with file name %0 (Clear all data = %1)"
+	RIPPA_LOAD_FILE L"Load Ini %0 (Read only = %1)"
+	RIPPA_SAVE_FILE L"Save Ini"
+	RIPPA_SAVE_AS L"Save Ini As %0"
+	RIPPA_BACKUP_TO L"Backup Ini To %0 (Compressed = %1, Key = %2)"
+	RIPPA_CLOSE L"Close Ini"
+	RIPPA_LOAD_FROM_STRING L"Load %0 into Ini"
+	RIPPA_SET_AUTO_LOAD_SAVE L"Set autosave to %0 and autoload to %1"
+	RIPPA_SET_COMPRESSION L"Set compression to %0"
+	RIPPA_SET_ENCRYPTION L"Set Encryption to %0"
+	RIPPA_SET_READ_ONLY L"Set Read Only to %0"
+	RIPPA_SET_CASE_SENSITIVE L"Set Case Sensitive to %0"
+	RIPPA_SET_ESCAPE_CHARS L"Use escape characters ( %0 , %1 , %2 )"
+	RIPPA_SET_ALWAYS_QUOTE L"Quote strings = %0"
+	RIPPA_SET_REPEAT_MODES L"Set repeat modes to ( %0 , %1 , %2 )"
+	RIPPA_SET_NEWLINE_STR L"Set new line string to %0"
+	RIPPA_SET_DEFAULT_DIR L"Set default directory to %0"
+	RIPPA_COMPRESS_FILE L"Compress %0 to %1"
+	RIPPA_DECOMPRESS_FILE L"Decompress %0 to %1"
+	RIPPA_OPEN_DIALOG L"Open dialog with title %0 (Settings: %1)"
+	RIPPA_ADD_REPEATED_ITEM L"Add repeated (%0,%1,%2) with mode %3"
+	RIPPA_CLOSE_DIALOG L"Close dialog"
+	RIPPA_REFRESH_DIALOG L"Refresh dialog (Mode = %0)"
+	RIPPA_IO_CSV L"CSV Import/Export (%0) to file %1, seperator %2"
+	RIPPA_IO_CSV_ARRAY L"CSV Array Import/Export (%1) to file %1, seperator %2"
+	RIPPA_PUT_DATA_INTO_CHART L"Put data into chart object %0 from group %1"
+	RIPPA_FIND_SUBGROUPS L"Find subgroups of '%0' (Levels = %1)"
+	RIPPA_SET_GROUP_OPTS L"Subgroups enabled = %0, Empty Groups allowed = %1."
+	RIPPA_CHANGE_GLOBAL_KEY L"Changed global data slot to %0"
+	RIPPA_REORDER_GROUP L"%0 group %1"
+	RIPPA_SET_PART_IN_ITEM L"Set part %2 of the item %1 from group %0 to %3"
+	RIPPA_GET_DATA_FROM_ARRAY L"Load data from array '%0' into group '%1'"
+	RIPPA_PUT_DATA_INTO_ARRAY L"Put data into array '%0' from group '%1'"
+	RIPPA_GET_DATA_FROM_CHART L"Get data from chart object %0 into group %1"
+	RIPPA_GET_SETTINGS_FROM_CHART L"Get properties from chart object %0 into %1"
+	RIPPA_PUT_SETTINGS_INTO_CHART L"Put properties to chart object %0 from group %1"
+	RIPPA_CHANGE_FILE L"%0 : %1"
+	RIPPA_PERFORM_UNDO L"Perform undo"
+	RIPPA_PERFORM_REDO L"Perform redo"
+	RIPPA_CLEAR_STACKS L"Clear undo/redo stack. Mode = %0"
+	RIPPA_FORCE_ADD_UNDO_BLOCK L"Add a new undo stack block"
+	RIPPA_SET_MODE L"Set automatic undo/redo stack mode to %0"
+
+	RIPPC_CURRENT_GROUP_EXISTS L"%o: Current group exists"
+	RIPPC_CURRENT_GROUP_HAS_ITEM L"%o: Current group has item %0"
+	RIPPC_ITEM_HAS_HASH L"%o: %0 in current group is equal to %2 with default value %1 (hashed)"
+	RIPPC_GROUP_EXISTS L"%o: Group %0 exists"
+	RIPPC_GROUP_HAS_ITEM L"%o: Group %0 has item %1"
+	RIPPC_GROUP_ITEM_HAS_HASH L"%o: %1 in %0 is equal to %3 with default value %2 (hashed)"
+	RIPPC_IS_WILDCAT_MATCH L"%o: Wildcat match %1 to pattern %0"
+	RIPPC_ON_OPEN L"%o: On Dialog Box Opened"
+	RIPPC_ON_CLOSE L"%o: On Dialog Box Closed"
+	RIPPC_ON_MODIFIED L"%o: On Dialog Box Modified"
+	RIPPC_ON_DATA_MODIFIED L"%o: On Data Modified"
+	RIPPC_ON_SAVE L"%o: On Save"
+	RIPPC_ON_NEW_ITEM L"%o: On New Item"
+	RIPPC_ON_RESULTS_FOUND L"%o: On Search Results Found"
+	RIPPC_ON_NO_RESULTS_FOUND L"%o: On No Search Results Found"
+	RIPPC_ON_MERGE L"%o: On Merge"
+	RIPPC_ON_UNCOMPRESSION_OK L"%o: File was uncompressed"
+	RIPPC_ON_UNCOMPRESSION_FAIL L"%o: File failed to be uncompressed"
+	RIPPC_HAS_UNDO L"Is undo available?"
+	RIPPC_HAS_REDO L"Is redo available?"
+
+	RIPPE_GROUP_GET_ITEM_VALUE L"GetItemValueG("
+	RIPPE_GROUP_GET_ITEM_STRING L"GetItemStringG$("
+	RIPPE_GROUP_GET_POSITION_X L"PosXG("
+	RIPPE_GROUP_GET_POSITION_Y L"PosYG("
+	RIPPE_GROUP_GET_NTH_ITEM_NAME L"NthItemG$("
+	RIPPE_GROUP_GET_NTH_ITEM_VALUE L"NthItemValueG("
+	RIPPE_GROUP_GET_NTH_ITEM_STRING L"NthItemStringG$("
+	RIPPE_GROUP_GET_NUM_ITEMS L"ItemCountG("
+	RIPPE_GET_ITEM_VALUE L"GetItemValue("
+	RIPPE_GET_ITEM_STRING L"GetItemString$("
+	RIPPE_GET_POSITION_X L"PosX("
+	RIPPE_GET_POSITION_Y L"PosY("
+	RIPPE_GET_NTH_GROUP L"NthGroup$("
+	RIPPE_GET_NTH_ITEM_NAME L"NthItemName$("
+	RIPPE_GET_NTH_ITEM_STRING L"NthItemString$("
+	RIPPE_GET_NTH_ITEM_VALUE L"NthItemValue("
+	RIPPE_GET_NUM_GROUPS L"GroupCount("
+	RIPPE_GET_NUM_ITEMS L"ItemCount("
+	RIPPE_GET_NUM_ITEMS_EVERYWHERE L"TotalItems("
+	RIPPE_GET_NUM_SEARCH_RESULTS L"SearchResultsCount("
+	RIPPE_GET_NTH_SEARCH_RESULT_GROUP L"SearchGroup$("
+	RIPPE_GET_NTH_SEARCH_RESULT_ITEM_NAME L"SearchItemName$("
+	RIPPE_GET_NTH_SEARCH_RESULT_ITEM_VALUE L"SearchItemValue("
+	RIPPE_GET_NTH_SEARCH_RESULT_ITEM_STRING L"SearchItemString$("
+	RIPPE_GET_NTH_SEARCH_RESULT_PATH L"SearchItemPath$("
+	RIPPE_GET_STRINGIFIED L"WriteStream$("
+	RIPPE_HASH_STRING L"Hash$("
+	RIPPE_CRYPT L"Crypt$("
+	RIPPE_ESCAPE_STRING L"Escape$("
+	RIPPE_UNESCAPE_STRING L"Unescape$("
+	RIPPE_PERFORM_CALCULATIONS L"Calc("
+	RIPPE_FIND_MIN_OR_MAX_GROUP L"CalcStr$("
+	RIPPE_GET_SORTED_NTH_ITEM_NAME L"NthSortedName$("
+	RIPPE_GET_SORTED_NTH_ITEM_VALUE L"NthSortedItem("
+	RIPPE_GET_CSVIFIED L"GetCSV$("
+	RIPPE_GET_NTH_ITEM_EVERYWHERE L"NthOverallItem$("
+	RIPPE_GET_NUM_UNIQUE_ITEM_NAMES L"UniqueItemCount("
+	RIPPE_GET_PART_IN_ITEM L"GetItemPart$("
+	RIPPE_GROUP_GET_NAME L"CurrentGroupName$("
+	RIPPE_GROUP_GET_STRINGIFIED L"CurrentGroupString$("
+	RIPPE_GET_FILENAME L"Filename$("
+
+	RIPPPR_VERSION_NAME L"Version"
+	RIPPPR_VERSION_DESC L"This is the current version of the Ini++ object."
+	RIPPPR_GLOBAL_TICKBOX_NAME L"Global Data?"
+	RIPPPR_GLOBAL_TICKBOX_DESC L"If this is checked, then the data is shared with all Ini++ objects with this property, even across frames. Important: Only one object may have this property per frame."
+	RIPPPR_GLOBAL_EDITBOX_NAME L"Global data key"
+	RIPPPR_GLOBAL_EDITBOX_DESC L"A key can be selected. All global Ini++ objects with the same key share the same data."
+	RIPPPR_FILEPATH_HEADER L"File and Path Settings"
+	RIPPPR_DEFAULT_FILE_NAME L"Default File"
+	RIPPPR_DEFAULT_FILE_DESC L"The file to be initially loaded. Relative paths may be used. If the field is left blank or the check-box unchecked no file will be loaded."
+	RIPPPR_DEFAULT_FILE_FILTER L"INI Files|*.ini|All Files|*.*|"
+	RIPPPR_READ_ONLY_NAME L"Read Only?"
+	RIPPPR_READ_ONLY_DESC L"If selected, the file specified above will be opened in Read Only mode. This does not apply if another file is opened or created."
+	RIPPPR_BASE_DIR_NAME L"Base Folder"
+	RIPPPR_BASE_DIR_DESC L"The folder that all relative paths are relative to."
+	RIPPPR_BASE_DIR_WINDOWS L"Windows Folder"
+	RIPPPR_BASE_DIR_CURRENT L"(Initial) Current Folder"
+	RIPPPR_BASE_DIR_INSTALL L"Program Folder"
+	RIPPPR_BASE_DIR_APPDATA L"Application Data (User)"
+	RIPPPR_BASE_DIR_PRGDATA L"Application Data (Common)"
+	RIPPPR_INITIAL_DATA_NAME L"Initial Data"
+	RIPPPR_INITIAL_DATA_DESC L"Data loaded into the object after the default file is loaded. Object settings are used except encryption and compression."
+	RIPPPR_AUTO_LOAD_NAME L"Enable 'Auto Load'"
+	RIPPPR_AUTO_LOAD_DESC L"Before any condition, expression or action, reload the file. Avoid this opition if possible."
+	RIPPPR_AUTO_SAVE_NAME L"Enable 'Auto Save'"
+	RIPPPR_AUTO_SAVE_DESC L"When the object is written to when a file is open, automatically resave the file?"
+	RIPPPR_CREATE_DIRS_NAME L"Create folders for files if they do not exist?"
+	RIPPPR_CREATE_DIRS_DESC L"Allow the Save functions to create folders if they do not exist. If not selected, folders (but not files) must exist."
+	RIPPPR_BASE1INDEX_NAME L"1-based index"
+	RIPPPR_BASE1INDEX_DESC L"If selected, any specified index will start at 1. Otherwise it will start at 0."
+	RIPPPR_OBFUSCATION_HEADER L"Compression & Encyption"
+	RIPPPR_COMPRESS_NAME L"Use Compression?"
+	RIPPPR_COMPRESS_DESC L"If selected, the Ini file will be decompressed when loaded and compressed when saved."
+	RIPPPR_ENCRYPT_NAME L"Encryption"
+	RIPPPR_ENCRYPT_DESC L"If the box is checked then the Ini file will be decrypted when loaded and encrypted when saved, with the key specified."
+	RIPPPR_UNDO_REDO_HEADER L"Undo/Redo Buffer Size"
+	RIPPPR_UNDO_NAME L"Undo:"
+	RIPPPR_UNDO_DESC L"Number of actions that can be undone. -1 for infinite."
+	RIPPPR_REDO_NAME L"Redo:"
+	RIPPPR_REDO_DESC L"Number of 'undo's that can be redone. -1 for infinite."
+	RIPPPR_FORMAT_HEADER L"Format Settings"
+	RIPPPR_STANDARD_NAME L"Use Standard Settings?"
+	RIPPPR_STANDARD_DESC L"Use standard Ini file settings with no encryption or compression. Disables 'special' features." //TODO I guess Jax changed their mind on compression/encryption?
+	RIPPPR_ADVANCED_NAME L"Advanced Settings"
+	RIPPPR_ADVANCED_DESC L"Custom settings can only be used if ""Standard Ini"" mode is disabled."
+	RIPPPR_NEW_LINE_NAME L"New line"
+	RIPPPR_NEW_LINE_DESC L"The string which represents new lines. If the box is unchecked then the standard Windows new line is used."
+	RIPPPR_QUOTESTR_NAME L"Always quote strings?"
+	RIPPPR_QUOTESTR_DESC L"If this is selected then string values are always quoted. Otherwise, they will be only if they have leading or trailing white space." //TODO ask Jax why it's inverted by runtime?
+	RIPPPR_CASESENS_NAME L"Case sensitive?"
+	RIPPPR_CASESENS_DESC L"If selected, group and item names are case sensitive."
+	RIPPPR_EMPTYGRP_NAME L"Allow empty groups"
+	RIPPPR_EMPTYGRP_DESC L"With this selected, empty groups will still be said to exist."
+	RIPPPR_SUBGROUP_NAME L"Load and Save Subgroups"
+	RIPPPR_SUBGROUP_DESC L"When selected, indented groups will be considered 'subgroups', and they will be renamed to the 'path' of the group."
+	RIPPPR_REPEATSG_NAME L"Repeated Groups"
+	RIPPPR_REPEATSG_DESC L"See documentation."
+	RIPPPR_REPEATSI_NAME L"Repeated Items"
+	RIPPPR_REPEATSI_DESC L"See documentation."
+	RIPPPR_SAVERPTS_NAME L"Save repeated items as original?"
+	RIPPPR_SAVERPTS_DESC L"If selected, repeated items will be saved without all the text before the last dot. This may result in multiple items having the same name."
+	RIPPPR_ESCAPESG_NAME L"Escape characters in group names?"
+	RIPPPR_ESCAPESG_DESC L"Escape characters in group names?"
+	RIPPPR_ESCAPESI_NAME L"Escape characters in item names?"
+	RIPPPR_ESCAPESI_DESC L"Escape characters in item names?"
+	RIPPPR_ESCAPESV_NAME L"Escape characters in item values?"
+	RIPPPR_ESCAPESV_DESC L"Escape characters in item values?"
+
+	RIPPH_TITLE L"Quick Help for Ini++ Object\0\n"
+	//TODO: include iavg.
+	RIPPH_PERFORM_CALCULATIONS L"This expression goes through each group and calculates the specified operation (sum, average, maximum, etc) of all items in the group. Which operation it performs is specified by the first parameter.\n\nIt then takes all these values and calculations either the sum, average, maximum, etc., of those. Which operation it performs here is specified by the second parameter.\n\nThe possible parameters are:\n+\tSum\n*\tProduct\navg\tAverage\nmin\tMinimum\nmax\tMaximum\nn\tNumber of items (for second parameter only)\n\nYou may also write the name of an item or group and it will only look at those.\n\nFor instance, setting the first parameter to 'max' and the second to 'avg' will give you the average highest value in a group.\n\nRefer to the help file for more information.\0\n"
+	RIPPH_FIND_MIN_OR_MAX_GROUP L"This expression goes through each group and calculates the specified operation (sum, average, maximum, etc) of all items in the group. Which operation it performs is specified by the first parameter.\n\nIt then takes all these values and calculations either the sum, average, maximum, etc., of those. Which operation it performs here is specified by the second parameter.\n\nThe possible values for the first parameter are:\n+\tSum\n*\tProduct\nAvg\tAverage\nMin\tMinimum\nMax\tMaximum\nn\tNumber of items\n\nYou may also write the name of an item and will only look at items with that name. The second parameter must be either 'min' or 'max'.\n\nFor instance, setting the first parameter to 'n' and the second to 'max' will give you the name of the group with the most items.\n\nRefer to the help file for more information.\0\n"
+
+	RIPPCP_DIALOG_NO_DELETING_GROUPS L"No deleting groups"
+	RIPPCP_DIALOG_NO_DELETING_ITEMS L"No deleting items"
+	RIPPCP_DIALOG_NO_RENAMING_GROUPS L"No renaming groups"
+	RIPPCP_DIALOG_NO_RENAMING_ITEMS L"No renaming items"
+	RIPPCP_DIALOG_NO_CHANGING_VALUES L"No changing values"
+	RIPPCP_DIALOG_NO_REFRESH_BUTTON L"No refresh button"
+	RIPPCP_DIALOG_NO_NEW_GROUPS L"No new groups"
+	RIPPCP_DIALOG_NO_NEW_ITEMS L"No new items"
+	RIPPCP_DIALOG_NO_AUTO_REFRESH L"No auto refresh"
+	RIPPCP_DIALOG_PAUSE_APP L"Pause application"
+	RIPPCP_DIALOG_NONE L"None"
+	RIPPCP_SSS_SORT_BY_VALUE L"Sort (by value, "
+	RIPPCP_SSS_SHUFFLE L"Shuffle"
+	RIPPCP_SSS_REMOVE_FIRST L"Remove first element"
+	RIPPCP_SSS_CYCLE_UP L"Cycle Up"
+	RIPPCP_SSS_REMOVE_LAST L"Remove last element"
+	RIPPCP_SSS_CYCLE_DOWN L"Cycle Down"
+	RIPPCP_SSS_REVERSE L"Reverse"
+	RIPPCP_SSS_SWAP_ITEMS_VALUES_IN L"Swap items and values in"
+	RIPPCP_SSS_RENUMBER L"Renumber"
+	RIPPCP_SSS_SORT_BY_NAME L"Sort (by name, "
+	RIPPCP_SSS_SORT_BY_FIRST_PART L"Sort (by first part, "
+	RIPPCP_SSS_SORT_ORDER_ALPHANUM L"alphanum)"
+	RIPPCP_SSS_SORT_ORDER_STANDARD_CASE_INSENSITIVE L"standard, case insensitive)"
+	RIPPCP_SSS_SORT_ORDER_STANDARD_CASE_SENSITIVE L"standrad, case sensitive)"
+	RIPPCP_SEARCH_MODE L"Mode: "
+	RIPPCP_SEARCH_MODE_DISREGARD L"Disregard previous results"
+	RIPPCP_SEARCH_MODE_OR L"Or"
+	RIPPCP_SEARCH_MODE_AND L"And"
+	RIPPCP_SEARCH_MODE_XOR L"Xor"
+	RIPPCP_SEARCH_OPTIONS L" (Options: "
+	RIPPCP_SEARCH_OPTION_UNUSED L"Unused"
+	RIPPCP_SEARCH_OPTION_ONLY_GROUP_NAMES L"Only add group names to results"
+	RIPPCP_SEARCH_OPTION_MATCH_ANY L"Match any of the conditions"
+	RIPPCP_SEARCH_OPTION_CASE_SENSITIVE L"Case sensitive"
+	RIPPCP_SEARCH_OPTIONS_END L")"
+	RIPPCP_COMMA L", "
+	RIPPCP_NLC_LOAD L"Load file, "
+	RIPPCP_NLC_CHANGE L"Change the current file path, "
+	RIPPCP_NLC_CHANGE_AND L"changing the current file path, and "
+	RIPPCP_NLC_KEEP_PATH_AND L"keeping the old path, and "
+	RIPPCP_NLC_CHANGE_IF_EXISTS_AND L"changing the current file path if the file exists, and "
+	RIPPCP_NLC_CLEAR_DATA L"clearing the current data in the object."
+	RIPPCP_NLC_KEEP_DATA L"keeping the current data."
+	RIPPCP_NLC_CLEAR_DATA_IF_FILE_EXISTS L"clearing the current data in the object if the file exists."
+	RIPPCP_NLC_SAVE_IMMEDIATELY L" (Immediately save)"
+	RIPPCP_NLC_READ_ONLY L" (Read Only)"
+
+	//TODO why do the null terminators get stripped away if they are the last character? the \0\n are just a workaround for this weirdness since \0 alone doesn't work...
+	RIPPCD_OBJECTSELECTOR1 L"Please type the name of an Ini++ object (other than this one) that you wish to use as the source for the merge operation. Please note this is case sensitive.\0\n"
+	RIPPCD_OBJECTSELECTOR2 L"Please type the name of an Ini++ object (other than this one) that you wish to save search results to. Please note this is case sensitive.\0\n"
+	RIPPCD_OBJECTSELECTOR3 L"Please type the name of a Chart Object that you wish to use. Please note this is case sensitive.\0\n"
+	RIPPCD_OBJECTSELECTOR4 L"Please type the name of an Array Object that you wish to recieve data from. Please note this is case sensitive.\0\n"
+	RIPPCD_OBJECTSELECTOR5 L"Please type the name of an Array Object that you wish to put data into. Please note this is case sensitive.\0\n"
+	RIPPCD_DIALOG_ITEM_FORMATTING_A L"item = 'value'\0\n"
+	RIPPCD_DIALOG_ITEM_FORMATTING_B L"item\0\n"
+	RIPPCD_DIALOG_ITEM_FORMATTING_C L"item ('value')\0\n"
+	RIPPCD_DIALOG_ITEM_FORMATTING_D L"'value'\0\n"
+	RIPPCD_DIALOG_ITEM_FORMATTING_E L"Item 'item' has value 'value'\0\n"
+	RIPPCD_DIALOG_ITEM_FORMATTING_F L"Item: 'item' Value: 'value'\0\n"
+	RIPPCD_DIALOG_ITEM_FORMATTING_G L"item: value\0\n"
+	RIPPCD_DIALOG_ITEM_FORMATTING_H L"Item 'item' Valeur 'value'\0\n"
+	RIPPCD_SSS_A L"Rearranges the items so that they are in alphabetical order based on the items value\0\n"
+	RIPPCD_SSS_B L"Randomly rearranges the items in the group\0\n"
+	RIPPCD_SSS_C L"Removes the first item in the group\0\n"
+	RIPPCD_SSS_D L"Cycles the elements down, so that the current last element is made the first element\0\n"
+	RIPPCD_SSS_E L"Removes the last element in the group\0\n"
+	RIPPCD_SSS_F L"Cycles the elements up, so the current first element is made the last element\0\n"
+	RIPPCD_SSS_G L"Reverses the order of the group\0\n"
+	RIPPCD_SSS_H L"Swap every item so that its new name is its old value, and its new value is its old name\0\n"
+	RIPPCD_SSS_I L"Names the groups by their ordering, so the first item is called '1', the second '2', etc.\0\n"
+	RIPPCD_SSS_J L"Rearranges the items so that they are in alphabetical order based on the items name\0\n"
+	RIPPCD_SSS_K L"Rearrages the items so that they are in alphabetical order based on the value before the first comma.\r\n\r\nFor instance, 'example,value' would be sorted as if its value is just 'example'\0\n"
+END
+
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+#if defined(APSTUDIO_INVOKED) || defined(EDIT_MODE)
+#if defined(APSTUDIO_INVOKED)
+IDD_DEBUG$(EDIT_MODE) DIALOG DISCARDABLE  0, 0, 365, 144
+#else
+IDD_DEBUG DIALOG DISCARDABLE  0, 0, 365, 144
+#endif
+STYLE DS_SYSMODAL | DS_SETFOREGROUND | DS_CENTER | WS_MINIMIZEBOX | 
+    WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "Ini++ Data Editor"
+FONT 10, "Verdana"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,311,127,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,258,127,50,14
+    EDITTEXT        IDC_DATA,0,0,365,124,ES_MULTILINE | ES_AUTOVSCROLL | 
+                    ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
+END
+#endif
+
+#if defined(APSTUDIO_INVOKED) || defined(EDIT_MODE)
+#if defined(APSTUDIO_INVOKED)
+IDD_OBJECTSELECT$(EDIT_MODE) DIALOG DISCARDABLE  0, 0, 405, 51
+#else
+IDD_OBJECTSELECT DIALOG DISCARDABLE  0, 0, 405, 51
+#endif
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "Select Object"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,348,30,50,14
+    LTEXT           "Please type the name of the object you wish to use. This is case sensitive.",
+                    IDC_INFO,7,7,336,23
+    EDITTEXT        IDC_EDIT,7,32,334,12,ES_AUTOHSCROLL
+    LISTBOX         IDC_LIST,241,7,102,23,LBS_SORT | LBS_NOINTEGRALHEIGHT | 
+                    NOT WS_VISIBLE | WS_VSCROLL | WS_TABSTOP
+END
+#endif
+
+#if defined(APSTUDIO_INVOKED) || defined(INCLUDE_DIALOG)
+#if defined(APSTUDIO_INVOKED)
+IDD_DEBUG2$(INCLUDE_DIALOG) DIALOG DISCARDABLE  0, 0, 310, 163
+#else
+IDD_DEBUG2 DIALOG DISCARDABLE  0, 0, 310, 163
+#endif
+STYLE DS_SYSMODAL | DS_SETFOREGROUND | DS_CENTER | WS_MINIMIZEBOX | 
+    WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "Ini++ Debugger (Tree View)"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "Tree1",IDC_TREE,"SysTreeView32",TVS_HASBUTTONS | 
+                    TVS_HASLINES | TVS_LINESATROOT | TVS_DISABLEDRAGDROP | 
+                    TVS_NOTOOLTIPS | WS_BORDER | WS_TABSTOP,0,0,309,162
+END
+#endif
+
+#if defined(APSTUDIO_INVOKED) || defined(INCLUDE_DIALOG)
+#if defined(APSTUDIO_INVOKED)
+IDD_EDITITEM$(INCLUDE_DIALOG) DIALOGEX 0, 0, 274, 52
+#else
+IDD_EDITITEM DIALOGEX 0, 0, 274, 52
+#endif
+STYLE DS_SYSMODAL | DS_MODALFRAME | DS_SETFOREGROUND | DS_CENTER | WS_POPUP | 
+    WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Group and Item Editor"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,224,38,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,172,38,50,14
+    EDITTEXT        IDC_NAME,29,3,244,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_VALUE,29,20,244,15,ES_AUTOHSCROLL
+    RTEXT           "Name:",IDC_STATIC,1,5,26,8
+    RTEXT           "Value:",IDC_STATIC,0,22,26,9
+    PUSHBUTTON      "Delete",IDC_DELETE,120,38,50,14
+END
+#endif
+
+#if defined(APSTUDIO_INVOKED) || defined(EDIT_MODE)
+#if defined(APSTUDIO_INVOKED)
+IDD_OPENDIALOG$(EDIT_MODE) DIALOG DISCARDABLE  0, 0, 280, 84
+#else
+IDD_OPENDIALOG DIALOG DISCARDABLE  0, 0, 280, 84
+#endif
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog Box Settings"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,223,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,223,24,50,14
+    CONTROL         "Disallow deleting groups",IDC_CHECK1,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,7,7,92,10
+    CONTROL         "Disallow deleting items",IDC_CHECK2,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,7,19,87,10
+    CONTROL         "Disallow renaming groups",IDC_CHECK3,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,7,31,96,10
+    CONTROL         "Disallow renaming items",IDC_CHECK4,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,7,42,96,10
+    CONTROL         "Values are read-only",IDC_CHECK5,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,7,53,96,10
+    CONTROL         "No 'Refresh' menu option",IDC_CHECK6,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,112,7,96,10
+    CONTROL         "Disallow adding groups",IDC_CHECK7,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,112,17,96,10
+    CONTROL         "Disallow adding items",IDC_CHECK8,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,112,28,96,10
+    CONTROL         "Do not refresh item values",IDC_CHECK9,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,112,39,153,10
+    COMBOBOX        IDC_COMBO,66,65,143,36,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    CONTROL         "Pause program whilst open",IDC_CHECK10,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,112,50,108,10
+    LTEXT           "Item formatting:",IDC_STATIC,7,66,55,11
+END
+#endif
+
+#if defined(APSTUDIO_INVOKED) || defined(EDIT_MODE)
+#if defined(APSTUDIO_INVOKED)
+IDD_SLOTVIEW$(EDIT_MODE) DIALOG DISCARDABLE  0, 0, 238, 121
+#else
+IDD_SLOTVIEW DIALOG DISCARDABLE  0, 0, 238, 121
+#endif
+STYLE DS_SYSMODAL | DS_MODALFRAME | DS_SETFOREGROUND | DS_CENTER | WS_POPUP | 
+    WS_CAPTION | WS_SYSMENU
+CAPTION "Global Data Slots viewer"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LISTBOX         IDC_LIST1,7,7,224,107,LBS_SORT | LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+END
+#endif
+
+#if defined(APSTUDIO_INVOKED) || defined(EDIT_MODE)
+#if defined(APSTUDIO_INVOKED)
+IDD_SSS$(EDIT_MODE) DIALOGEX 0, 0, 262, 164
+#else
+IDD_SSS DIALOGEX 0, 0, 262, 164
+#endif
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Reorder Group"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "Sort by value",IDC_RADIO,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,14,20,57,10
+    CONTROL         "Sort by name",IDC_RADIO10,"Button",BS_AUTORADIOBUTTON,
+                    14,30,57,10
+    CONTROL         "Sort by first part",IDC_RADIO11,"Button",
+                    BS_AUTORADIOBUTTON,14,40,65,10
+    CONTROL         "Shuffle",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,14,50,
+                    38,10
+    CONTROL         "Remove first",IDC_RADIO3,"Button",BS_AUTORADIOBUTTON,14,
+                    60,55,10
+    CONTROL         "Remove last",IDC_RADIO5,"Button",BS_AUTORADIOBUTTON,14,
+                    70,55,10
+    CONTROL         "Cycle Up",IDC_RADIO4,"Button",BS_AUTORADIOBUTTON,14,80,
+                    45,10
+    CONTROL         "Cycle Down",IDC_RADIO6,"Button",BS_AUTORADIOBUTTON,14,
+                    90,54,10
+    CONTROL         "Reverse",IDC_RADIO7,"Button",BS_AUTORADIOBUTTON,14,100,
+                    43,10
+    CONTROL         "Swap items and values",IDC_RADIO8,"Button",
+                    BS_AUTORADIOBUTTON,14,110,89,10
+    CONTROL         "Renumber items",IDC_RADIO9,"Button",BS_AUTORADIOBUTTON,
+                    14,120,67,10
+    EDITTEXT        IDC_DESCRIPTIONTEXT,117,16,137,67,ES_MULTILINE | 
+                    ES_READONLY,WS_EX_DLGMODALFRAME | WS_EX_STATICEDGE
+    CONTROL         "'Alphanum' intelligent sorting",IDC_SORTINGRADIO1,
+                    "Button",BS_AUTORADIOBUTTON | WS_GROUP,124,100,104,10
+    CONTROL         "Standard sorting (case insensitive)",IDC_SORTINGRADIO2,
+                    "Button",BS_AUTORADIOBUTTON,124,112,123,10
+    CONTROL         "Standard sorting (case sensitive)",IDC_SORTINGRADIO3,
+                    "Button",BS_AUTORADIOBUTTON,124,124,118,10
+    DEFPUSHBUTTON   "OK",IDOK,103,143,55,14
+    GROUPBOX        "Description",IDC_STATIC,113,4,146,83
+    GROUPBOX        "Sorting",IDC_STATIC,113,89,146,49,WS_GROUP
+    GROUPBOX        "Operation",IDC_STATIC,5,4,103,134,WS_GROUP
+END
+#endif
+
+#if defined(APSTUDIO_INVOKED) || defined(EDIT_MODE)
+#if defined(APSTUDIO_INVOKED)
+IDD_SEARCH$(EDIT_MODE) DIALOG DISCARDABLE  0, 0, 230, 67
+#else
+IDD_SEARCH DIALOG DISCARDABLE  0, 0, 230, 67
+#endif
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Search Options"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,173,46,50,14
+    GROUPBOX        "Mode",IDC_STATIC,7,6,97,54
+    CONTROL         "Discard previous results",IDC_RADIO,"Button",
+                    BS_AUTORADIOBUTTON,13,18,95,9
+    CONTROL         "Or",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,13,28,47,9
+    CONTROL         "And",IDC_RADIO3,"Button",BS_AUTORADIOBUTTON,13,38,47,9
+    CONTROL         "Xor",IDC_RADIO4,"Button",BS_AUTORADIOBUTTON,13,48,27,10
+    CONTROL         "Add group name only to results",IDC_CHECK2,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,110,29,113,10
+    CONTROL         "Match any of the conditions",IDC_CHECK3,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,110,19,107,10
+    CONTROL         "Case sensitive",IDC_CHECK4,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,110,9,61,10
+END
+#endif
+
+#if defined(APSTUDIO_INVOKED) || defined(EDIT_MODE)
+#if defined(APSTUDIO_INVOKED)
+IDD_LOADMODE$(EDIT_MODE) DIALOG DISCARDABLE  0, 0, 315, 234
+#else
+IDD_LOADMODE DIALOG DISCARDABLE  0, 0, 315, 234
+#endif
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Load or Change File"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,258,213,50,14
+    GROUPBOX        "Load File",IDC_STATIC,7,27,301,56
+    CONTROL         "Load file into Ini++ object",IDC_RADIO1,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,10,40,117,10
+    CONTROL         "Don't load the file into the object",IDC_RADIO3,"Button",
+                    BS_AUTORADIOBUTTON,10,51,117,10
+    GROUPBOX        "Change Current File",IDC_STATIC,7,86,301,63
+    CONTROL         "Set current file to new path",IDC_RADIO5,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,10,99,97,10
+    CONTROL         "Keep old path name",IDC_RADIO6,"Button",
+                    BS_AUTORADIOBUTTON,10,110,97,10
+    CONTROL         "Only change path if exists",IDC_RADIO7,"Button",
+                    BS_AUTORADIOBUTTON,10,121,97,10
+    CONTROL         "Save Ini straight away",IDC_CHECK1,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,133,85,10
+    CONTROL         "Read Only Mode",IDC_CHECK2,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,64,72,10
+    GROUPBOX        "Clearing current data in object",IDC_STATIC,7,153,301,
+                    57
+    CONTROL         "Clear old data",IDC_RADIO8,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,10,163,59,10
+    CONTROL         "Keep old data",IDC_RADIO9,"Button",BS_AUTORADIOBUTTON,
+                    10,174,61,10
+    CONTROL         "Clear data only if file exists",IDC_RADIO10,"Button",
+                    BS_AUTORADIOBUTTON,10,186,117,10
+    LTEXT           "Please select how the want Ini++  to load the file, set the current file and erase the current data in the object.",
+                    IDC_STATIC,7,7,301,17
+    LTEXT           "Usually you will want the file to be loaded in this action, but sometimes you may not. For instances, if you want to change the  path of the object without caring what file is there for a ""New"" command.",
+                    IDC_STATIC,141,35,161,45,WS_BORDER
+    LTEXT           "The 'current file path' is the path that the 'Save' action and the auto-save/load features use.\n\nUsually you will wish to change the path to the path of the file you are loading, but you may not.",
+                    IDC_STATIC,141,94,161,51,WS_BORDER
+    LTEXT           "Before this action is run, there may be data already in the Ini++ object, possibly from previous 'Load' actions or from 'Set Value' actions.\nShould this data be erased or should it be preserved?",
+                    IDC_STATIC,141,160,161,46,WS_BORDER
+END
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    "IDD_SSS$(EDIT_MODE)", DIALOG
+    BEGIN
+        BOTTOMMARGIN, 157
+    END
+
+    "IDD_LOADMODE$(EDIT_MODE)", DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 308
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 227
+    END
+END
+#endif    // APSTUDIO_INVOKED
