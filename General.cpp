@@ -15,7 +15,7 @@ auto FUSION_API GetInfos(std::int32_t const which) noexcept
 	case KGI_PRODUCT:
 		return PRODUCT_VERSION_STANDARD;
 	case KGI_BUILD:
-		return 294;
+		return 293;
 	case KGI_UNICODE:
 		return FUSION_GET_COMPATIBILITY_UNICODE;
 	}

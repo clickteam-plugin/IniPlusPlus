@@ -645,7 +645,7 @@ struct SaveObjectDoer final
 					for(auto i{old_size}; i < *rvNumberOfValues; ++i)
 					{
 						values[i].m_type = TYPE_INT;
-						values[i].m_long ={};
+						values[i].m_long = {};
 					}
 				}
 				else if(*rvNumberOfValues >= 0)
