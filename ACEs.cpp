@@ -1902,7 +1902,7 @@ auto FUSION_API actionSwitchGlobalObject(RunData* const run_data, ac_param_t con
 	else
 	{
 		//copy our data into global
-		run_data->data = &(Data::global.emplace(data_slot, *(run_data->local_data)).first->second);
+		run_data->data = &(Data::global.emplace(data_slot, *(run_data->data)).first->second);
 	}
 
 	return action_return_t();
