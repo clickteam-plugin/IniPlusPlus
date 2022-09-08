@@ -190,7 +190,7 @@ auto FUSION_API GetPropValue(mv* const mV, SerializedEditData* serialized_edit_d
 {
 	switch(property_id)
 	{
-		case PropId::Version       : return new CPropStringValue(_T("Unicode, ") _T(__DATE__) _T(" (v0.4.3-popgoes)"));
+		case PropId::Version       : return new CPropStringValue(_T("Unicode, ") _T(__DATE__) _T(" (v0.4.4-popgoes)"));
 		case PropId::DefPath       : return new CPropStringValue(serialized_edit_data->deserialize(std::nullopt).defaultFile.c_str());
 		case PropId::DefFolder     : return new CPropDWordValue (serialized_edit_data->deserialize(std::nullopt).defaultFolder);
 		case PropId::DefaultText   : return new CPropStringValue(serialized_edit_data->deserialize(std::nullopt).defaultText.c_str());

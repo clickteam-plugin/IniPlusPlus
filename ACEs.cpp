@@ -932,7 +932,7 @@ struct SaveObjectDoer final
 	{
 		if(std::holds_alternative<string_t>(v))
 		{
-			data.create_value(group, std::move(name), std::get<string_t>(v));
+			data.get_value_or_create(group, std::move(name)) = std::get<string_t>(v);
 		}
 		else
 		{
