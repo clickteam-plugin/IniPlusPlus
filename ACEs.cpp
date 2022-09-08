@@ -1665,10 +1665,17 @@ auto FUSION_API actionSetCompression(RunData* const run_data, ac_param_t const p
 auto FUSION_API actionSetEncryption(RunData* const run_data, ac_param_t const param0, ac_param_t) noexcept
 -> action_return_t
 {
+	string_view_t const new_encrypt_key{reinterpret_cast<TCHAR const*>(param0)};
 	Data& data{*(run_data->data)};
 
-	NOT_YET_IMPLEMENTED
-	//
+	if(std::empty(new_encrypt_key))
+	{
+		data.settings.encrypt_key.reset();
+	}
+	else
+	{
+		data.settings.encrypt_key.emplace(lSDK::narrow_from_wide(new_encrypt_key));
+	}
 
 	return action_return_t();
 }
