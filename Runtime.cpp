@@ -370,7 +370,7 @@ void Data::load(lSDK::string_view_t s)
 
 		auto [line, ending]{read_line(s, settings.newline, false)};
 		s.remove_prefix(std::size(line) + std::size(ending));
-		std::size_t const depth{settings.subgroups*s.find_first_not_of('\t')}; //0 if subgroups are disabled, otherwise count of number of indents
+		std::size_t const depth{settings.subgroups*line.find_first_not_of('\t')}; //0 if subgroups are disabled, otherwise count of number of indents
 		group_path.resize(depth + 1);
 		line = trim(line);
 		assert(!std::empty(line)); //should've been handled above
