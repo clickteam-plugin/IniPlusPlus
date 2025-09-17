@@ -28,7 +28,7 @@ BEGIN
 	RIPP_NAME L"Ini++ Unicode"
 	RIPP_AUTHOR L"Jack ""Jax"" Webster"
 	RIPP_COPYRIGHT L"Copyright © 2006-2015 Jack Webster"
-	RIPP_DESCRIPTION L"Allows advanced manipulation of INI files. Now with Unicode support!\nNot all functionality is available in this version, report missing features to LB@MayContainCode.com"
+	RIPP_DESCRIPTION L"Allows advanced manipulation of INI files. Now with Unicode support!\nNot all functionality is available in this version, report missing features at https://github.com/clickteam-plugin/IniPlusPlus/issues"
 	RIPP_WEBSITE L"https://sites.google.com/site/jlnwebster/multimedia-fusion/extension-list/ini"
 	RIPP_HELP L"Help/Ini++/index.htm"
 

@@ -724,6 +724,10 @@ auto FUSION_API CreateRunObject(RunData* const run_data, SerializedEditData cons
 auto FUSION_API DestroyRunObject(RunData* const run_data, std::int32_t const fast) noexcept
 -> std::int16_t
 {
+	if(!fast)
+	{
+		run_data->data->autosave(run_data);
+	}
 	delete run_data->local_data;
 	delete run_data->settings;
 	return FUSION_BEGIN_RUNTIME_STRUCTURE_DESTRUCTION_SUCCESS;
