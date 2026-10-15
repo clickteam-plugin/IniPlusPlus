@@ -1635,9 +1635,10 @@ auto FUSION_API actionLoadFromString(RunData* const run_data, ac_param_t const p
 
 	if(param1 == 0)
 	{
-		data.close(run_data);
+		std::visit([](auto& ini) noexcept { ini.clear(); }, data.ini);
 	}
 	data.load(ini_str);
+	data.pending_autosave = true;
 
 	return action_return_t();
 }
